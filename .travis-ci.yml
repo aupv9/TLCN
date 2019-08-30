@@ -1,0 +1,9 @@
+language: generic
+cache:
+  directories:
+    - node_modules
+deploy:
+  provider: heroku
+  api_key:
+    secure: EU/9xsb6KG2uWkoHiea+eG2NFhQrXywI0j8eFA2XPjlx6y3U0qGdggpR1C8g8fP55rUKVKiyhilPAwnMF7udEjvocUrI0GEomFjLJs+GdXAR8clMMSZs7JZj+oCxDU2Z9BxvnwC/yOVFM6X41/NlOMGJmcNChrCUr4yWWTgYqEqOUurqCLXYcjrVIJuEbWTF1vg3kQ5vtfMHpvjvvr/aA+qALs46/la0q7z3CWwCG8BsIHhBBmHqvWVmYNS6cm6dXo5tsfNLDYLF42snYnZBtex/eP43PaP3ZqHvSY4qFwjCYJepp8BkQMCDP0cV3apOeF+RKEKghWb09KldUtioLj00XsQrgoWNsThb7t0E3EMPGa9xQ1yEfKfGhj9CIaMtW5mctVG9U2EmqrjmOJdDdi5//fQXgaNc6b9YGeDvdeMbbkFA+uMjHH+6fgXPWafuN0zhyV7wxpGd7aXPKC08H88bqKGsQietT54eEnPZ1J+ZVMSUBnTK2OoeuPAIVs3bNc/+ZjCTIHrA9z4DkIlxHHeWXj7N7Ylz7oPJh3ilXsZv3gZhFbwxjSPpg/E9nE/LkcwLXNkxtnor73WglKXtaMBIVNB9MfM1nDucOf3FlIiOx4YDUlD58KXXaU6k7nCi4n7D9V+7Dq2MmISt6jzYwDJd1+7qAmbA7GhGW4yjUs0=
+  app: datve-tlcn
