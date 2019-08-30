@@ -2,7 +2,7 @@
 #nav-tab{
   height: 400px;
   background: #fafafa;
-
+  padding: 30px;
   #myTabContent{
     background: #ffffff;
     border-radius: 1px;
@@ -50,5 +50,8 @@
 @media only screen and (max-width: 400px) {
     #nav-tab{
       display: none;
+
+
+
     }
 }
