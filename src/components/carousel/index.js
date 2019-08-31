@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import './style.scss';
 import DatePicker from "react-datepicker";
-import {Link} from'react-router-dom'
 import "react-datepicker/dist/react-datepicker.css";
-
+import * as _ from'lodash'
+import * as LIST from '../../contants'
 class Carousel extends Component {
     constructor(props) {
             super(props);
             this.state = {
-                startDate: new Date()
+                startDate: new Date(),
+                listProvince:LIST.LIST_PROVINCE,
+
             };
             this.handleChange = this.handleChange.bind(this);
     }
@@ -28,6 +29,15 @@ class Carousel extends Component {
         console.log(this.state.startDate.getDate().toString()+"-"+
             this.state.startDate.getMonth().toString()+"-" +this.state.startDate.getFullYear().toString())
     }
+    showProvice=(e)=>{
+        let searchStr=e.target.value;
+        if(searchStr !== "" && searchStr !== null){
+            _.filter(this.state.listProvince,(o)=>{
+                return _.includes(o.NAME,searchStr)
+            })
+        }
+
+    }
     render() {
         return (
             <>
@@ -39,7 +49,8 @@ class Carousel extends Component {
                         <div className="search-box col-12">
                             <div className="search-content">
                                 <div className="location">
-                                    <input type={"text"} placeholder={"Gõ vào nơi đi"} id="ip-start"></input>
+                                    <input type={"text"} placeholder={"Gõ vào nơi đi"} id="ip-start" onChange={this.showProvice}></input>
+
                                     <button id="switch-btn"><img src={"https://storage.googleapis.com/fe-production/images/header/swap.svg"}/></button>
                                     <input type={"text"} placeholder={"Gõ vào nơi đến"} id="ip-end"></input>
                                 </div>

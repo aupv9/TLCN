@@ -9,7 +9,7 @@ html,*{
 #header{
     width: 100%;
     height:100px ;
-    background: #095aa9;
+    background: #ffffff;
     .container{
       width: 1170px;
       height: 100px;
@@ -66,7 +66,9 @@ html,*{
   *{
     overflow: hidden;
   }
+
   .logo{
+    float: right;
     width: 80px;
     margin: auto 0;
   }

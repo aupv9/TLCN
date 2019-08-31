@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.3.3",
     "@material-ui/pickers": "latest",
+    "lodash": "^4.17.15",
     "node-sass": "^4.12.0",
     "rc-datepicker": "^5.0.14",
     "react": "^16.9.0",

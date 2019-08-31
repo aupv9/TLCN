@@ -9,7 +9,7 @@ class Header extends Component {
                 <div id="header">
                     <div className="container">
                         <div className="row">
-                            <div className="col-2">
+                            <div className="col-2 col-xs-6">
                                 <div className="header-logo">
                                     <Link to={"/"}><img src={logo} className="logo"/></Link>
                                 </div>

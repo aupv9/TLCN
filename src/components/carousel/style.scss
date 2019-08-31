@@ -4,7 +4,7 @@
   background: #fafafa !important;
 }
 .carousel{
-  background-image: url("../../img/bg2.jpg");
+  background-image: url("https://www.baolau.com/images/landing/bus-ha-giang.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -71,6 +71,8 @@
       padding-left: 35px!important;
       &:focus{
         border-radius: 5px;
+       // border: 2px solid #fb0;
+
       }
     }
     input{
@@ -95,7 +97,7 @@
     }
     #searchSubmit{
       height: 48px;
-      background-color: #095aa9;
+      background-color: #3a9cfb;
       border-radius: 4pt!important;
       width:200px;
       color: #fff;
@@ -148,6 +150,7 @@
       }
       #searchSubmit{
         width: 320px !important;
+
       }
     }
 
