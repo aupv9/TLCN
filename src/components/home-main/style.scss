@@ -1,0 +1,56 @@
+/*Start pageContent*/
+.pageContent{
+  min-height: 620px;
+  position: relative;
+  top:0;
+  z-index: 1;
+  transition: top .4s ease-in-out;
+  .SearchPage__FrontDoor{
+    .base-front-door{
+      z-index: 10;
+      margin: 0 auto;
+      .coverPhotoContainer{
+        min-height: 33.3333em;
+        width: 100%;
+        position: relative;
+        .Common-Frontdoor-CoverPhoto{
+            min-height: 620px;
+            position: relative;
+            height: auto;
+            overflow: hidden;
+            background: #8596a3;
+
+        }
+        .challenger-cover-photo{
+            top:0px;
+            width: 100%;
+            color: #fff;
+            .background-wrapper{
+              .coverBackground{
+                background-image:
+                        url("https://www.baolau.com/images/landing/bus-ha-giang.jpg");
+                height: 620px;
+                position: relative;
+
+                background-size: cover;
+                background-position: center;
+              }
+
+            }
+        }
+      }
+    }
+  }
+
+}
+
+.keel-agd{
+  font-family: "mallory",Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.231;
+  color: #212a30;
+}
+div{
+  display: block;
+}

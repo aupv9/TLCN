@@ -4,7 +4,7 @@ import Header from "../../components/header";
 import Home_Main from "../../components/home-main";
 import Footer from "../../components/footer";
 import ListXe from "../../components/list-xe";
-
+import './style.scss'
 class Home extends Component {
 
     componentWillMount() {

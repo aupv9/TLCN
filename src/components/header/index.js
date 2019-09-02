@@ -1,41 +1,69 @@
 import React, {Component} from 'react';
 import './style.scss';
-import logo from '../../img/logo.webp';
+import logo from '../../img/logo2.jpg';
 import {Link} from 'react-router-dom';
+import text from '../../img/text.jpg'
 class Header extends Component {
     render() {
         return (
             <>
-                <div id="header">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-2 col-xs-6">
-                                <div className="header-logo">
-                                    <Link to={"/"}><img src={logo} className="logo"/></Link>
+                <div className="common-layout-header">
+                    <div className="keel-container">
+                        <div className="header-wrapper">
+                            <div className="header-grid keel-grid v-c-p">
+                                <div className="col-logo">
+                                        <img src={logo} className="logo-header"/>
+                                    <Link  to={"/"} className={"logo"}>
+                                        <img src={text} className="logo-header" style={{width:"100px"}}/>
+                                    </Link>
+
                                 </div>
-                            </div>
-                            <div className="col-6">
-                                <div className="header-nav">
-                                    <ul className="nav-menu">
-                                        <li>
-                                            <Link to="/">Trang Chủ</Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/">Tra Cứu Vé</Link>
-                                        </li>
-                                    </ul>
+                                <div className="col-nav">
+                                    <nav className="common-layout-nav header">
+                                        <ul className="v-c-p nav-grid mr-bt">
+                                            <li className="col-grid">
+                                                <Link to={"/"} >
+                                                    Home
+                                                </Link>
+                                            </li>
+                                            <li className="col-grid">
+                                                <Link to={"/"}>
+                                                    Quản lý vé
+                                                </Link>
+                                            </li>
+                                            <li className="col-grid">
+                                                <Link to={"/"}>
+                                                    Tra Cứu Vé
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    </nav>
                                 </div>
-                            </div>
-                            <div className="col-4">
-                                <div className="header-user">
-                                    <div id="dropdown-list-user">
-                                        <Link to={"/"}><i className="fas fa-user"></i></Link>
+                                <div className="col-right mr-bt">
+                                    <div className="right-grid keel-grid right">
+                                        <div className="multi-lang">
+                                            <div className="col-lang">
+                                                <a className="dropdown-lang"
+                                                onClick={()=>{console.log("vn")}}>
+                                                    <span className="flag-vn">&nbsp;</span>
+                                                </a>
+                                                <a className="dropdown-lang"
+                                                   onClick={()=>{console.log("vn")}}>
+                                                    <span className="flag-usa">&nbsp;</span>
+                                                </a>
+
+                                            </div>
+
+                                        </div>
+                                        <div className="col-login mr-bt">
+                                            <div className="v-c-p section-buttons">
+                                                <a className="ui-button login-button mr-bt">LOGIN</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </>

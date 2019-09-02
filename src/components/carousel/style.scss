@@ -1,7 +1,7 @@
 
 #main{
-  margin-bottom: 120px;
-  background: #fafafa !important;
+  margin-bottom: 80px;
+
 }
 .carousel{
   background-image: url("https://www.baolau.com/images/landing/bus-ha-giang.jpg");
@@ -104,6 +104,16 @@
       font-weight: 700;
     }
   }
+}
+.show-search{
+   margin-top: 60px;
+   height: auto;
+    width: 320px;
+    padding: 20px;
+    box-shadow: 10px 10px 5px 0px  rgba(250,250,250,1);
+    border: 2px solid  rgba(250,250,250,1);
+    z-index: 1000;
+    border-radius: 2px ;
 }
 /* Mobile Styles */
 @media only screen and (max-width: 400px) {

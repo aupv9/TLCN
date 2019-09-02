@@ -1,16 +1,23 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import Carousel from "../carousel";
-import NavTab from "../nav-tabs";
-import BusNet from "../bus-net";
+import './style.scss'
 
 class Home_Main extends Component {
     render() {
         return (
             <>
-                <Carousel />
-                <NavTab />
-                <BusNet/>
+                <main className="pageContent keel-agd">
+                    <div className="SearchPage__FrontDoor">
+                        <div className="base-front-door keel-agd">
+                            <div className="coverPhotoContainer">
+                                <div className="Common-Frontdoor-CoverPhoto challenger-cover-photo">
+                                    <div className="background-wrapper">
+                                        <div className="coverBackground"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
             </>
         );
     }

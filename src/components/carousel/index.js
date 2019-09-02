@@ -50,7 +50,6 @@ class Carousel extends Component {
                             <div className="search-content">
                                 <div className="location">
                                     <input type={"text"} placeholder={"Gõ vào nơi đi"} id="ip-start" onChange={this.showProvice}></input>
-
                                     <button id="switch-btn"><img src={"https://storage.googleapis.com/fe-production/images/header/swap.svg"}/></button>
                                     <input type={"text"} placeholder={"Gõ vào nơi đến"} id="ip-end"></input>
                                 </div>
@@ -64,7 +63,14 @@ class Carousel extends Component {
                                 </div>
                                 <button id="searchSubmit" onClick={this.click}>Tìm Vé Xe</button>
                             </div>
+
                         </div>
+                    </div>
+                    <div className="show-search" style={{display:'block'}}>
+                         <p>1</p>
+                        <p>1</p>
+                        <p>1</p>
+
                     </div>
                 </div>
                 </div>

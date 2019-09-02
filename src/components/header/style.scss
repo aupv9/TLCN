@@ -6,72 +6,164 @@ html,*{
 
 /*Start header*/
 
-#header{
-    width: 100%;
-    height:100px ;
-    background: #ffffff;
-    .container{
-      width: 1170px;
-      height: 100px;
+.v-c-p{
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+    .keel-container{
+      max-width: 77.333em;
+      margin: 0 auto;
+      padding: 0 2em;
+      .header-wrapper{
+        border-bottom: none;
+        margin-bottom: 0;
 
-    }
-    .header-logo{
-      width: 100px;
-      margin:10px;
-      img{
-        width: 80px;
-        height: 80px;
-      }
-    }
-    .header-nav{
-      width: 100%;
-      margin: 30px 0;
+        .header-grid{
+          position: relative;
+          height: 60px;
 
-      .nav-menu{
-        display: inline-flex;
-        list-style: none;
-        li{
-          margin: 0 20px;
-          a{
-            color: #38B7F9;
+            .col-logo{
+              width: 150px;
+                  .logo{
+                    img{
+                      cursor: pointer;
+                    }
+                  }
+
+                .logo-header{
+                  height: 45px;
+                  width: 50px;
+                }
+
+
+
+            }
+          .col-nav {
+            margin-left: -165.05px;
+            padding-left: 185.05px!important;
+
+              .header {
+                line-height: 60px;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                .nav-grid{
+                  .col-grid{
+                    width: 80px;
+                    list-style: none;
+                    margin: 0 5px;
+                    line-height: 40px;
+                    padding-left: 6px;
+                    &:first-child{
+                      border-left: solid 1px #eee;
+                      line-height: 40px;
+                      width: 50px;
+                    }
+                    a{
+                      color: #333F48;
+                      font-size: 13px;
+                      font-family: "mallory",Helvetica Neue,Helvetica,Arial,sans-serif;
+                      font-weight:600;
+                      text-decoration: none;
+                      &:hover{
+                        color: #5191F8;
+                      }
+                    }
+                  }
+                }
+
+              }
+          }
+
+          .col-right{
+            width: 50%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            overflow: hidden;
+            line-height: 60px;
+           .col-login{
+             margin-left: 20px;
+              .section-buttons {
+               display: flex;
+               padding: 0 6px;
+               height: 60px;
+               font-size: 13px;
+                width: 100px;
+                justify-content: right;
+                justify-items: right;
+                 .login-button {
+                   line-height:60px;
+                   margin-right: 8px;
+                   color: #488bf8;
+                   border-radius: 2px;
+                   cursor: pointer;
+                    font-size: 1em;
+                   font-weight: 600;
+                 }
+             }
+
+           }
+            .dropdown-lang{
+              border-right: none;
+              border-left: 1px solid #eee;
+              line-height: 40px;
+              width: 65px;
+              text-align: center;
+
+                .flag-vn{
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 28px;
+                  height: 24px;
+                  background-image: url("../../img/vietnam-flag-icon-32.png");
+                  background-position: left top;
+                  background-repeat: no-repeat;
+                  cursor: pointer;
+                  margin: 0 5px;
+                }
+                .flag-usa{
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 28px;
+                  height: 24px;
+                  background-image: url("../../img/united-states-of-america-flag-square-icon-32.png");
+                  background-position: left top;
+                  background-repeat: no-repeat;
+                  cursor: pointer;
+                }
+            }
           }
         }
-      }
-
-    }
-  .header-user{
-    margin: 25px 0;
-    float: right;
-    #dropdown-list-user{
-      height: 50px;
-      width: 50px;
-      border-radius: 50%;
-      background: #C5C5C5;
-      text-align: center;
-      padding-top: 10px;
-      a{
-        cursor: pointer;
-      }
-      .fas{
-        font-size: 30px;
-        color: #ffffff;
-
+        .keel-grid{
+            display: flex;
+            flex-wrap: wrap;
+            font-family: FreeSans,Arimo,"Droid Sans",Helvetica,Arial,sans-serif;
+            text-rendering: optimizespeed;
+        }
       }
     }
-  }
 
+    /*global attribute*/
+.mr-bt{
+  margin-bottom: 0;
 }
-
+.right{
+  justify-content: flex-end;
+  text-align: right;
+}
+.common-layout-header{
+    border-bottom: none;
+    margin-bottom: 0;
+}
 @media only screen and (max-width: 768px) {
   *{
     overflow: hidden;
   }
-
-  .logo{
-    float: right;
-    width: 80px;
-    margin: auto 0;
+  .col-nav{
+    display: none;
   }
+
 }
 
 

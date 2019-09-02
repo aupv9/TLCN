@@ -5,8 +5,8 @@ class ContentSearch extends Component {
         return (
             <>
                 <div className="search-content">
-
-
+                    <p>SS</p>
+                    <p>SS</p>
                 </div>
             </>
         );
