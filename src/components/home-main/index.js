@@ -11,7 +11,17 @@ class Home_Main extends Component {
                             <div className="coverPhotoContainer">
                                 <div className="Common-Frontdoor-CoverPhoto challenger-cover-photo">
                                     <div className="background-wrapper">
-                                        <div className="coverBackground"></div>
+                                        <div className="coverBackground">
+                                            <div className={"primary-content"}>
+                                               <section className="title-section">
+                                                    <div className="section-container ">
+                                                        <h1 className="title">Book [ flights ] online</h1>
+                                                        <h2 className="subTitle">Search and compare hundreds of travel
+                                                            sites at once</h2>
+                                                    </div>
+                                               </section>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

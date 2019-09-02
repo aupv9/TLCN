@@ -31,11 +31,49 @@
                         url("https://www.baolau.com/images/landing/bus-ha-giang.jpg");
                 height: 620px;
                 position: relative;
-
                 background-size: cover;
                 background-position: center;
-              }
+                opacity: 1;
+                transition: opacity 2s ease,height .15s ease;
 
+                .primary-content{
+                  display: table-cell;
+                  height: 100%;
+                  width: 170.124em ;
+                    .title-section{
+                      margin-top: 40px;
+                      height: auto;
+                      margin-bottom: 30px;
+                        .section-container{
+                          position: relative;
+                          height: 100%;
+                          display: flex;
+                          align-items: center;
+                          flex-wrap: wrap;
+
+                          max-width: 77.333em;
+                          margin: 0 auto !important;
+                          padding: 0 2em;
+                            .title{
+                              width: 100%;
+                              margin: 0;
+                              text-align: center;
+                              font-family: "mallory",Helvetica Neue,Helvetica,Arial,sans-serif;
+                              font-weight: 600;
+                            }
+                          .subTitle{
+                            position: relative;
+                            width: 100%;
+                            margin-top: 10px;
+                            text-align: center;
+                            font-weight: 500;
+                            font-size: 21px;
+                            margin-bottom: 0;
+                          }
+                        }
+                    }
+                }
+              }
             }
         }
       }
@@ -51,6 +89,7 @@
   line-height: 1.231;
   color: #212a30;
 }
+
 div{
   display: block;
 }
