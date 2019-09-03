@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 import './style.scss'
 import DatePicker from "react-datepicker";
-
+import * as LIST from '../../contants'
 import "react-datepicker/dist/react-datepicker.css";
+import ContentSearch from '../content-search/index'
+import * as _ from "lodash";
+
 class Home_Main extends Component {
     state = {
-        startDate: new Date()
+        startDate: new Date(),
+        key:"",
+        listProvince:LIST.LIST_PROVINCE,
     };
 
     handleChange = date => {
@@ -13,17 +18,37 @@ class Home_Main extends Component {
             startDate: date
         });
     };
+    getElementId=(element)=>{
+        return document.getElementById(element)
+    }
+
+
     onSearch=(type,e)=>{
         const value=e.target.value;
-        switch (type ) {
-            case type === 1:
 
+        switch(type) {
+            case 1:
+                this.getElementId("listRe").classList.add("smartboxS")
+                this.getElementId("listRe").classList.remove("smartboxE")
+                break;
+            case 2:
+                this.getElementId("listRe").classList.remove("smartboxS")
+                this.getElementId("listRe").classList.add("smartboxE")
+                break;
         }
+
         if(value.length > 0 ){
+            this.setState({
+                key:this.state.key+value
+            })
             document.getElementById("listRe").style.display="block"
         }else{
             document.getElementById("listRe").style.display="none"
+            this.setState({key:""})
+
         }
+
+
 
     }
     offList=()=>{
@@ -62,7 +87,8 @@ class Home_Main extends Component {
                                                                                    className="col-field" placeholder="Từ đâu?"/>
                                                                             <button id="switch-btn" className=""><i
                                                                                 className="fas fa-exchange-alt"></i></button>
-                                                                            <input type="text"  className="col-field"  placeholder="Đến đâu?"/>
+                                                                            <input type="text"  onChange={(e)=>this.onSearch(2,e)}
+                                                                                   className="col-field"  placeholder="Đến đâu?"/>
                                                                              <DatePicker className={"col-field"}
                                                                                 selected={this.state.startDate}
                                                                                 onChange={this.handleChange}
@@ -85,13 +111,21 @@ class Home_Main extends Component {
                 </main>
                 <div className="smartbox-air" style={{display:"none"}} id="listRe">
                     <ul className="list-box">
-                        <li>
-                            <i className="fas fa-bus"></i>
-                            <span>San Francisco, CA, Mỹ - San Francisco (SFO)</span>
-                        </li>
-                        <li>2</li>
-                        <li>3</li>
+                        {
 
+                            _.filter(LIST.LIST_PROVINCE,(o)=>{
+                                return _.includes(o.NAME,this.state.key)
+                            })
+                                .map((item,key)=>{
+                                return(
+                                    <li key={key}>
+                                        <i className="fas fa-bus"></i>
+                                        <span>{item.NAME}</span>
+                                    </li>
+                                )
+                            })
+                        }
+                        {/*<ContentSearch keySearch={this.state.key}></ContentSearch>*/}
                     </ul>
                 </div>
 

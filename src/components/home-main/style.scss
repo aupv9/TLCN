@@ -160,7 +160,7 @@
   }
 
 }
-.smartbox{
+.smartboxS{
   display: inline;
   position: absolute;
   width: auto;
@@ -188,10 +188,38 @@
             background: #488BF8;
             color: #fff;
           }
-
-
-
       }
+  }
+}
+.smartboxE{
+  display: inline;
+  position: absolute;
+  width: auto;
+  top: 315px;
+  left: 800px;
+  z-index: 10000;
+  font-size: 16px;
+  margin: 5px 0 0;
+  background-color: #fff;
+  box-shadow: 0 3px 12px 1px rgba(0,0,0,0.26);
+  .list-box{
+    margin: 0;
+    padding: 5px 0;
+    list-style: none;
+    display: block;
+    font-size: 16px;
+    li{
+
+      background-repeat: no-repeat;
+      padding: 10px 24px 10px 30px;
+      span{
+        margin:0 20px;
+      }
+      &:hover{
+        background: #488BF8;
+        color: #fff;
+      }
+    }
   }
 }
 *{
