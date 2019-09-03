@@ -13,6 +13,22 @@ class Home_Main extends Component {
             startDate: date
         });
     };
+    onSearch=(type,e)=>{
+        const value=e.target.value;
+        switch (type ) {
+            case type === 1:
+
+        }
+        if(value.length > 0 ){
+            document.getElementById("listRe").style.display="block"
+        }else{
+            document.getElementById("listRe").style.display="none"
+        }
+
+    }
+    offList=()=>{
+        document.getElementById("listRe").style.display="none"
+    }
     render() {
         return (
             <>
@@ -42,7 +58,8 @@ class Home_Main extends Component {
                                                                 <div className="form-search-wrapper">
                                                                     <div className="keel-grid">
                                                                         <div className="col-fields">
-                                                                            <input type="text"  className="col-field" placeholder="Từ đâu?"/>
+                                                                            <input type="text" onChange={(e)=>this.onSearch(1,e)} onBlur={this.offList}
+                                                                                   className="col-field" placeholder="Từ đâu?"/>
                                                                             <button id="switch-btn" className=""><i
                                                                                 className="fas fa-exchange-alt"></i></button>
                                                                             <input type="text"  className="col-field"  placeholder="Đến đâu?"/>
@@ -66,14 +83,18 @@ class Home_Main extends Component {
                         </div>
                     </div>
                 </main>
-                <div className="smartbox smartbox-air">
-                    <ul>
-                        <li>1</li>
+                <div className="smartbox-air" style={{display:"none"}} id="listRe">
+                    <ul className="list-box">
+                        <li>
+                            <i className="fas fa-bus"></i>
+                            <span>San Francisco, CA, Mỹ - San Francisco (SFO)</span>
+                        </li>
                         <li>2</li>
                         <li>3</li>
 
                     </ul>
                 </div>
+
             </>
         );
     }
