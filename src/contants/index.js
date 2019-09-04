@@ -81,7 +81,7 @@ export const LIST_PROVINCE=[
     {MA:38,NAME: "Hà Tĩnh"},
     {MA:0,NAME:"Hải Dương"},{MA:1,NAME:"Hải Phòng"},
     {MA:1,NAME:"Hòa Bình"}, {MA:95,NAME:"Hậu Giang"},
-    {MA:1,NAME:"Hưng Yên"}, {MA:1,NAME:"Thành phố Hồ Chí Minh"},
+    {MA:1,NAME:"Hưng Yên"}, {MA:59,NAME:"Thành phố Hồ Chí Minh"},
     {MA:79,NAME:"Khánh Hòa"}, {MA:68,NAME:"Kiên Giang"},
     {MA:82,NAME:"Kon Tum"},
     {MA:1,NAME:"Lai Châu"}, {MA:1,NAME:"Lào Cai"},

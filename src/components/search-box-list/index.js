@@ -25,7 +25,9 @@ class SearchBox extends Component {
                                 <div className="search-content">
                                     <div className="location">
                                         <input type={"text"} placeholder={"Gõ vào nơi đi"} id="ip-start"></input>
-                                        <button id="switch-btn"><img src={"https://storage.googleapis.com/fe-production/images/header/swap.svg"}/></button>
+                                        <button id="switch-btn"><i
+                                            className="fas fa-exchange-alt"
+                                        ></i></button>
                                         <input type={"text"} placeholder={"Gõ vào nơi đến"} id="ip-end"></input>
                                     </div>
                                     <div className="date">
