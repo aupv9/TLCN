@@ -4,7 +4,6 @@ class SearchMain extends Component {
     render() {
         return (
             <>
-
             </>
         );
     }

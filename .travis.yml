@@ -5,5 +5,5 @@ cache:
 deploy:
   provider: heroku
   api_key:
-    secure: 77b26d40-6a25-4fe3-a4c9-9e1a3fe0abb9
-  app: datve-tlcn
+    secure: cfb5fc3c-6d09-4ad3-9207-fd2878604763
+  app: app-tlcn
