@@ -4,6 +4,6 @@ cache:
     - node_modules
 deploy:
   provider: heroku
-  api_key:
-    secure: cfb5fc3c-6d09-4ad3-9207-fd2878604763
+  target_branch: master
+  api_key: cfb5fc3c-6d09-4ad3-9207-fd2878604763
   app: datve-tlcn
