@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
-import './style.scss'
-import DatePicker from "react-datepicker";
-import * as LIST from '../../contants'
+import './style.scss';
+import * as LIST from '../../contants';
 import "react-datepicker/dist/react-datepicker.css";
 import * as _ from "lodash";
-import { DropdownList } from 'react-widgets'
+import FormSearchMain from "../form-search-main";
 
 class Home_Main extends Component {
-    /*
-    * khởi tạo các biến local để xử lý
-    * */
+    //* khởi tạo các biến local để xử lý
+    //*
     state = {
         startDate: new Date(),
         key:"",
@@ -28,7 +26,10 @@ class Home_Main extends Component {
     };
     /*get element theo Id*/
     getElementId=(element)=>{
-        return document.getElementById(element)
+        // eslint-disable-next-line no-undef
+        return document.getElementById(element);
+        
+
     }
 
     /*Khi nhập vào điểm đi và điểm đến
@@ -66,20 +67,19 @@ class Home_Main extends Component {
             this.setState({
                 key:value.trim()
             })
-            document.getElementById("listRe").style.display="block"
+            // eslint-disable-next-line no-undef
+            document.getElementById("listRe").style.display="block";
         }else{
+            // eslint-disable-next-line no-undef
             document.getElementById("listRe").style.display="none"
-            this.setState({key:""})
+            this.setState({key:""});
         }
-
-
-
     }
     /*
     * khi nhấp chuột ra khỏi input sẽ ẩn đi list địa điểm
     * */
     offList=()=>{
-        document.getElementById("listRe").style.display="none"
+       document.getElementById("listRe").style.display="none";
     }
 
     /*
@@ -87,8 +87,8 @@ class Home_Main extends Component {
     * */
     toSearch=()=>{
         return  _.filter(LIST.LIST_PROVINCE,(o)=>{
-            return _.includes(o.NAME,this.state.key.toLowerCase())
-        })
+            return _.includes(o.NAME,this.state.key.toLowerCase());
+        });
     }
     /*
     * Khi chọn địa điểm sẽ set state địa điểm đi và đến
@@ -100,18 +100,19 @@ class Home_Main extends Component {
             this.setState({
                 nameStart:name,
                 idStart:id
-            })
+            });
         }else{
             this.setState({
                 nameEnd:name,
                 idEnd:id
-            })
+            });
         }
     }
     /*
     * Chuyển vị trí đ điểm đi và đến
     * */
-    onSwitch=(e)=>{
+    // eslint-disable-next-line no-unused-vars
+    onSwitch=()=>{
         let start=this.state.nameStart;
         let idStart=this.state.idStart
         this.setState(
@@ -122,7 +123,7 @@ class Home_Main extends Component {
                 idEnd:idStart
             }
         )
-        console.log(this.state.idStart,this.state.idEnd)
+        console.log(this.state.idStart,this.state.idEnd);
     }
 
     render() {
@@ -142,41 +143,7 @@ class Home_Main extends Component {
                                                         <h2 className="subTitle">Search and compare hundreds of travel
                                                             sites at once</h2>
                                                     </div>
-                                                   <div className="form-section">
-                                                        <div className="form-container">
-                                                            <div className="base-form-search">
-                                                                 <div className={"form-header"}>
-                                                                     <div className="displayBlock">
-                                                                         <button className="button-radio active-button-radio">Khứ hồi</button>
-                                                                         <button  className="button-radio">Một chiều</button>
-                                                                     </div>
-                                                                 </div>
-                                                                <div className="form-search-wrapper">
-                                                                    <div className="keel-grid">
-                                                                        <div className="col-fields">
-                                                                            <input onKeyDown={(e)=>this.onSearch(1,e)}
-                                                                                type="text"
-                                                                                   onChange={(e)=>this.onSearch(1,e)} onBlur={this.offList}
-                                                                                   value={this.state.nameStart}
-                                                                                   className="col-field" placeholder="Từ đâu?"/>
-
-                                                                            <button id="switch-btn" className="" onClick={this.onSwitch}><i
-                                                                                className="fas fa-exchange-alt"
-                                                                            ></i></button>
-                                                                            <input type="text"  onChange={(e)=>this.onSearch(2,e)}
-                                                                                   className="col-field"  placeholder="Đến đâu?"
-                                                                                   onBlur={this.offList} value={this.state.nameEnd}/>
-                                                                             <DatePicker className={"col-field"}
-                                                                                selected={this.state.startDate}
-                                                                                onChange={this.handleChange}
-                                                                                />
-                                                                             <button className="button-submit">Tìm Kiếm</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                   </div>
+                                                <FormSearchMain />
                                                </section>
                                             </div>
                                         </div>
@@ -186,17 +153,21 @@ class Home_Main extends Component {
                         </div>
                     </div>
                 </main>
-                <div className="smartbox-air" style={{display:"none"}} id="listRe">
-                    <ul className="list-box" id="listPro">
+                <div className="smartbox-air"
+                     style={{display:"none"}}
+                     id="listRe">
+                    <ul className="list-box"
+                        id="listPro">
                        {
                             this.toSearch()?this.toSearch().map((item,key)=>{
                                     return(
                                         <li role="option"
                                             onMouseDown={this.setIdPro}
-
                                             data-id={item.MA}
                                             data-name={item.NAME}
-                                            key={key} id={`station-`+item.MA} className="" >
+                                            key={key}
+                                            id={`station-`+item.MA}
+                                            className="" >
                                             <i  onMouseDown={this.setIdPro}
                                                 data-id={item.MA}
                                                 data-name={item.NAME}
@@ -206,13 +177,12 @@ class Home_Main extends Component {
                                                    data-name={item.NAME} >{item.NAME}
                                                   </span>
                                         </li>
-                                    )
+                                    );
                                 }):this.offList()
                         }
                         {
 
                         }
-                        {/*<ContentSearch keySearch={this.state.key}></ContentSearch>*/}
                     </ul>
                 </div>
 

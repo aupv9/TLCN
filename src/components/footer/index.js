@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import './style.scss';
-import {Link}from 'react-router-dom'
+import {Link}from 'react-router-dom';
 class Footer extends Component {
     render() {
         return (
@@ -86,8 +85,6 @@ class Footer extends Component {
                             {/* Copyright */}
                         </footer>
                         {/* Footer */}
-
-
                     </div>
                 </div>
 

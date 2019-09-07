@@ -1,0 +1,31 @@
+{
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "arrow-body-style": "warn",
+    "semi": 2,
+    "eqeqeq": 2,
+    "react/jsx-max-props-per-line":2,
+    "react/no-deprecated": 1,
+    "react/prop-types": 1,
+    "react/jsx-no-undef": 1,
+    "no-mixed-spaces-and-tabs": 0,
+    "no-undef": 1,
+     "no-unused-vars": 2,
+     "wrap-iife": 1,
+      "no-var": 2
+  }
+}

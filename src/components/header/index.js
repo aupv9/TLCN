@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import './style.scss';
 import logo from '../../img/logo2.jpg';
 import {Link} from 'react-router-dom';
-import text from '../../img/text.jpg'
+import text from '../../img/text.jpg';
+
 class Header extends Component {
     render() {
         return (
@@ -12,10 +13,14 @@ class Header extends Component {
                         <div className="header-wrapper">
                             <div className="header-grid keel-grid v-c-p">
                                 <div className="col-logo">
-                                        <img src={logo} className="logo-header"/>
-                                    <Link  to={"/"} className={"logo"}>
-                                        <img src={text} className="logo-header" style={{width:"100px"}}/>
-                                    </Link>
+                                        <img src={logo}
+                                         className="logo-header"/>
+                                         <Link  to={"/"}
+                                                className={"logo"}>
+                                            <img src={text}
+                                                 className="logo-header"
+                                                 style={{width:"100px"}}/>
+                                        </Link>
 
                                 </div>
                                 <div className="col-nav">
@@ -44,16 +49,15 @@ class Header extends Component {
                                         <div className="multi-lang">
                                             <div className="col-lang">
                                                 <a className="dropdown-lang"
-                                                onClick={()=>{console.log("vn")}}>
+
+                                                onClick={()=>{}}>
                                                     <span className="flag-vn">&nbsp;</span>
                                                 </a>
                                                 <a className="dropdown-lang"
-                                                   onClick={()=>{console.log("vn")}}>
+                                                   onClick={()=>{}}>
                                                     <span className="flag-usa">&nbsp;</span>
                                                 </a>
-
                                             </div>
-
                                         </div>
                                         <div className="col-login mr-bt">
                                             <div className="v-c-p section-buttons">

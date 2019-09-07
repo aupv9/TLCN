@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import './App.css';
-import {BrowserRouter as Router} from 'react-router-dom'
+import {BrowserRouter as Router} from 'react-router-dom';
 import Router_URL from "./components/router_url";
 class App extends Component{
 
@@ -8,7 +8,7 @@ class App extends Component{
       return (
           <>
               <Router>
-                  <Router_URL></Router_URL>
+                  <Router_URL/>
               </Router>
           </>
       );
