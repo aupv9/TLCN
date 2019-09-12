@@ -21,25 +21,24 @@ public class VeController {
     @Qualifier("veService")
     VeServiceImpl veService;
 
-    /*
-     * find các xe có đủ điều kiện guest cần
-     * @param start mã nơi đi
-     * @param end mã nơi đến
-     * @param date ngày đi
-     */
-    /*
 
-
-     * add xe
-     * kèm theo x-user-token để xác thực
-     * */
     @RequestMapping(value = "/Ve",method = RequestMethod.POST,produces = "application/json")
     public ResponseEntity<Ve> addVe(@RequestBody Ve ve){
         HttpHeaders headers=new HttpHeaders();
         if(veService.addVe(ve)){
-            return  new ResponseEntity<Ve>(ve,headers,HttpStatus.CREATED);
+            return  new ResponseEntity<Ve>(ve,headers,HttpStatus.OK);
         }
         return new ResponseEntity<Ve>(ve,headers,HttpStatus.NOT_EXTENDED);
     }
+    @RequestMapping(value = "/VeUpdate",method = RequestMethod.POST,produces = "application/json")
+    public ResponseEntity<Ve> cancelVe(@RequestBody Ve ve){
+        HttpHeaders headers=new HttpHeaders();
 
+        if(veService.cancelVe(ve)){
+            headers.add("token-mess","OK");
+            return new ResponseEntity<Ve>(ve,headers,HttpStatus.OK);
+        }
+        return new ResponseEntity<Ve>(ve,headers,HttpStatus.NOT_MODIFIED);
+
+    }
 }

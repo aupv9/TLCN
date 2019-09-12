@@ -50,8 +50,8 @@ public class VeDaoImpl implements VeService {
     @Override
     public boolean cancelVe(Ve ve){
         try {
-            coll.updateOne(eq("_id",ve.get_id()),new Document("huy",ve.getHuy()));
-
+            coll.updateOne(eq("_id",ve.get_id()),new Document("$set",
+                    new Document("huy",true)));
             return true;
         }
         catch (MongoException e){

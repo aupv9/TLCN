@@ -85,7 +85,7 @@ public class XeDaoImpl implements XeDao{
     }
     public boolean updateXe(Xe xe){
         try {
-            coll.updateOne(eq("_id",xe.get_id()),new Document("loaixe",xe.getLoaixe())
+            coll.updateOne(eq("_id",xe.get_id()),new Document("$set",new Document("loaixe",xe.getLoaixe())
                     .append("nhaxe",xe.getNhaxe())
                     .append("loaidi",xe.getLoaidi())
                     .append("chuyendi",xe.getChuyendi())
@@ -97,6 +97,7 @@ public class XeDaoImpl implements XeDao{
                     .append("chinhsachhuyve",xe.getChinhsachhuyve())
                     .append("lichtrinh",xe.getLichtrinh())
                     .append("danhsachghe",xe.getDanhsachghe())
+                    )
             );
             return true;
         }
