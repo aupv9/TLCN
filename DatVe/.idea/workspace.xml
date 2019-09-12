@@ -8,10 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ec4df14d-a26a-43ce-88c0-b6668eddbe12" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/datve/com/controller/VeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datve/com/controller/VeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/datve/com/dao/VeDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datve/com/dao/VeDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/datve/com/dao/XeDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datve/com/dao/XeDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/DatVe-0.0.1-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/DatVe-0.0.1-SNAPSHOT.war" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -212,7 +208,7 @@
       <workItem from="1568206236472" duration="4618000" />
       <workItem from="1568215488113" duration="3515000" />
       <workItem from="1568219152703" duration="293000" />
-      <workItem from="1568269724568" duration="3169000" />
+      <workItem from="1568269724568" duration="3610000" />
     </task>
     <servers />
   </component>

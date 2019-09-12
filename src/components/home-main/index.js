@@ -86,6 +86,7 @@ class Home_Main extends Component {
     * method tìm kiếm thông qua key
     * */
     toSearch=()=>{
+
         return  _.filter(LIST.LIST_PROVINCE,(o)=>{
             return _.includes(o.NAME,this.state.key.toLowerCase());
         });

@@ -1,0 +1,27 @@
+
+.pageContainer{
+
+  height: auto;
+  width: 1340px !important;
+  margin: auto;
+
+  .keel-grid{
+    letter-spacing: -0.28571428571429em;
+    font-family: FreeSans,Arimo,"Droid Sans",Helvetica,Arial,sans-serif;
+    text-rendering: optimizespeed;
+    max-width: 89.333em;
+    padding: 0 4em;
+      .col-left{
+        width: 240px;
+        position: relative;
+        z-index: 5;
+      }
+      .col-list-body{
+        width: 740px;
+      }
+      .col-right{
+        width: 215px;
+
+      }
+  }
+}

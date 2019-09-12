@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import './style.scss'
+import './style.scss';
 import DatePicker from "react-datepicker";
+
 class SearchBox extends Component {
     constructor(props) {
         super(props);
@@ -24,11 +25,15 @@ class SearchBox extends Component {
                             <div className="search-box-list col-12">
                                 <div className="search-content">
                                     <div className="location">
-                                        <input type={"text"} placeholder={"Gõ vào nơi đi"} id="ip-start"></input>
+                                        <input type={"text"}
+                                               placeholder={"Gõ vào nơi đi"}
+                                               id="ip-start"></input>
                                         <button id="switch-btn"><i
                                             className="fas fa-exchange-alt"
                                         ></i></button>
-                                        <input type={"text"} placeholder={"Gõ vào nơi đến"} id="ip-end"></input>
+                                        <input type={"text"}
+                                               placeholder={"Gõ vào nơi đến"}
+                                               id="ip-end"></input>
                                     </div>
                                     <div className="date">
                                         <DatePicker id="departDate"
@@ -38,12 +43,17 @@ class SearchBox extends Component {
                                         <button className="btn-day">Hôm Nay</button>
                                         <button className="btn-day">Ngày Mai</button>
                                     </div>
-                                    <button id="btToday" type="button" className="fl btn btn-gray btn-today">Hôm nay
+                                    <button id="btToday"
+                                            type="button"
+                                            className="fl btn btn-gray btn-today">Hôm nay
                                     </button>
-                                    <button id="btTomorrow" type="button" className="fl btn btn-gray btn-tomorrow">
+                                    <button id="btTomorrow"
+                                            type="button"
+                                            className="fl btn btn-gray btn-tomorrow">
                                         Ngày mai
                                     </button>
-                                    <button id="searchSubmit" onClick={this.click}>Tìm Vé Xe</button>
+                                    <button id="searchSubmit"
+                                            onClick={this.click}>Tìm Vé Xe</button>
                                 </div>
                             </div>
                         </div>

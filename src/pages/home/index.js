@@ -7,9 +7,7 @@ import ListXe from "../../components/list-xe";
 import './style.scss';
 class Home extends Component {
 
-	componentWillMount() {
-		console.log(this.props.match.url);
-	}
+
 	render() {
 		return (
             <>
