@@ -2,19 +2,43 @@
 .pageContainer{
 
   height: auto;
-  width: 1340px !important;
-  margin: auto;
 
+
+  background: #F7F7F7 !important;
   .keel-grid{
+    width: 1340px !important;
     letter-spacing: -0.28571428571429em;
     font-family: FreeSans,Arimo,"Droid Sans",Helvetica,Arial,sans-serif;
     text-rendering: optimizespeed;
     max-width: 89.333em;
     padding: 0 4em;
+    margin: auto;
       .col-left{
         width: 240px;
         position: relative;
         z-index: 5;
+        opacity: 1;
+        .base-result-rail{
+
+          position: relative;
+          top: auto;
+          bottom: auto;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          backface-visibility: hidden;
+            .common-filter{
+              font-size: 12px;
+              background-image: linear-gradient(135deg,#488bf8 0%,#176cf6 100%);
+
+              .count-grid{
+                display: flex;
+                align-items: center;
+                text-align: center;
+                height: 40px;
+                color: #fff;
+              }
+            }
+        }
       }
       .col-list-body{
         width: 740px;

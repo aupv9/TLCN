@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './style.scss';
+import LeftSearch from "../col-left";
 
 class ListContent extends Component {
     render() {
@@ -8,7 +9,7 @@ class ListContent extends Component {
                 <div className="pageContainer">
                     <div className="keel-grid">
                         <div className="col-left">
-s
+                            <LeftSearch />
                         </div>
                         <div className="col-list-body">
                             s
