@@ -27,7 +27,6 @@ public class XeServiceImpl  implements XeService{
     }
     public boolean updateXe(Xe xe){
         return xeDao.updateXe(xe);
-
     }
 }
 

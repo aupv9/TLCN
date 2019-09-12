@@ -21,7 +21,6 @@ public class VeController {
     @Qualifier("veService")
     VeServiceImpl veService;
 
-
     @RequestMapping(value = "/Ve",method = RequestMethod.POST,produces = "application/json")
     public ResponseEntity<Ve> addVe(@RequestBody Ve ve){
         HttpHeaders headers=new HttpHeaders();
@@ -30,6 +29,7 @@ public class VeController {
         }
         return new ResponseEntity<Ve>(ve,headers,HttpStatus.NOT_EXTENDED);
     }
+
     @RequestMapping(value = "/VeUpdate",method = RequestMethod.POST,produces = "application/json")
     public ResponseEntity<Ve> cancelVe(@RequestBody Ve ve){
         HttpHeaders headers=new HttpHeaders();

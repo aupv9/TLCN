@@ -56,14 +56,14 @@ public class XeController {
             return new ResponseEntity<Xe>(xe,headers,HttpStatus.NOT_EXTENDED);
         }
 
-//        @RequestMapping(value = "/Car/update",method = RequestMethod.PUT,produces = "application/json")
-//        public ResponseEntity<Xe> updateXe(@RequestBody Xe xe){
-//
-//            HttpHeaders headers=new HttpHeaders();
-//            if(xeService.updateXe(xe)){
-//                return new ResponseEntity<Xe>(xe,headers,HttpStatus.OK);
-//            }
-//            return new ResponseEntity<Xe>(xe,headers,HttpStatus.NOT_MODIFIED);
-//        }
+        @RequestMapping(value = "/Car/update",method = RequestMethod.PUT,produces = "application/json")
+        public ResponseEntity<Xe> updateXe(@RequestBody Xe xe){
+
+            HttpHeaders headers=new HttpHeaders();
+            if(xeService.updateXe(xe)){
+                return new ResponseEntity<Xe>(xe,headers,HttpStatus.OK);
+            }
+            return new ResponseEntity<Xe>(xe,headers,HttpStatus.NOT_MODIFIED);
+        }
 
 }

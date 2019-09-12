@@ -14,6 +14,7 @@ import javax.servlet.ServletRegistration;
 public class SpringWebAppInitializer implements WebApplicationInitializer {
     //Spring sẽ vào đây đọc các cấu hình để init
     public void onStartup(ServletContext servletContext) throws ServletException {
+
         AnnotationConfigWebApplicationContext appContext=new AnnotationConfigWebApplicationContext();
         appContext.register(ApplicationContextConfig.class);
         appContext.register(ApplicationContextConfig.class);
