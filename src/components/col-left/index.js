@@ -9,9 +9,15 @@ class LeftSearch extends Component {
                         <div className="common-filter">
                             <div className="count-grid">
                                 <div className="count">
-                                    <span>1</span>
+                                    <p>Có tổng cộng là <span></span> chuyến</p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    {/*Fiter list container*/}
+                    <div className="filterListContainer">
+                        <div className="filter-list">
+
                         </div>
                     </div>
                 </div>
