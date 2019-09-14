@@ -7,7 +7,8 @@ class Router_URL extends Component {
         return (
             <>
                 <Switch>
-                    <Route  path={"/"} component={Home}></Route>
+                    <Route  path={"/"}
+                            component={Home}></Route>
                 </Switch>
             </>
         );

@@ -49,7 +49,6 @@ class Header extends Component {
                                         <div className="multi-lang">
                                             <div className="col-lang">
                                                 <a className="dropdown-lang"
-
                                                 onClick={()=>{}}>
                                                     <span className="flag-vn">&nbsp;</span>
                                                 </a>

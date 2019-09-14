@@ -28,8 +28,6 @@ class Home_Main extends Component {
     getElementId=(element)=>{
         // eslint-disable-next-line no-undef
         return document.getElementById(element);
-        
-
     }
 
     /*Khi nhập vào điểm đi và điểm đến
@@ -37,7 +35,7 @@ class Home_Main extends Component {
     và reset value của input search
     * type 1 là điểm đi 2 là điểm đến
     * */
-    onSearch=(type,e)=>{
+    onSearch=(type , e)=>{
         let value=e.target.value;
         switch(type) {
             case 1:
@@ -123,8 +121,7 @@ class Home_Main extends Component {
                 idStart: this.state.idEnd,
                 idEnd:idStart
             }
-        )
-        console.log(this.state.idStart,this.state.idEnd);
+        );
     }
 
     render() {
