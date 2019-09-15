@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import IntroList from "../intro-list";
 import SearchBox from "../search-box-list";
 import ListContent from "../list-content";
+import IntroList from "../intro-list";
 
 class ListXe extends Component {
 

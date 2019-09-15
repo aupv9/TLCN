@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import './style.scss'
+import './style.scss';
 class IntroList extends Component {
     render() {
         return (
