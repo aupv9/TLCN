@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {ExpansionPanel,
     ExpansionPanelSummary,
-    ExpansionPanelDetails
+    ExpansionPanelDetails,
+    Checkbox
 } from "@material-ui/core";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
@@ -16,12 +17,25 @@ const styles = theme => ({
         fontWeight: theme.typography.fontWeightRegular,
     },
 });
+
 class LeftSearch extends Component {
 
+    constructor(props) {
+        super(props);
 
 
+    }
+   state={
+        checkedA:false
+   }
+    handleChange = name => event => {
+        console.log(event);
+        this.setState({[name]: event.target.checked });
+    };
     render() {
         const { classes } = this.props;
+
+
         return (
             <>
                 <div className="base-result-rail">
@@ -40,18 +54,24 @@ class LeftSearch extends Component {
                             <div className={classes.root}>
                                 <ExpansionPanel>
                                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                        <Typography className={classes.heading}>Hãng Xe</Typography>
+                                        <Typography className={classes.heading}>HÃNG XE </Typography>
                                     </ExpansionPanelSummary>
                                     <ExpansionPanelDetails>
                                         <Typography>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                            sit amet blandit leo lobortis eget.
+                                            <Checkbox
+                                                checked={this.state.checkedA}
+                                                onChange={this.handleChange('checkedA')}
+                                                inputProps={{
+                                                    'aria-label': 'primary checkbox',
+                                                }}
+                                            />
+
                                         </Typography>
                                     </ExpansionPanelDetails>
                                 </ExpansionPanel>
                                 <ExpansionPanel>
                                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                        <Typography className={classes.heading}>Expansion Panel 2</Typography>
+                                        <Typography className={classes.heading}>GIỜ ĐI</Typography>
                                     </ExpansionPanelSummary>
                                     <ExpansionPanelDetails>
                                         <Typography>

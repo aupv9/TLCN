@@ -4,8 +4,19 @@ import * as LIST from '../../contants';
 import "react-datepicker/dist/react-datepicker.css";
 import * as _ from "lodash";
 import DatePicker from "react-datepicker";
+import {connect} from 'react-redux';
+import filterCarReducer from "../../redux/reducers/todoCars";
+import {getCar} from "../../redux/action";
+import axios from 'axios';
 
 class Home_Main extends Component {
+
+
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        console.log(nextProps.filterCarReducer.data);
+    }
+
     //* khởi tạo các biến local để xử lý
     //*
     state = {
@@ -35,8 +46,8 @@ class Home_Main extends Component {
     và reset value của input search
     * type 1 là điểm đi 2 là điểm đến
     * */
-    onSearch=(type , e)=>{
-        let value=e.target.value;
+    onSearch= type => event=>{
+        let value= event.target.value;
         switch(type) {
             case 1:
                 this.setState(
@@ -112,6 +123,8 @@ class Home_Main extends Component {
     * */
     // eslint-disable-next-line no-unused-vars
     onSwitch=()=>{
+
+        this.props.getCars();
         let start=this.state.nameStart;
         let idStart=this.state.idStart
         this.setState(
@@ -124,7 +137,12 @@ class Home_Main extends Component {
         );
     }
 
+
     render() {
+
+
+
+        //console.log();
         return (
             <>
                 <main className="pageContent keel-agd">
@@ -153,9 +171,9 @@ class Home_Main extends Component {
                                                                <div className="form-search-wrapper">
                                                                    <div className="keel-grid">
                                                                        <div className="col-fields">
-                                                                           <input onKeyDown={(e)=>this.onSearch(1,e)}
+                                                                           <input
                                                                                   type="text"
-                                                                                  onChange={(e)=>this.onSearch(1,e)}
+                                                                                  onChange={this.onSearch(1)}
                                                                                   onBlur={this.offList}
                                                                                   value={this.state.nameStart}
                                                                                   className="col-field"
@@ -166,7 +184,7 @@ class Home_Main extends Component {
                                                                                <i className="fas fa-exchange-alt"/>
                                                                            </button>
                                                                            <input type="text"
-                                                                                  onChange={(e)=>this.onSearch(2,e)}
+                                                                                  onChange={this.onSearch(2)}
                                                                                   className="col-field"
                                                                                   placeholder="Đến đâu?"
                                                                                   onBlur={this.offList}
@@ -230,5 +248,14 @@ class Home_Main extends Component {
 }
 
 Home_Main.propTypes = {};
-
-export default Home_Main;
+const mapStateToProps=(state)=>({
+    filterCarReducer:state.filterCarReducer
+});
+const mapDispatchToProps = dispatch => {
+    return {
+        getCars: () => {
+            dispatch(getCar());
+        }
+    };
+};
+export default  connect(mapStateToProps,mapDispatchToProps)(Home_Main);
