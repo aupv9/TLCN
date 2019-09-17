@@ -35,7 +35,6 @@ class LeftSearch extends Component {
     render() {
         const { classes } = this.props;
 
-
         return (
             <>
                 <div className="base-result-rail">
@@ -65,7 +64,6 @@ class LeftSearch extends Component {
                                                     'aria-label': 'primary checkbox',
                                                 }}
                                             />
-
                                         </Typography>
                                     </ExpansionPanelDetails>
                                 </ExpansionPanel>

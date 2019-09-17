@@ -1,3 +1,4 @@
-export const GET_LIST_CAR="GET_LIST_CAR";
+export const GET_LIST_CAR_SUCCESS="GET_LIST_CAR_SUCCESS";
+export const GET_LIST_CAR_ERR="GET_LIST_CAR_ERR";
 
 

@@ -5,15 +5,14 @@ import "react-datepicker/dist/react-datepicker.css";
 import * as _ from "lodash";
 import DatePicker from "react-datepicker";
 import {connect} from 'react-redux';
-import filterCarReducer from "../../redux/reducers/todoCars";
 import {getCar} from "../../redux/action";
-import axios from 'axios';
 
 class Home_Main extends Component {
 
 
 
     componentWillReceiveProps(nextProps, nextContext) {
+
         console.log(nextProps.filterCarReducer.data);
     }
 
@@ -123,8 +122,6 @@ class Home_Main extends Component {
     * */
     // eslint-disable-next-line no-unused-vars
     onSwitch=()=>{
-
-        this.props.getCars();
         let start=this.state.nameStart;
         let idStart=this.state.idStart
         this.setState(
@@ -137,12 +134,14 @@ class Home_Main extends Component {
         );
     }
 
+    onSearchCars =()=>{
 
+        console.log(this.state.startDate.getMonth()+1);
+        //console.log(this.state.idStart,this.state.idEnd,this.state.startDate.getDate()+"/"+this.state.startDate.getMonth()+"/"+this.state.startDate.getFullYear());
+        this.props.getCars(this.state.idStart,this.state.idEnd,this.state.startDate.getDate()+"-"+this.state.startDate.getMonth()+1+"-"+this.state.startDate.getFullYear());
+}
     render() {
 
-
-
-        //console.log();
         return (
             <>
                 <main className="pageContent keel-agd">
@@ -192,8 +191,10 @@ class Home_Main extends Component {
                                                                            <DatePicker className={"col-field"}
                                                                                        selected={this.state.startDate}
                                                                                        onChange={this.handleChange}
+
                                                                            />
-                                                                           <button className="button-submit">Tìm Kiếm</button>
+                                                                           <button className="button-submit"
+                                                                                    onClick={this.onSearchCars}>Tìm Kiếm</button>
                                                                        </div>
                                                                    </div>
                                                                </div>
@@ -237,7 +238,6 @@ class Home_Main extends Component {
                                 }):this.offList()
                         }
                         {
-
                         }
                     </ul>
                 </div>
@@ -253,8 +253,8 @@ const mapStateToProps=(state)=>({
 });
 const mapDispatchToProps = dispatch => {
     return {
-        getCars: () => {
-            dispatch(getCar());
+        getCars: (start,end,date) => {
+            dispatch(getCar(start,end,date));
         }
     };
 };

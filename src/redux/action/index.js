@@ -1,22 +1,27 @@
 import * as types from '../type';
 import axios from 'axios';
 
-export const getCar= ()=>{
-
+export const getCar= (start, end, date) =>{
     return dispatch =>{
-        axios.get("https://webapi-service.herokuapp.com/api/Cars/start=63&end=59&date=26-8-2019")
+        axios.get(`https://webapi-service.herokuapp.com/api/Cars/start=${start}&end=${end}&date=${date}`)
                     .then(
                         (response)=>
                         {
+                            console.log(response);
                             dispatch(
                                     {
-                                        type:types.GET_LIST_CAR,
+                                        type:types.GET_LIST_CAR_SUCCESS,
                                         payload:response.data
                                     }
                                 );
                         })
-                    .catch(function (error) {
-                        console.log(error);
+                    .catch((error) =>{
+                        dispatch(
+                            {
+                                type:types.GET_LIST_CAR_ERR,
+                                payload:error
+                            }
+                        );
                     });
 
     };
