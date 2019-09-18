@@ -6,6 +6,7 @@ import IntroList from "../intro-list";
 class ListXe extends Component {
 
     render() {
+        console.log(this.props.match.params);
         return (
             <>
                <IntroList/>

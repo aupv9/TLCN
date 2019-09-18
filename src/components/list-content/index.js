@@ -4,6 +4,7 @@ import LeftSearch from "../col-left";
 
 class ListContent extends Component {
     render() {
+
         return (
             <>
                 <div className="pageContainer">

@@ -6,15 +6,20 @@ import * as _ from "lodash";
 import DatePicker from "react-datepicker";
 import {connect} from 'react-redux';
 import {getCar} from "../../redux/action";
+import * as types from '../../redux/type';
+import { Redirect } from 'react-router-dom';
 
 class Home_Main extends Component {
 
 
 
-    componentWillReceiveProps(nextProps, nextContext) {
-
-        console.log(nextProps.filterCarReducer.data);
-    }
+    // componentWillReceiveProps(nextProps, nextContext) {
+    //     if(nextProps.filterCarReducer.action === types.GET_LIST_CAR_SUCCESS){
+    //         console.log("1");
+    //         console.log(nextProps.filterCarReducer.data);
+    //     }
+    //
+    // }
 
     //* khởi tạo các biến local để xử lý
     //*
@@ -124,21 +129,29 @@ class Home_Main extends Component {
     onSwitch=()=>{
         let start=this.state.nameStart;
         let idStart=this.state.idStart
-        this.setState(
-            {
-                nameStart:this.state.nameEnd,
-                nameEnd:start,
-                idStart: this.state.idEnd,
-                idEnd:idStart
-            }
+        this.setState( state=>
+                ({
+                    nameStart:this.state.nameEnd,
+                    nameEnd:start,
+                    idStart: this.state.idEnd,
+                    idEnd:idStart
+                })
+
         );
     }
 
     onSearchCars =()=>{
-
-        console.log(this.state.startDate.getMonth()+1);
-        //console.log(this.state.idStart,this.state.idEnd,this.state.startDate.getDate()+"/"+this.state.startDate.getMonth()+"/"+this.state.startDate.getFullYear());
-        this.props.getCars(this.state.idStart,this.state.idEnd,this.state.startDate.getDate()+"-"+this.state.startDate.getMonth()+1+"-"+this.state.startDate.getFullYear());
+        let info={
+            start:this.state.idStart,
+            end:this.state.idEnd,
+            date:this.state.startDate
+        }
+        console.log(info);
+        this.props.history.push(`/list-xe/${this.state.idStart}/${this.state.idEnd}/${this.state.startDate}/`);
+        console.log(this.props);
+        //let month=parseInt(this.state.startDate.getMonth())+1;
+        //console.log(this.state.idStart,this.state.idEnd,this.state.startDate.getDate()+"-"+month+"-"+this.state.startDate.getFullYear());
+        //this.props.getCars(this.state.idStart,this.state.idEnd,this.state.startDate.getDate()+"-"+month+"-"+this.state.startDate.getFullYear());
 }
     render() {
 
@@ -248,14 +261,14 @@ class Home_Main extends Component {
 }
 
 Home_Main.propTypes = {};
-const mapStateToProps=(state)=>({
-    filterCarReducer:state.filterCarReducer
-});
-const mapDispatchToProps = dispatch => {
-    return {
-        getCars: (start,end,date) => {
-            dispatch(getCar(start,end,date));
-        }
-    };
-};
-export default  connect(mapStateToProps,mapDispatchToProps)(Home_Main);
+// const mapStateToProps=(state)=>({
+//     filterCarReducer:state.filterCarReducer
+// });
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         getCars: (start,end,date) => {
+//             dispatch(getCar(start,end,date));
+//         }
+//     };
+// };connect(mapStateToProps,mapDispatchToProps)
+export default  (Home_Main);
