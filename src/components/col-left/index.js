@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 import {ExpansionPanel,
     ExpansionPanelSummary,
     ExpansionPanelDetails,
-    Checkbox
+    Checkbox,Typography
 } from "@material-ui/core";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
