@@ -4,7 +4,7 @@ import {ExpansionPanel,
     ExpansionPanelDetails,
     Checkbox,Typography
 } from "@material-ui/core";
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -51,7 +51,7 @@ class LeftSearch extends Component {
                         <div className="filter-list">
                             <div className={classes.root}>
                                 <ExpansionPanel>
-                                    <ExpansionPanelSummary>
+                                    <ExpansionPanelSummary expandIcon={<ExpandMore />}>
                                         <Typography className={classes.heading}>HÃNG XE </Typography>
                                     </ExpansionPanelSummary>
                                     <ExpansionPanelDetails>
@@ -67,7 +67,7 @@ class LeftSearch extends Component {
                                     </ExpansionPanelDetails>
                                 </ExpansionPanel>
                                 <ExpansionPanel>
-                                    <ExpansionPanelSummary >
+                                    <ExpansionPanelSummary expandIcon={<ExpandMore />}>
                                         <Typography className={classes.heading}>GIỜ ĐI</Typography>
                                     </ExpansionPanelSummary>
                                     <ExpansionPanelDetails>
@@ -78,7 +78,7 @@ class LeftSearch extends Component {
                                     </ExpansionPanelDetails>
                                 </ExpansionPanel>
                                 <ExpansionPanel>
-                                    <ExpansionPanelSummary >
+                                    <ExpansionPanelSummary expandIcon={<ExpandMore />}>
                                         <Typography className={classes.heading}>Expansion Panel 2</Typography>
                                     </ExpansionPanelSummary>
                                     <ExpansionPanelDetails>
