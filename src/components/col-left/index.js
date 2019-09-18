@@ -51,7 +51,7 @@ class LeftSearch extends Component {
                         <div className="filter-list">
                             <div className={classes.root}>
                                 <ExpansionPanel>
-                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                                    <ExpansionPanelSummary>
                                         <Typography className={classes.heading}>HÃNG XE </Typography>
                                     </ExpansionPanelSummary>
                                     <ExpansionPanelDetails>
@@ -67,7 +67,7 @@ class LeftSearch extends Component {
                                     </ExpansionPanelDetails>
                                 </ExpansionPanel>
                                 <ExpansionPanel>
-                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                                    <ExpansionPanelSummary >
                                         <Typography className={classes.heading}>GIỜ ĐI</Typography>
                                     </ExpansionPanelSummary>
                                     <ExpansionPanelDetails>
@@ -78,7 +78,7 @@ class LeftSearch extends Component {
                                     </ExpansionPanelDetails>
                                 </ExpansionPanel>
                                 <ExpansionPanel>
-                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                                    <ExpansionPanelSummary >
                                         <Typography className={classes.heading}>Expansion Panel 2</Typography>
                                     </ExpansionPanelSummary>
                                     <ExpansionPanelDetails>
