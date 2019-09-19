@@ -141,15 +141,11 @@ class Home_Main extends Component {
     }
 
     onSearchCars =()=>{
-        let info={
-            start:this.state.idStart,
-            end:this.state.idEnd,
-            date:this.state.startDate
-        }
-        console.log(info);
-        this.props.history.push(`/list-xe/${this.state.idStart}/${this.state.idEnd}/${this.state.startDate}/`);
+        let month=parseInt(this.state.startDate.getMonth())+1;
+        let date=this.state.startDate.getDate()+"-"+month+"-"+this.state.startDate.getFullYear();
+        this.props.history.push(`/list-xe/${this.state.idStart}/${this.state.idEnd}/${date}`);
         console.log(this.props);
-        //let month=parseInt(this.state.startDate.getMonth())+1;
+
         //console.log(this.state.idStart,this.state.idEnd,this.state.startDate.getDate()+"-"+month+"-"+this.state.startDate.getFullYear());
         //this.props.getCars(this.state.idStart,this.state.idEnd,this.state.startDate.getDate()+"-"+month+"-"+this.state.startDate.getFullYear());
 }
@@ -261,14 +257,5 @@ class Home_Main extends Component {
 }
 
 Home_Main.propTypes = {};
-// const mapStateToProps=(state)=>({
-//     filterCarReducer:state.filterCarReducer
-// });
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         getCars: (start,end,date) => {
-//             dispatch(getCar(start,end,date));
-//         }
-//     };
-// };connect(mapStateToProps,mapDispatchToProps)
+
 export default  (Home_Main);
