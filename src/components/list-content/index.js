@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import './style.scss';
 import LeftSearch from "../col-left";
-import {getCar} from "../../redux/action";
-import {connect} from 'react-redux';
 
 class ListContent extends Component {
     render() {
@@ -12,7 +10,7 @@ class ListContent extends Component {
                 <div className="pageContainer">
                     <div className="keel-grid">
                         <div className="col-left">
-                            <LeftSearch />
+                            <LeftSearch params={this.props.params}/>
                         </div>
                         <div className="col-list-body">
                             s
@@ -21,22 +19,10 @@ class ListContent extends Component {
                             s
                         </div>
                     </div>
-
                 </div>
-
-
             </>
         );
     }
 }
-const mapStateToProps=(state)=>({
-    filterCarReducer:state.filterCarReducer
-});
-const mapDispatchToProps = dispatch => {
-    return {
-        getCars: (start,end,date) => {
-            dispatch(getCar(start,end,date));
-        }
-    };
-};
-export default connect(mapStateToProps,mapDispatchToProps)(ListContent);
+
+export default ListContent;

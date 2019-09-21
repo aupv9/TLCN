@@ -4,22 +4,9 @@ import * as LIST from '../../contants';
 import "react-datepicker/dist/react-datepicker.css";
 import * as _ from "lodash";
 import DatePicker from "react-datepicker";
-import {connect} from 'react-redux';
-import {getCar} from "../../redux/action";
-import * as types from '../../redux/type';
-import { Redirect } from 'react-router-dom';
+
 
 class Home_Main extends Component {
-
-
-
-    // componentWillReceiveProps(nextProps, nextContext) {
-    //     if(nextProps.filterCarReducer.action === types.GET_LIST_CAR_SUCCESS){
-    //         console.log("1");
-    //         console.log(nextProps.filterCarReducer.data);
-    //     }
-    //
-    // }
 
     //* khởi tạo các biến local để xử lý
     //*
@@ -58,11 +45,11 @@ class Home_Main extends Component {
                     {
                         position:true,
                         nameStart:value
-                    })
+                    });
                 /*
                 *   khi nhập vào search box điểm đi show ra list đia điểm
                 * */
-                this.getElementId("listRe").classList.add("smartboxS")
+                this.getElementId("listRe").classList.add("smartboxS");
                 this.getElementId("listRe").classList.remove("smartboxE")
                 break;
             case 2:
@@ -79,12 +66,12 @@ class Home_Main extends Component {
         if(value.length > 0 && value !== ""){
             this.setState({
                 key:value.trim()
-            })
+            });
             // eslint-disable-next-line no-undef
             document.getElementById("listRe").style.display="block";
         }else{
             // eslint-disable-next-line no-undef
-            document.getElementById("listRe").style.display="none"
+            document.getElementById("listRe").style.display="none";
             this.setState({key:""});
         }
     }
@@ -99,7 +86,6 @@ class Home_Main extends Component {
     * method tìm kiếm thông qua key
     * */
     toSearch=()=>{
-
         return  _.filter(LIST.LIST_PROVINCE,(o)=>{
             return _.includes(o.NAME,this.state.key.toLowerCase());
         });
@@ -136,7 +122,6 @@ class Home_Main extends Component {
                     idStart: this.state.idEnd,
                     idEnd:idStart
                 })
-
         );
     }
 
@@ -144,13 +129,10 @@ class Home_Main extends Component {
         let month=parseInt(this.state.startDate.getMonth())+1;
         let date=this.state.startDate.getDate()+"-"+month+"-"+this.state.startDate.getFullYear();
         this.props.history.push(`/list-xe/${this.state.idStart}/${this.state.idEnd}/${date}`);
-        console.log(this.props);
-
         //console.log(this.state.idStart,this.state.idEnd,this.state.startDate.getDate()+"-"+month+"-"+this.state.startDate.getFullYear());
         //this.props.getCars(this.state.idStart,this.state.idEnd,this.state.startDate.getDate()+"-"+month+"-"+this.state.startDate.getFullYear());
-}
+    }
     render() {
-
         return (
             <>
                 <main className="pageContent keel-agd">
@@ -172,8 +154,10 @@ class Home_Main extends Component {
                                                            <div className="base-form-search">
                                                                <div className={"form-header"}>
                                                                    <div className="displayBlock">
-                                                                       <button className="button-radio active-button-radio">Khứ hồi</button>
-                                                                       <button  className="button-radio">Một chiều</button>
+                                                                       <button
+                                                                           className="button-radio active-button-radio">Khứ hồi</button>
+                                                                       <button
+                                                                           className="button-radio">Một chiều</button>
                                                                    </div>
                                                                </div>
                                                                <div className="form-search-wrapper">
@@ -245,8 +229,6 @@ class Home_Main extends Component {
                                         </li>
                                     );
                                 }):this.offList()
-                        }
-                        {
                         }
                     </ul>
                 </div>

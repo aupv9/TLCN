@@ -5,35 +5,71 @@ import {ExpansionPanel,
     Checkbox,Typography
 } from "@material-ui/core";
 // import ExpandMore from '@material-ui/icons/ExpandMore';
-import { withStyles } from '@material-ui/core/styles';
-
-const styles = theme => ({
-    root: {
-        width: '100%',
-    },
-    heading: {
-        fontSize: theme.typography.pxToRem(15),
-        fontWeight: theme.typography.fontWeightRegular,
-    },
-});
+import {getCar} from "../../redux/action";
+import {connect} from "react-redux";
+import * as types from '../../redux/type';
 
 class LeftSearch extends Component {
 
-    constructor(props) {
-        super(props);
+    /*
+    * Khi state thay đổi từ kết quả gọi service trả về từ server sẽ tiến hành xử lý
+    * */
+    componentWillReceiveProps(nextProps, nextContext) {
+        const filter=nextProps.filterCarReducer;
+        //khi action thành công
+        if(filter.action === types.GET_LIST_CAR_SUCCESS){
+            let setNhaXe=new Set();
+            let setGioDi=new Set();
+            let arrNhaXe=[];
+            let arrGioDi=[];
+            filter.data.forEach((elment)=>{
+                setNhaXe.add(elment.nhaxe);
+                setGioDi.add(elment.giodi);
+            });
+            for (let item of setNhaXe) arrNhaXe.push({name:item,check:false});
+            for (let item of setGioDi) arrGioDi.push(item);
 
+            this.setState(state =>({
+                checkNhaXe:arrNhaXe,
+                checkGioDi:arrGioDi
+            }));
+        }
+        console.log(filter.data);
 
     }
-   state={
-        checkedA:false
-   }
-    handleChange = name => event => {
-        console.log(event);
-        this.setState({[name]: event.target.checked });
+
+    componentWillMount() {
+        this.props.getCars(this.props.params.start,this.props.params.end,this.props.params.date);
+    }
+
+    constructor(props) {
+        super(props);
+        this.state={
+            checkNhaXe:[{name:"",check:false}],
+            checkGioDi:[]
+        };
+    }
+
+    listCheck=()=>{
+        return(
+            this.state.checkNhaXe.map((item,index)=>{
+                return (
+                       <>
+                       <input type="checkbox"
+                              key={index}
+                              onChange={this.handleChange(index)}/>
+                           <span>{item.name}</span></>
+                );
+            })
+        );
+    }
+    handleChange = index => event => {
+        let checkNhaXe = [...this.state.checkNhaXe];
+        checkNhaXe[index] = { name: checkNhaXe[index].name,check:event.target.checked}
+        this.setState({ checkNhaXe });
+        console.log(this.state);
     };
     render() {
-        const { classes } = this.props;
-
         return (
             <>
                 <div className="base-result-rail">
@@ -49,26 +85,20 @@ class LeftSearch extends Component {
                     {/*Fiter list container*/}
                     <div className="filterListContainer">
                         <div className="filter-list">
-                            <div className={classes.root}>
+                            <div >
                                 <ExpansionPanel>
                                     <ExpansionPanelSummary >
-                                        <Typography className={classes.heading}>HÃNG XE </Typography>
+                                        <Typography>HÃNG XE </Typography>
                                     </ExpansionPanelSummary>
                                     <ExpansionPanelDetails>
                                         <Typography>
-                                            <Checkbox
-                                                checked={this.state.checkedA}
-                                                onChange={this.handleChange('checkedA')}
-                                                inputProps={{
-                                                    'aria-label': 'primary checkbox',
-                                                }}
-                                            />
+                                            {this.listCheck()}
                                         </Typography>
                                     </ExpansionPanelDetails>
                                 </ExpansionPanel>
                                 <ExpansionPanel>
                                     <ExpansionPanelSummary >
-                                        <Typography className={classes.heading}>GIỜ ĐI</Typography>
+                                        <Typography >GIỜ ĐI</Typography>
                                     </ExpansionPanelSummary>
                                     <ExpansionPanelDetails>
                                         <Typography>
@@ -79,7 +109,7 @@ class LeftSearch extends Component {
                                 </ExpansionPanel>
                                 <ExpansionPanel>
                                     <ExpansionPanelSummary >
-                                        <Typography className={classes.heading}>Expansion Panel 2</Typography>
+                                        <Typography >Expansion Panel 2</Typography>
                                     </ExpansionPanelSummary>
                                     <ExpansionPanelDetails>
                                         <Typography>
@@ -98,6 +128,17 @@ class LeftSearch extends Component {
 }
 
 // LeftSearch.prototype={
-//     classes:PropTypes.object.required
+//     filterCarReducer:PropTypes.object.required
 // }
-export default withStyles(styles)(LeftSearch);
+
+const mapStateToProps=(state)=>({
+    filterCarReducer:state.filterCarReducer
+});
+const mapDispatchToProps = dispatch => {
+    return {
+        getCars: (start,end,date) => {
+            dispatch(getCar(start,end,date));
+        }
+    };
+};
+export default connect(mapStateToProps,mapDispatchToProps)(LeftSearch);
