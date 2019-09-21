@@ -38,12 +38,11 @@ class LeftSearch extends Component {
 
     }
 
-    componentWillMount() {
-        this.props.getCars(this.props.params.start,this.props.params.end,this.props.params.date);
-    }
 
     constructor(props) {
         super(props);
+        this.props.getCars(this.props.params.start,this.props.params.end,this.props.params.date);
+
         this.state={
             checkNhaXe:[{name:"",check:false}],
             checkGioDi:[]
@@ -57,13 +56,13 @@ class LeftSearch extends Component {
                        <>
                        <input type="checkbox"
                               key={index}
-                              onChange={this.handleChange(index)}/>
+                              onChange={this.handleCheckNhaXe(index)}/>
                            <span>{item.name}</span></>
                 );
             })
         );
     }
-    handleChange = index => event => {
+    handleCheckNhaXe = index => event => {
         let checkNhaXe = [...this.state.checkNhaXe];
         checkNhaXe[index] = { name: checkNhaXe[index].name,check:event.target.checked}
         this.setState({ checkNhaXe });
@@ -102,19 +101,27 @@ class LeftSearch extends Component {
                                     </ExpansionPanelSummary>
                                     <ExpansionPanelDetails>
                                         <Typography>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                            sit amet blandit leo lobortis eget.
+                                            {
+                                                this.state.checkGioDi.map((item,index)=>{
+                                                    return(
+                                                        <>
+                                                        <input type="checkbox"
+                                                               key={index}
+                                                               onChange={this.handleCheckNhaXe(index)}/>
+                                                        <span>{item}</span></>
+                                                    );
+                                                })
+                                            }
                                         </Typography>
                                     </ExpansionPanelDetails>
                                 </ExpansionPanel>
                                 <ExpansionPanel>
                                     <ExpansionPanelSummary >
-                                        <Typography >Expansion Panel 2</Typography>
+                                        <Typography >NƠI ĐI</Typography>
                                     </ExpansionPanelSummary>
                                     <ExpansionPanelDetails>
                                         <Typography>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                            sit amet blandit leo lobortis eget.
+
                                         </Typography>
                                     </ExpansionPanelDetails>
                                 </ExpansionPanel>
