@@ -27,7 +27,7 @@ class LeftSearch extends Component {
                 setGioDi.add(elment.giodi);
             });
             for (let item of setNhaXe) arrNhaXe.push({name:item,check:false});
-            for (let item of setGioDi) arrGioDi.push(item);
+            for (let item of setGioDi) arrGioDi.push({name:item,check:false});
 
             this.setState(state =>({
                 checkNhaXe:arrNhaXe,
@@ -38,6 +38,10 @@ class LeftSearch extends Component {
 
     }
 
+    componentWillMount() {
+        this.props.getCars(this.props.params.start,this.props.params.end,this.props.params.date);
+    }
+
 
     constructor(props) {
         super(props);
@@ -45,27 +49,66 @@ class LeftSearch extends Component {
 
         this.state={
             checkNhaXe:[{name:"",check:false}],
-            checkGioDi:[]
+            checkGioDi:[{name:0,check:false}]
         };
     }
-
-    listCheck=()=>{
+    /*
+    * Render list check search nhà xe
+    * */
+    listCheckNhaXe=()=>{
         return(
             this.state.checkNhaXe.map((item,index)=>{
                 return (
                        <>
-                       <input type="checkbox"
-                              key={index}
-                              onChange={this.handleCheckNhaXe(index)}/>
+                           <Checkbox
+                           onChange={this.handleCheckNhaXe(index)}
+                           inputProps={{
+                               'aria-label': 'primary checkbox',
+                           }}
+                            />
+                       {/*<input type="checkbox"*/}
+                       {/*       key={index}*/}
+                       {/*       onChange={this.handleCheckNhaXe(index)}/>*/}
                            <span>{item.name}</span></>
                 );
             })
         );
     }
+    /*
+   * Render list check search giờ đi
+   * */
+    listCheckGioDi=()=>{
+        return(
+            this.state.checkGioDi.map((item,index)=>{
+                return(
+                    <>
+                        <Checkbox
+                            onChange={this.handleCheckGioDi(index)}
+                            inputProps={{
+                                'aria-label': 'primary checkbox',
+                            }}
+                        />
+                        <span>{item.name}</span><span>:00</span></>
+                );
+            })
+        );
+    }
+    /*
+    * Method change from checkbox render check nhà xe
+    * */
     handleCheckNhaXe = index => event => {
         let checkNhaXe = [...this.state.checkNhaXe];
-        checkNhaXe[index] = { name: checkNhaXe[index].name,check:event.target.checked}
+        checkNhaXe[index] = { name: checkNhaXe[index].name,check:event.target.checked};
         this.setState({ checkNhaXe });
+        console.log(this.state);
+    };
+    /*
+    * Method change from checkbox render check giờ đi
+    * */
+    handleCheckGioDi = index => event => {
+        let checkGioDi = [...this.state.checkGioDi];
+        checkGioDi[index] = { name: checkGioDi[index].name, check:event.target.checked};
+        this.setState({ checkGioDi });
         console.log(this.state);
     };
     render() {
@@ -91,7 +134,7 @@ class LeftSearch extends Component {
                                     </ExpansionPanelSummary>
                                     <ExpansionPanelDetails>
                                         <Typography>
-                                            {this.listCheck()}
+                                            {this.listCheckNhaXe()}
                                         </Typography>
                                     </ExpansionPanelDetails>
                                 </ExpansionPanel>
@@ -102,15 +145,7 @@ class LeftSearch extends Component {
                                     <ExpansionPanelDetails>
                                         <Typography>
                                             {
-                                                this.state.checkGioDi.map((item,index)=>{
-                                                    return(
-                                                        <>
-                                                        <input type="checkbox"
-                                                               key={index}
-                                                               onChange={this.handleCheckNhaXe(index)}/>
-                                                        <span>{item}</span></>
-                                                    );
-                                                })
+                                                this.listCheckGioDi()
                                             }
                                         </Typography>
                                     </ExpansionPanelDetails>
