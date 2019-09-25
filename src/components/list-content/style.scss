@@ -81,6 +81,47 @@
                                       .grid-inner{
                                           display: flex;
                                           flex-flow: row nowrap;
+                                          font-family: FreeSans,Arimo,"Droid Sans",Helvetica,Arial,sans-serif;
+                                          text-rendering: optimizespeed;
+                                            .col-info{
+                                                flex: 1;
+                                                display: flex;
+                                                flex-direction:column;
+                                                padding: 12px 0;
+                                                  >*{
+                                                    padding: 0 12px;
+                                                  }
+                                                  .main-info{
+                                                    flex: auto;
+                                                    display: flex;
+                                                    flex-direction: column;
+                                                      .cars-result-info{
+                                                        flex: auto;
+                                                        display: flex;
+                                                        flex-direction: column;
+                                                          ol{
+                                                            list-style: none;
+                                                            margin: 0;
+                                                            padding: 0;
+                                                          }
+                                                          .cars{
+                                                            display: flex;
+                                                            flex: auto;
+                                                            flex-direction: column;
+                                                            align-items: stretch;
+                                                            justify-content: space-around;
+                                                              .col-field{
+                                                                min-height: 40px;
+                                                              }
+                                                              .carrier{
+                                                                text-align: center;
+                                                                width: 90px;
+                                                                margin-right: 20px;
+                                                              }
+                                                          }
+                                                      }
+                                                  }
+                                            }
                                       }
                               }
                           }
