@@ -60,16 +60,20 @@ class LeftSearch extends Component {
             this.state.checkNhaXe.map((item,index)=>{
                 return (
                        <>
-                           <Checkbox
-                           onChange={this.handleCheckNhaXe(index)}
-                           inputProps={{
-                               'aria-label': 'primary checkbox',
-                           }}
-                            />
-                       {/*<input type="checkbox"*/}
-                       {/*       key={index}*/}
-                       {/*       onChange={this.handleCheckNhaXe(index)}/>*/}
-                           <span>{item.name}</span></>
+                           <p key={index}
+                              style={{width:'220px',textAlign:'left',margin:'auto'}}>
+                               <Checkbox
+                                   onChange={this.handleCheckNhaXe(index)}
+                                   inputProps={{
+                                       'aria-label': 'primary checkbox',
+                                   }}
+                               />
+                               {/*<input type="checkbox"*/}
+                               {/*       key={index}*/}
+                               {/*       onChange={this.handleCheckNhaXe(index)}/>*/}
+                               <span>{item.name}</span>
+                           </p>
+                        </>
                 );
             })
         );
@@ -82,13 +86,18 @@ class LeftSearch extends Component {
             this.state.checkGioDi.map((item,index)=>{
                 return(
                     <>
-                        <Checkbox
-                            onChange={this.handleCheckGioDi(index)}
-                            inputProps={{
-                                'aria-label': 'primary checkbox',
-                            }}
-                        />
-                        <span>{item.name}</span><span>:00</span></>
+                        <p key={index}
+                           style={{width:'220px',textAlign:'left',margin:'auto'}}>
+                            <Checkbox
+                                onChange={this.handleCheckGioDi(index)}
+                                inputProps={{
+                                    'aria-label': 'primary checkbox',
+                                }}
+                            />
+                            <span>{item.name}</span><span>:00</span>
+                        </p>
+                        </>
+
                 );
             })
         );

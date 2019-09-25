@@ -42,8 +42,52 @@
             }
         }
       }
+    .animated{
+      transition-timing-function: ease-in-out;
+      transition-delay: 50ms;
+      transition-duration: 500ms;
+      opacity: 1;
+      transition-property: opacity,transform;
+    }
       .col-list-body{
         width: 740px;
+        margin-top: 20px;
+        min-height: 1000px;
+        display: inline-block;
+
+          .listInner{
+            position: relative;
+              .resultsContainer{
+                z-index:2 ;
+                min-height: 600px;
+                position: relative;
+                  .search-result-list{
+                      .cars-result{
+                          padding: 0;
+                          position: relative;
+                          overflow:visible;
+                          transition-property: outline,border-color,box-shadow;
+                          transition-duration: 200ms;
+                          transition-timing-function: ease-out;
+                          outline: none!important;
+                          cursor: pointer;
+                          .result-wrapper{
+                            background: #fff;
+                            border: 1px solid #e2e2e2;
+                              .result-inner{
+                                  height: 100%;
+                                  position: relative;
+                                  cursor: pointer;
+                                      .grid-inner{
+                                          display: flex;
+                                          flex-flow: row nowrap;
+                                      }
+                              }
+                          }
+                      }
+                  }
+              }
+          }
       }
       .col-right{
         width: 215px;
