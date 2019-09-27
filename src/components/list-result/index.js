@@ -29,16 +29,30 @@ class ListResult extends Component {
 
                                                                     </div>
                                                                     <div className="col-field time-start">
-                                                                            222
+                                                                        <div className="top">
+                                                                            <div className="depart-time ">16:00</div>
+                                                                        </div>
+                                                                        <div className="bottom">phan rang</div>
                                                                     </div>
                                                                     <div className="col-field route">
+                                                                        <div className="time">8h</div>
                                                                         <div className="axis"></div>
                                                                     </div>
                                                                     <div className="col-field time-end">
-                                                                        222
+                                                                        <div className="top">
+                                                                            <div className="depart-time ">16:00</div>
+                                                                        </div>
+                                                                        <div className="bottom">phan rang</div>
                                                                     </div>
                                                                     <div className="col-field info-car">
-                                                                        ss
+                                                                        <div className="type">15 chỗ</div>
+                                                                    </div>
+                                                                    <div className="col-field evaluate">
+                                                                        <div className="start-eval">15 chỗ</div>
+                                                                    </div>
+                                                                    <div className="col-field detail">
+                                                                        <div className="top-row">1</div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
