@@ -51,8 +51,17 @@ class ListResult extends Component {
                                                                         <div className="start-eval">15 chỗ</div>
                                                                     </div>
                                                                     <div className="col-field detail">
-                                                                        <div className="top-row">1</div>
-
+                                                                        <div className="top-row">
+                                                                            <img src={"https://img.icons8.com/ios-glyphs/30/000000/share.png"} />
+                                                                        </div>
+                                                                        <div className="show-detail">
+                                                                            <div className="dropdown-detail">
+                                                                                sss
+                                                                            </div>
+                                                                            <div className="button-detail">
+                                                                                <button>1</button>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
