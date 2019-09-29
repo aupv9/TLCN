@@ -34,12 +34,11 @@ class LeftSearch extends Component {
                 checkGioDi:arrGioDi
             }));
         }
-        console.log(filter.data);
 
     }
 
     componentWillMount() {
-        this.props.getCars(this.props.params.start,this.props.params.end,this.props.params.date);
+       this.props.getCars(this.props.params.start,this.props.params.end,this.props.params.date);
     }
 
 
@@ -109,7 +108,6 @@ class LeftSearch extends Component {
         let checkNhaXe = [...this.state.checkNhaXe];
         checkNhaXe[index] = { name: checkNhaXe[index].name,check:event.target.checked};
         this.setState({ checkNhaXe });
-        console.log(this.state);
     };
     /*
     * Method change from checkbox render check giờ đi
@@ -118,7 +116,6 @@ class LeftSearch extends Component {
         let checkGioDi = [...this.state.checkGioDi];
         checkGioDi[index] = { name: checkGioDi[index].name, check:event.target.checked};
         this.setState({ checkGioDi });
-        console.log(this.state);
     };
     render() {
         return (
