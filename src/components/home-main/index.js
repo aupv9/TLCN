@@ -5,7 +5,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import * as _ from "lodash";
 import DatePicker from "react-datepicker";
 
+
 class Home_Main extends Component {
+
     //* khởi tạo các biến local để xử lý
     //*
     state = {
@@ -35,19 +37,19 @@ class Home_Main extends Component {
     và reset value của input search
     * type 1 là điểm đi 2 là điểm đến
     * */
-    onSearch=(type , e)=>{
-        let value=e.target.value;
+    onSearch= type => event=>{
+        let value= event.target.value;
         switch(type) {
             case 1:
                 this.setState(
                     {
                         position:true,
                         nameStart:value
-                    })
+                    });
                 /*
                 *   khi nhập vào search box điểm đi show ra list đia điểm
                 * */
-                this.getElementId("listRe").classList.add("smartboxS")
+                this.getElementId("listRe").classList.add("smartboxS");
                 this.getElementId("listRe").classList.remove("smartboxE")
                 break;
             case 2:
@@ -64,12 +66,12 @@ class Home_Main extends Component {
         if(value.length > 0 && value !== ""){
             this.setState({
                 key:value.trim()
-            })
+            });
             // eslint-disable-next-line no-undef
             document.getElementById("listRe").style.display="block";
         }else{
             // eslint-disable-next-line no-undef
-            document.getElementById("listRe").style.display="none"
+            document.getElementById("listRe").style.display="none";
             this.setState({key:""});
         }
     }
@@ -84,7 +86,6 @@ class Home_Main extends Component {
     * method tìm kiếm thông qua key
     * */
     toSearch=()=>{
-
         return  _.filter(LIST.LIST_PROVINCE,(o)=>{
             return _.includes(o.NAME,this.state.key.toLowerCase());
         });
@@ -114,16 +115,23 @@ class Home_Main extends Component {
     onSwitch=()=>{
         let start=this.state.nameStart;
         let idStart=this.state.idStart
-        this.setState(
-            {
-                nameStart:this.state.nameEnd,
-                nameEnd:start,
-                idStart: this.state.idEnd,
-                idEnd:idStart
-            }
+        this.setState( state=>
+                ({
+                    nameStart:this.state.nameEnd,
+                    nameEnd:start,
+                    idStart: this.state.idEnd,
+                    idEnd:idStart
+                })
         );
     }
 
+    onSearchCars =()=>{
+        let month=parseInt(this.state.startDate.getMonth())+1;
+        let date=this.state.startDate.getDate()+"-"+month+"-"+this.state.startDate.getFullYear();
+        this.props.history.push(`/list-xe/${this.state.idStart}/${this.state.idEnd}/${date}`);
+        //console.log(this.state.idStart,this.state.idEnd,this.state.startDate.getDate()+"-"+month+"-"+this.state.startDate.getFullYear());
+        //this.props.getCars(this.state.idStart,this.state.idEnd,this.state.startDate.getDate()+"-"+month+"-"+this.state.startDate.getFullYear());
+    }
     render() {
         return (
             <>
@@ -146,16 +154,18 @@ class Home_Main extends Component {
                                                            <div className="base-form-search">
                                                                <div className={"form-header"}>
                                                                    <div className="displayBlock">
-                                                                       <button className="button-radio active-button-radio">Khứ hồi</button>
-                                                                       <button  className="button-radio">Một chiều</button>
+                                                                       <button
+                                                                           className="button-radio active-button-radio">Khứ hồi</button>
+                                                                       <button
+                                                                           className="button-radio">Một chiều</button>
                                                                    </div>
                                                                </div>
                                                                <div className="form-search-wrapper">
                                                                    <div className="keel-grid">
                                                                        <div className="col-fields">
-                                                                           <input onKeyDown={(e)=>this.onSearch(1,e)}
+                                                                           <input
                                                                                   type="text"
-                                                                                  onChange={(e)=>this.onSearch(1,e)}
+                                                                                  onChange={this.onSearch(1)}
                                                                                   onBlur={this.offList}
                                                                                   value={this.state.nameStart}
                                                                                   className="col-field"
@@ -166,7 +176,7 @@ class Home_Main extends Component {
                                                                                <i className="fas fa-exchange-alt"/>
                                                                            </button>
                                                                            <input type="text"
-                                                                                  onChange={(e)=>this.onSearch(2,e)}
+                                                                                  onChange={this.onSearch(2)}
                                                                                   className="col-field"
                                                                                   placeholder="Đến đâu?"
                                                                                   onBlur={this.offList}
@@ -174,8 +184,10 @@ class Home_Main extends Component {
                                                                            <DatePicker className={"col-field"}
                                                                                        selected={this.state.startDate}
                                                                                        onChange={this.handleChange}
+
                                                                            />
-                                                                           <button className="button-submit">Tìm Kiếm</button>
+                                                                           <button className="button-submit"
+                                                                                    onClick={this.onSearchCars}>Tìm Kiếm</button>
                                                                        </div>
                                                                    </div>
                                                                </div>
@@ -218,9 +230,6 @@ class Home_Main extends Component {
                                     );
                                 }):this.offList()
                         }
-                        {
-
-                        }
                     </ul>
                 </div>
 
@@ -231,4 +240,4 @@ class Home_Main extends Component {
 
 Home_Main.propTypes = {};
 
-export default Home_Main;
+export default  (Home_Main);

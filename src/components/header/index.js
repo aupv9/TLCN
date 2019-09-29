@@ -13,15 +13,17 @@ class Header extends Component {
                         <div className="header-wrapper">
                             <div className="header-grid keel-grid v-c-p">
                                 <div className="col-logo">
+                                        <Link  to={"/"}
+                                               className={"logo"}>
                                         <img src={logo}
                                          className="logo-header"/>
-                                         <Link  to={"/"}
-                                                className={"logo"}>
-                                            <img src={text}
-                                                 className="logo-header"
-                                                 style={{width:"100px"}}/>
                                         </Link>
-
+                                        <Link   to={"/"}
+                                                className={"logo"}>
+                                         <img src={text}
+                                              className="logo-header"
+                                              style={{width:"100px"}}/>
+                                        </Link>
                                 </div>
                                 <div className="col-nav">
                                     <nav className="common-layout-nav header">

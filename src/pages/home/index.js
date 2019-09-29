@@ -14,10 +14,10 @@ class Home extends Component {
                 <Header />
                     <Route exact
 						   path={["/","/home"]}
-						   render={()=> <Home_Main/> }/>
+						   render={(props)=> <Home_Main {...props}/> }/>
                     <Route exact
-						   path={["/list-xe","/home/list-xe"]}
-						   render={()=> <ListXe/> } />
+						   path={["/list-xe/:start/:end/:date","/home/list-xe/:start/:end/:date"]}
+						   render={(props)=> <ListXe {...props} /> } />
                 <Footer/>
             </>
 		);
