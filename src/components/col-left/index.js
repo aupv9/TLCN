@@ -14,41 +14,17 @@ class LeftSearch extends Component {
     /*
     * Khi state thay đổi từ kết quả gọi service trả về từ server sẽ tiến hành xử lý
     * */
-    componentWillReceiveProps(nextProps, nextContext) {
-        const filter=nextProps.filterCarReducer;
-        //khi action thành công
-        if(filter.action === types.GET_LIST_CAR_SUCCESS){
-            let setNhaXe=new Set();
-            let setGioDi=new Set();
-            let arrNhaXe=[];
-            let arrGioDi=[];
-            filter.data.forEach((elment)=>{
-                setNhaXe.add(elment.nhaxe);
-                setGioDi.add(elment.giodi);
-            });
-            for (let item of setNhaXe) arrNhaXe.push({name:item,check:false});
-            for (let item of setGioDi) arrGioDi.push({name:item,check:false});
-
-            this.setState(state =>({
-                checkNhaXe:arrNhaXe,
-                checkGioDi:arrGioDi
-            }));
-        }
-
-    }
 
     componentWillMount() {
-       this.props.getCars(this.props.params.start,this.props.params.end,this.props.params.date);
     }
 
 
     constructor(props) {
         super(props);
-        this.props.getCars(this.props.params.start,this.props.params.end,this.props.params.date);
 
         this.state={
-            checkNhaXe:[{name:"",check:false}],
-            checkGioDi:[{name:0,check:false}]
+            checkNhaXe:this.props.checkNhaXe,
+            checkGioDi:this.props.checkGioDi
         };
     }
     /*
@@ -56,7 +32,7 @@ class LeftSearch extends Component {
     * */
     listCheckNhaXe=()=>{
         return(
-            this.state.checkNhaXe.map((item,index)=>{
+            this.props.checkNhaXe.map((item,index)=>{
                 return (
                        <>
                            <p key={index}
@@ -82,7 +58,7 @@ class LeftSearch extends Component {
    * */
     listCheckGioDi=()=>{
         return(
-            this.state.checkGioDi.map((item,index)=>{
+            this.props.checkGioDi.map((item,index)=>{
                 return(
                     <>
                         <p key={index}
