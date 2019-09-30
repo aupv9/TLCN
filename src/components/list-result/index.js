@@ -1,20 +1,29 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import * as _ from 'lodash';
+import * as types from "../../redux/type";
+import {getCar} from "../../redux/action";
 
 class ListResult extends Component {
 
 
     constructor(props) {
         super(props);
-        console.log(this.props.filterCarReducer);
-    }
-    componentWillMount() {
-        console.log(this.props.filterCarReducer);
     }
 
+    componentWillMount() {
+        console.log(this.props.filterCarReducer);
+        this.props.getCars(this.props.params.start,this.props.params.end,this.props.params.date);
+
+    }
+    componentWillReceiveProps(nextProps, nextContext) {
+        const filter=nextProps.filterCarReducer;
+        //khi action thành công
+        if(filter.action === types.GET_LIST_CAR_SUCCESS){
+
+        }
+    }
     renderCars=()=>{
-        console.log( this.props.filterCarReducer);
         
         // list.map((item,index)=>{
         //     return (
@@ -106,11 +115,13 @@ class ListResult extends Component {
     }
 }
 const mapStateToProps=(state)=>({
-    filterCarReducer:state.filterCarReducer.data
+    filterCarReducer:state.filterCarReducer
 });
 const mapDispatchToProps = dispatch => {
     return {
-
+        getCars: (start,end,date) => {
+            dispatch(getCar(start,end,date));
+        }
     };
 };
 

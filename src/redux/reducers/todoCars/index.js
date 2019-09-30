@@ -7,7 +7,7 @@ let filterCarReducer= (state=initState,action) =>{
     state.action=action.type;
     switch (action.type) {
         case types.GET_LIST_CAR_SUCCESS:
-            return{
+            return {
                 ...state,
                 data:action.payload
             }
