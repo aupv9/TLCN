@@ -39,6 +39,7 @@ class Home_Main extends Component {
     * */
     onSearch= type => event=>{
         let value= event.target.value;
+        console.log(value);
         switch(type) {
             case 1:
                 this.setState(
@@ -63,17 +64,21 @@ class Home_Main extends Component {
         /*
         * khi giá trị nhập vào khác rỗng set lại state key để thực hiện việc search trong list địa điểm
         * */
-        if(value.length > 0 && value !== ""){
-            this.setState({
-                key:value.trim()
-            });
-            // eslint-disable-next-line no-undef
-            document.getElementById("listRe").style.display="block";
-        }else{
-            // eslint-disable-next-line no-undef
-            document.getElementById("listRe").style.display="none";
-            this.setState({key:""});
-        }
+        this.setState({
+            key:value.trim()
+        });
+        document.getElementById("listRe").style.display="block";
+
+        // if(value.length > 0 ){
+        //     this.setState({
+        //         key:value.trim()
+        //     });
+        //     document.getElementById("listRe").style.display="block";
+        // }else{
+        //     document.getElementById("listRe").style.display="none";
+        //     this.setState({key:""});
+        // }
+        console.log(this.state.key);
     }
     /*
     * khi nhấp chuột ra khỏi input sẽ ẩn đi list địa điểm
@@ -87,7 +92,7 @@ class Home_Main extends Component {
     * */
     toSearch=()=>{
         return  _.filter(LIST.LIST_PROVINCE,(o)=>{
-            return _.includes(o.NAME,this.state.key.toLowerCase());
+            return _.includes(o.NAME.toLowerCase(),this.state.key.toLowerCase());
         });
     }
     /*
@@ -129,8 +134,6 @@ class Home_Main extends Component {
         let month=parseInt(this.state.startDate.getMonth())+1;
         let date=this.state.startDate.getDate()+"-"+month+"-"+this.state.startDate.getFullYear();
         this.props.history.push(`/list-xe/${this.state.idStart}/${this.state.idEnd}/${date}`);
-        //console.log(this.state.idStart,this.state.idEnd,this.state.startDate.getDate()+"-"+month+"-"+this.state.startDate.getFullYear());
-        //this.props.getCars(this.state.idStart,this.state.idEnd,this.state.startDate.getDate()+"-"+month+"-"+this.state.startDate.getFullYear());
     }
     render() {
         return (
