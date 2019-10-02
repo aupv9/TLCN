@@ -51,13 +51,23 @@ class ListResult extends Component {
     * */
     renderCars=()=>{
         return this.state.arrCar.map((item,index)=>{
+
             /*
             * Tiền xử lý trước khi hiện thị dữ liệu cho người dùng
             * */
-            let gioDen=0;
+            let gioDen=0,gioDi=0;
             let noiDi="";
             let noiDen="";
 
+            for (let ii = 0 ; ii < item.lichtrinh.length ; ii++){
+                if(item.lichtrinh[ii].tinh === parseInt(this.props.params.start)){
+                    console.log(item.lichtrinh[ii].tinh);
+                    gioDi=item.lichtrinh[ii].thoigiandi;
+                    console.log(gioDi);
+                    noiDi=item.lichtrinh[ii].diemdi;
+                    break;
+                }
+            }
             for (let ii = 0 ; ii < item.lichtrinh.length ; ii++){
                 if(item.lichtrinh[ii].tinh === parseInt(this.props.params.end)){
                     gioDen=item.lichtrinh[ii].thoigiandi;
@@ -65,15 +75,14 @@ class ListResult extends Component {
                     break;
                 }
             }
-            for (let ii = 0 ; ii < LIST.LIST_PROVINCE.length ; ii++){
-                if(parseInt(this.props.params.start) === LIST.LIST_PROVINCE[ii].MA){
-                    noiDi=LIST.LIST_PROVINCE[ii].NAME;
-                }
-            }
-            console.log(gioDen);
+            // for (let ii = 0 ; ii < LIST.LIST_PROVINCE.length ; ii++){
+            //     if(parseInt(this.props.params.start) === LIST.LIST_PROVINCE[ii].MA){
+            //         noiDi=LIST.LIST_PROVINCE[ii].NAME;
+            //     }
+            // }
             const allTimeSplitGioDen=gioDen.split(":");
             const allTimeFirstGioDen=allTimeSplitGioDen[0]+allTimeSplitGioDen[1];
-            const allTimeSplitGioDi=item.giodi.split(":");
+            const allTimeSplitGioDi=gioDi.split(":");
             const allTimeFirstGioDi=allTimeSplitGioDi[0]+allTimeSplitGioDi[1];
             var allTime=0;
             if(allTimeSplitGioDen[1] > 0){
@@ -82,13 +91,6 @@ class ListResult extends Component {
                 allTime=allTimeFirstGioDen - allTimeFirstGioDi -40;
             }
             var timer=Math.floor(allTime / 100),time=allTime % 100;
-            // while(time > 0) {
-            //      console.log(time % 100);
-            //      time= Math.floor(timer / 10);
-            // }
-
-            console.log( time);
-
 
             return (
                 <>
@@ -119,7 +121,7 @@ class ListResult extends Component {
                                                             </div>
                                                             <div className="col-field time-start">
                                                                 <div className="top">
-                                                                    <div className="depart-time ">{item.giodi}</div>
+                                                                    <div className="depart-time ">{gioDi}</div>
                                                                 </div>
                                                                 <div className="bottom">{noiDi}</div>
                                                             </div>

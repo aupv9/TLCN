@@ -88,10 +88,9 @@ class LeftSearch extends Component {
                                     'aria-label': 'primary checkbox',
                                 }}
                             />
-                            <span>{item.name}</span><span>:00</span>
+                            <span>{item.name}</span><span></span>
                         </p>
                         </>
-
                 );
             })
         );
