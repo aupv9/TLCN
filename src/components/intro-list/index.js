@@ -1,6 +1,13 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import './style.scss';
+
+/*
+* Component IntroList
+* dùng render giao diện thanh intro
+*@author AuPhan
+* */
+
 class IntroList extends Component {
     render() {
         return (
@@ -16,7 +23,8 @@ class IntroList extends Component {
                                         </h1>
                                     </div>
                                     <div className="col-md-6 hidden-sm hidden-xs">
-                                        <h6 className="mt0 route-title hidden-sm hidden-xs route-title-bus-ticket"  style={{float:'right'}}>
+                                        <h6 className="mt0 route-title hidden-sm hidden-xs route-title-bus-ticket"
+                                                style={{float:'right'}}>
                                             <span className="mt0 mb0 text-gray">
                                                 <Link to={"/"}>Vé Xe Khách</Link>
                                                 >

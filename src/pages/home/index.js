@@ -5,10 +5,20 @@ import Home_Main from "../../components/home-main";
 import Footer from "../../components/footer";
 import ListXe from "../../components/list-xe";
 import './style.scss';
+
+/*
+* Class Home Component Home
+* Used render giao diện trang chính
+* @author AuPhan
+* */
+
 class Home extends Component {
 
-
+	/*
+	* Method render component dựa vào route
+	* */
 	render() {
+
 		return (
             <>
                 <Header />

@@ -4,7 +4,11 @@ import * as LIST from '../../contants';
 import "react-datepicker/dist/react-datepicker.css";
 import * as _ from "lodash";
 import DatePicker from "react-datepicker";
-
+/*
+* Component Home_Main
+* used render trang chủ của website
+* @author AuPhan
+* */
 
 class Home_Main extends Component {
 
@@ -130,6 +134,12 @@ class Home_Main extends Component {
         );
     }
 
+    /*
+    * Method dùng để tìm kiếm xe
+    * @param idStart mã tỉnh đi
+    * @param idEnd mã tỉnh đến
+    * @param date ngày đi
+    * */
     onSearchCars =()=>{
         let month=parseInt(this.state.startDate.getMonth())+1;
         let date=this.state.startDate.getDate()+"-"+month+"-"+this.state.startDate.getFullYear();

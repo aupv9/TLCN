@@ -2,12 +2,16 @@ import React, {Component} from 'react';
 import SearchBox from "../search-box-list";
 import ListContent from "../list-content";
 import IntroList from "../intro-list";
-import {connect} from 'react-redux';
+
+/*
+* Component ListXe
+* dùng render danh sách các xe tìm được
+* @author AuPhan
+* */
 
 class ListXe extends Component {
 
     render() {
-        // console.log(this.props.match.params);
         const params=this.props.match.params;
         return (
             <>
