@@ -17,7 +17,6 @@ class ListContent extends Component {
    * Khi state thay đổi từ kết quả gọi service trả về từ server sẽ tiến hành xử lý
    * */
     componentWillReceiveProps(nextProps, nextContext) {
-
         const filter=nextProps.filterCarReducer;
         //khi action thành công
         if(filter.action === types.GET_LIST_CAR_SUCCESS){
@@ -27,7 +26,10 @@ class ListContent extends Component {
             let arrGioDi=[];
             filter.data.forEach((elment)=>{
                 setNhaXe.add(elment.nhaxe);
-                setGioDi.add(elment.giodi);
+                elment.lichtrinh.forEach(item =>{
+                    setGioDi.add(item.thoigiandi);
+                });
+
             });
             for (let item of setNhaXe) arrNhaXe.push({name:item,check:false});
             for (let item of setGioDi) arrGioDi.push({name:item,check:false});
@@ -35,7 +37,8 @@ class ListContent extends Component {
             this.setState(state =>({
                 checkNhaXe:arrNhaXe,
                 checkGioDi:arrGioDi,
-                arrCar:filter.data
+                arrCar:filter.data,
+                arrCarTemp:filter.data
             }));
         }
     }
@@ -116,37 +119,32 @@ class ListContent extends Component {
         checkGioDi[index] = { name: checkGioDi[index].name, check:event.target.checked};
         this.setState({ checkGioDi });
         let gioDi="";
-            this.state.checkGioDi.forEach((item)=>{
-            if(item.check) { gioDi=item.name;}
-        })
-        const arrCar=_.filter(this.state.arrCar,(item,index)=>{
-            // console.log(index);
-            // console.log(item);
+        for (let ii=0; ii<checkGioDi.length; ii++){
+            if(checkGioDi[ii].check){
+                gioDi=checkGioDi[ii].name;
+            }else{
 
-            return item.lichtrinh.map((item)=>{
-                return item.thoigiandi === gioDi;
-            });
-        });
-        var arrFilter;
-        this.state.arrCar.forEach((item)=>{
-            let lichTrinh=item.lichtrinh;
-            for(let ii=0; ii<lichTrinh.length; ii++) {
-                if(lichTrinh[ii].thoigiandi === gioDi){
-                    console.log(lichTrinh[ii]);
-                    arrFilter.push(lichTrinh[ii]);
+            }
+        }
+        var arrFilter=[];
+        this.state.arrCarTemp.forEach((item)=>{
+            for(let ii=0; ii<item.lichtrinh.length; ii++) {
+                if(item.lichtrinh[ii].thoigiandi === gioDi){
+                    arrFilter.push(item);
+                }else{
                 }
             }
         })
 
         console.log(arrFilter);
-        //this.setState({arrCar:arrCar});
+        this.setState({arrCar:arrFilter});
     };
 
     /*
     * Method thực hiện việc render cho danh sách các xe đạt tiêu chuẩn
     * return về jsx hiển thị ra display
     * */
-    renderCars=()=>{
+     renderCars=()=>{
         return this.state.arrCar.map((item,index)=>{
 
             /*
