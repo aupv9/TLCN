@@ -27,9 +27,10 @@ class ListContent extends Component {
             filter.data.forEach((elment)=>{
                 setNhaXe.add(elment.nhaxe);
                 elment.lichtrinh.forEach(item =>{
-                    setGioDi.add(item.thoigiandi);
+                    if(item.tinh === parseInt(this.props.params.start)){
+                        setGioDi.add(item.thoigiandi);
+                    }
                 });
-
             });
             for (let item of setNhaXe) arrNhaXe.push({name:item,check:false});
             for (let item of setGioDi) arrGioDi.push({name:item,check:false});
@@ -38,7 +39,8 @@ class ListContent extends Component {
                 checkNhaXe:arrNhaXe,
                 checkGioDi:arrGioDi,
                 arrCar:filter.data,
-                arrCarTemp:filter.data
+                arrCarTemp:filter.data,
+
             }));
         }
     }
@@ -49,7 +51,9 @@ class ListContent extends Component {
         this.state={
             checkNhaXe:[{name:"",check:false}],
             checkGioDi:[{name:"",check:false}],
-            arrCar:[]
+            arrCar:[],
+            arrFilter:[],
+            arrGioDiFilter:[]
         };
 
     }
@@ -115,31 +119,55 @@ class ListContent extends Component {
     * Method change from checkbox render check giờ đi
     * */
     handleCheckGioDi = index => event => {
-        let checkGioDi = [...this.state.checkGioDi];
-        checkGioDi[index] = { name: checkGioDi[index].name, check:event.target.checked};
-        this.setState({ checkGioDi });
-        let gioDi="";
-        for (let ii=0; ii<checkGioDi.length; ii++){
-            if(checkGioDi[ii].check){
-                gioDi=checkGioDi[ii].name;
-            }else{
-
+        if(event.target.checked){
+            if(this.checkItemArr(this.state.checkGioDi[index])){
+                this.state.arrGioDiFilter.push(this.state.checkGioDi[index].name);
             }
-        }
-        var arrFilter=[];
-        this.state.arrCarTemp.forEach((item)=>{
-            for(let ii=0; ii<item.lichtrinh.length; ii++) {
-                if(item.lichtrinh[ii].thoigiandi === gioDi){
-                    arrFilter.push(item);
-                }else{
+        }else{
+            let indexGioDi=0;
+            console.log(this.state.checkGioDi[index].name);
+            for(let ii = 0; ii < this.state.arrGioDiFilter.length;ii++){
+                if(this.state.arrGioDiFilter[ii] === this.state.checkGioDi[index].name){
+                    indexGioDi=ii;
                 }
             }
-        })
+            this.state.arrGioDiFilter.splice(indexGioDi,1);
+        }
 
-        console.log(arrFilter);
-        this.setState({arrCar:arrFilter});
+        let gioDi="";
+        // for (let ii=0; ii<checkGioDi.length; ii++){
+        //     if(checkGioDi[ii].check){
+        //         gioDi=checkGioDi[ii].name;
+        //     }else{
+        //
+        //     }
+        // }
+
+            // this.state.arrCarTemp.forEach((item)=>{
+            //     for(let ii=0; ii<item.lichtrinh.length; ii++) {
+            //         if(item.lichtrinh[ii].thoigiandi === gioDi
+            //             && item.lichtrinh[ii].tinh === parseInt(this.props.params.start)){
+            //             if(this.checkItemArr(item)){
+            //                 this.state.arrFilter.push(item);
+            //             }
+            //             break;
+            //         }
+            //     }
+            // });
+            //
+            // console.log(this.state.arrFilter);
+            // this.setState({arrCar:Array.from(this.state.arrFilter)});
+            // console.log(this.state);
+        console.log(this.state.arrGioDiFilter);
     };
-
+    checkItemArr= item =>{
+        for(const element of this.state.arrGioDiFilter){
+            if(item === element){
+                return false;
+            }
+        }
+        return true;
+    }
     /*
     * Method thực hiện việc render cho danh sách các xe đạt tiêu chuẩn
     * return về jsx hiển thị ra display
