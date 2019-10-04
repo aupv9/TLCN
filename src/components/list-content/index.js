@@ -44,7 +44,7 @@ class ListContent extends Component {
             }));
         }
     }
-
+    /*Hàm khởi tạo 1 trong init mount của react chạy trước đi component được render*/
     constructor(props) {
         super(props);
         this.props.getCars(this.props.params.start,this.props.params.end,this.props.params.date);
@@ -113,54 +113,81 @@ class ListContent extends Component {
         let checkNhaXe = [...this.state.checkNhaXe];
         checkNhaXe[index] = { name: checkNhaXe[index].name,check:event.target.checked};
         this.setState({ checkNhaXe });
-        console.log(this.state);
     };
     /*
     * Method change from checkbox render check giờ đi
     * */
     handleCheckGioDi = index => event => {
+        /*
+        * Khi check box được click chọn
+        */
         if(event.target.checked){
-            if(this.checkItemArr(this.state.checkGioDi[index])){
+            /* Check giờ đi đã được chọn chưa*/
+            if(this.checkItemArrGioDi(this.state.checkGioDi[index])){
+                /* Add giờ đi vào mảng */
                 this.state.arrGioDiFilter.push(this.state.checkGioDi[index].name);
+                console.log(this.state.arrGioDiFilter);
+                /* Filter danh sách theo giờ đi*/
+                /*Duyệt qua arrCar để filter theo giờ đi*/
+                this.state.arrCarTemp.forEach((item)=>{
+                    /*Duyệt qua lịch trình của car trong list*/
+                    for(let ii=0; ii<item.lichtrinh.length; ii++) {
+                        /*Check thời gian đi có nằm trong list filter không && kèm với tỉnh xuất phát*/
+                        if(_.indexOf(this.state.arrGioDiFilter,
+                            item.lichtrinh[ii].thoigiandi) !== -1
+                            &&
+                            item.lichtrinh[ii].tinh === parseInt(this.props.params.start)){
+                            /*Check car có nằm trong arr filter chưa nếu chưa thì push vào*/
+                            if(!this.checkItemArrFilter(item)){
+                                this.state.arrFilter.push(item);
+                                /*Update state arrCar reRender  giao diện*/
+                                this.setState(state =>({arrCar:state.arrFilter}));
+                            }
+                        }
+                    }
+                });
             }
+           // console.log(this.state.arrFilter);
         }else{
-            let indexGioDi=0;
-            console.log(this.state.checkGioDi[index].name);
-            for(let ii = 0; ii < this.state.arrGioDiFilter.length;ii++){
-                if(this.state.arrGioDiFilter[ii] === this.state.checkGioDi[index].name){
-                    indexGioDi=ii;
+            if(_.isEmpty(this.state.arrGioDiFilter)){
+                console.log("empty");
+                this.setState(state =>({arrCar: state.arrCarTemp}));
+            }else{
+                /* Index để remove item từ arrFilterGioDi*/
+                let indexGioDi=0;
+                for(let ii = 0; ii < this.state.arrGioDiFilter.length;ii++){
+                    if(this.state.arrGioDiFilter[ii] === this.state.checkGioDi[index].name){
+                        indexGioDi=ii;
+                    }
                 }
+                this.state.arrFilter.forEach((item,key) =>{
+                    const lichTrinh=item.lichtrinh;
+                    for(const index in lichTrinh){
+                        if(lichTrinh[index].thoigiandi === this.state.arrGioDiFilter[indexGioDi]){
+                            console.log(key);
+                            this.state.arrFilter.splice(key,1);
+                            //_.pull(this.state.arrFilter,item);
+                        }
+                    }
+                });
+                this.setState(state=>({arrCar: state.arrFilter}));
+                console.log(this.state.arrFilter);
+                this.state.arrGioDiFilter.splice(indexGioDi,1);
             }
-            this.state.arrGioDiFilter.splice(indexGioDi,1);
+            if(_.isEmpty(this.state.arrGioDiFilter)){
+                this.setState(state =>({arrCar: state.arrCarTemp}));
+            }
         }
-
-        let gioDi="";
-        // for (let ii=0; ii<checkGioDi.length; ii++){
-        //     if(checkGioDi[ii].check){
-        //         gioDi=checkGioDi[ii].name;
-        //     }else{
-        //
-        //     }
-        // }
-
-            // this.state.arrCarTemp.forEach((item)=>{
-            //     for(let ii=0; ii<item.lichtrinh.length; ii++) {
-            //         if(item.lichtrinh[ii].thoigiandi === gioDi
-            //             && item.lichtrinh[ii].tinh === parseInt(this.props.params.start)){
-            //             if(this.checkItemArr(item)){
-            //                 this.state.arrFilter.push(item);
-            //             }
-            //             break;
-            //         }
-            //     }
-            // });
-            //
-            // console.log(this.state.arrFilter);
-            // this.setState({arrCar:Array.from(this.state.arrFilter)});
-            // console.log(this.state);
-        console.log(this.state.arrGioDiFilter);
     };
-    checkItemArr= item =>{
+    /*Method check item in arrFilter*/
+    checkItemArrFilter= item =>{
+        for (const element of this.state.arrFilter){
+            if(element._id === item._id) return true;
+        }
+        return false;
+    }
+    /*Method check item in arrFilterGioDi*/
+    checkItemArrGioDi= item =>{
         for(const element of this.state.arrGioDiFilter){
             if(item === element){
                 return false;
