@@ -149,10 +149,13 @@ class ListContent extends Component {
             }
            // console.log(this.state.arrFilter);
         }else{
+            /*Check arrGioDiFilter trỗng thì update lại arrCar*/
             if(_.isEmpty(this.state.arrGioDiFilter)){
                 console.log("empty");
                 this.setState(state =>({arrCar: state.arrCarTemp}));
-            }else{
+            }
+            /*arrGioDiFilter có item thì remove đi car có value của checkbox vừa chọn */
+            else{
                 /* Index để remove item từ arrFilterGioDi*/
                 let indexGioDi=0;
                 for(let ii = 0; ii < this.state.arrGioDiFilter.length;ii++){
@@ -160,18 +163,17 @@ class ListContent extends Component {
                         indexGioDi=ii;
                     }
                 }
+                /*Remove car có thời gian đi có checked === false*/
                 this.state.arrFilter.forEach((item,key) =>{
                     const lichTrinh=item.lichtrinh;
                     for(const index in lichTrinh){
                         if(lichTrinh[index].thoigiandi === this.state.arrGioDiFilter[indexGioDi]){
-                            console.log(key);
                             this.state.arrFilter.splice(key,1);
                             //_.pull(this.state.arrFilter,item);
                         }
                     }
                 });
                 this.setState(state=>({arrCar: state.arrFilter}));
-                console.log(this.state.arrFilter);
                 this.state.arrGioDiFilter.splice(indexGioDi,1);
             }
             if(_.isEmpty(this.state.arrGioDiFilter)){
