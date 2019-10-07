@@ -192,7 +192,17 @@
                                             }
                                       }
                               }
+
                           }
+                      }
+
+                      .detail-wrapper{
+                        height: auto;
+
+                        .MuiAppBar-colorPrimary {
+                          color: black;
+                          background-color: #f3f5f7 !important;
+                        }
                       }
                   }
               }

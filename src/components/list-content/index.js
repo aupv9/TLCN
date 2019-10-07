@@ -5,14 +5,23 @@ import {Checkbox,
     ExpansionPanel,
     ExpansionPanelDetails,
     ExpansionPanelSummary,
-    Typography} from "@material-ui/core";
+    Typography,
+    Box,
+    AppBar} from "@material-ui/core";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 import {getCar} from "../../redux/action";
 import {connect} from "react-redux";
 import * as _ from "lodash";
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import classnames from 'classnames';
+/*
+* Component ListContent
+* Used giải quyết việc đặt lọc và đặt chỗ
+* */
+
 
 class ListContent extends Component {
-
-
     /*
    * Khi state thay đổi từ kết quả gọi service trả về từ server sẽ tiến hành xử lý
    * */
@@ -203,14 +212,13 @@ class ListContent extends Component {
     * */
      renderCars=()=>{
         return this.state.arrCar.map((item,index)=>{
-
             /*
             * Tiền xử lý trước khi hiện thị dữ liệu cho người dùng
             * */
             let gioDen=0,gioDi=0;
             let noiDi="";
             let noiDen="";
-
+            /*Filter giờ đi và nơi đi từ data */
             for (let ii = 0 ; ii < item.lichtrinh.length ; ii++){
                 if(item.lichtrinh[ii].tinh === parseInt(this.props.params.start)){
                     gioDi=item.lichtrinh[ii].thoigiandi;
@@ -218,6 +226,7 @@ class ListContent extends Component {
                     break;
                 }
             }
+            /*Filter giờ đến và nơi đến*/
             for (let ii = 0 ; ii < item.lichtrinh.length ; ii++){
                 if(item.lichtrinh[ii].tinh === parseInt(this.props.params.end)){
                     gioDen=item.lichtrinh[ii].thoigiandi;
@@ -225,6 +234,7 @@ class ListContent extends Component {
                     break;
                 }
             }
+            /*Format giờ và nơi */
             const allTimeSplitGioDen=gioDen.split(":");
             const allTimeFirstGioDen=allTimeSplitGioDen[0]+allTimeSplitGioDen[1];
             const allTimeSplitGioDi=gioDi.split(":");
@@ -240,7 +250,7 @@ class ListContent extends Component {
             return (
                 <>
                     <div className="cars-result"
-                         style={{marginBottom:'10px'}}
+                         onClick={this.showDetail}
                          key={index}>
                         <div className="result-wrapper">
                             <div className="result-inner">
@@ -307,10 +317,75 @@ class ListContent extends Component {
                                 </div>
                             </div>
                         </div>
-                    </div></>
+                    </div>
+                    <div className="detail-wrapper"
+                         id="detail-car"
+                        style={{marginBottom:'10px',display:'none'}}>
+                        <AppBar position="static">
+                            <Box component="span"
+                                 m={1}>
+                                <Nav tabs>
+                                    <NavItem>
+                                        <NavLink
+                                            className={classnames({ active: this.state.activeTab === '1' })}
+                                            onClick={() => { this.toggle('1'); }}
+                                        >
+                                           Chi tiết
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink
+                                            className={classnames({ active: this.state.activeTab === '2' })}
+                                            onClick={() => { this.toggle('2'); }}
+                                        >
+                                            Chọn chỗ
+                                        </NavLink>
+                                    </NavItem>
+                                </Nav>
+                                <TabContent activeTab={this.state.activeTab}>
+                                    <TabPane tabId="1">
+                                        <Row>
+                                            <Col sm="12">
+                                                <h4>Tab 1 Contents</h4>
+                                            </Col>
+                                        </Row>
+                                    </TabPane>
+                                    <TabPane tabId="2">
+                                        <Row>
+                                            <Col sm="6">
+                                                <Card body>
+                                                    <CardTitle>Special Title Treatment</CardTitle>
+                                                    <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+                                                    <Button>Go somewhere</Button>
+                                                </Card>
+                                            </Col>
+                                            <Col sm="6">
+                                                <Card body>
+                                                    <CardTitle>Special Title Treatment</CardTitle>
+                                                    <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+                                                    <Button>Go somewhere</Button>
+                                                </Card>
+                                            </Col>
+                                        </Row>
+                                    </TabPane>
+                                </TabContent>
+
+                            </Box>
+                        </AppBar>
+                    </div>
+                </>
             );
         });
 
+    }
+    showDetail= event =>{
+    }
+    toggle= tab => {
+        if (this.state.activeTab !== tab) {
+            this.setState({
+                activeTab: tab
+            });
+        }
     }
     render() {
         return (
@@ -333,8 +408,8 @@ class ListContent extends Component {
                                 <div className="filterListContainer">
                                     <div className="filter-list">
                                         <div >
-                                            <ExpansionPanel>
-                                                <ExpansionPanelSummary >
+                                            <ExpansionPanel >
+                                                <ExpansionPanelSummary  expandIcon={<ExpandMoreIcon />}>
                                                     <Typography>HÃNG XE </Typography>
                                                 </ExpansionPanelSummary>
                                                 <ExpansionPanelDetails>
@@ -343,8 +418,8 @@ class ListContent extends Component {
                                                     </Typography>
                                                 </ExpansionPanelDetails>
                                             </ExpansionPanel>
-                                            <ExpansionPanel>
-                                                <ExpansionPanelSummary >
+                                            <ExpansionPanel >
+                                                <ExpansionPanelSummary  expandIcon={<ExpandMoreIcon />}>
                                                     <Typography >GIỜ ĐI</Typography>
                                                 </ExpansionPanelSummary>
                                                 <ExpansionPanelDetails>
@@ -355,8 +430,8 @@ class ListContent extends Component {
                                                     </Typography>
                                                 </ExpansionPanelDetails>
                                             </ExpansionPanel>
-                                            <ExpansionPanel>
-                                                <ExpansionPanelSummary >
+                                            <ExpansionPanel >
+                                                <ExpansionPanelSummary  expandIcon={<ExpandMoreIcon />}>
                                                     <Typography >NƠI ĐI</Typography>
                                                 </ExpansionPanelSummary>
                                                 <ExpansionPanelDetails>
@@ -389,6 +464,7 @@ class ListContent extends Component {
         );
     }
 }
+
 const mapStateToProps=(state)=>({
     filterCarReducer:state.filterCarReducer
 });
