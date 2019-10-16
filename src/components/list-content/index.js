@@ -1,19 +1,26 @@
 import React, {Component} from 'react';
 import './style.scss';
 import * as types from "../../redux/type";
-import {Checkbox,
+import PropTypes from 'prop-types';
+import seat from '../../img/seat.svg';
+import {
+    Checkbox,
     ExpansionPanel,
     ExpansionPanelDetails,
     ExpansionPanelSummary,
     Typography,
     Box,
-    AppBar} from "@material-ui/core";
+    Paper,
+    AppBar, makeStyles,
+    Table
+    ,TableBody,TableCell,TableHead,TableRow
+} from "@material-ui/core";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import {getCar} from "../../redux/action";
 import {connect} from "react-redux";
 import * as _ from "lodash";
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col ,Button } from 'reactstrap';
 import classnames from 'classnames';
 /*
 * Component ListContent
@@ -53,11 +60,17 @@ class ListContent extends Component {
             }));
         }
     }
+
+    /**/
+    componentDidMount() {
+        this.props.getCars(this.props.params.start,this.props.params.end,this.props.params.date);
+    }
+
     /*Hàm khởi tạo 1 trong init mount của react chạy trước đi component được render*/
     constructor(props) {
         super(props);
-        this.props.getCars(this.props.params.start,this.props.params.end,this.props.params.date);
         this.state={
+            valueTabs:0,
             checkNhaXe:[{name:"",check:false}],
             checkGioDi:[{name:"",check:false}],
             arrCar:[],
@@ -210,6 +223,7 @@ class ListContent extends Component {
     * Method thực hiện việc render cho danh sách các xe đạt tiêu chuẩn
     * return về jsx hiển thị ra display
     * */
+
      renderCars=()=>{
         return this.state.arrCar.map((item,index)=>{
             /*
@@ -319,11 +333,11 @@ class ListContent extends Component {
                         </div>
                     </div>
                     <div className="detail-wrapper"
-                         id="detail-car"
-                        style={{marginBottom:'10px',display:'none'}}>
+                        id={`carDetail-`+index}
+                        style={{marginBottom:'10px',display:'block'}}>
                         <AppBar position="static">
                             <Box component="span"
-                                 m={1}>
+                                 m={5}>
                                 <Nav tabs>
                                     <NavItem>
                                         <NavLink
@@ -338,7 +352,23 @@ class ListContent extends Component {
                                             className={classnames({ active: this.state.activeTab === '2' })}
                                             onClick={() => { this.toggle('2'); }}
                                         >
-                                            Chọn chỗ
+                                            Đánh Giá
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink
+                                            className={classnames({ active: this.state.activeTab === '3' })}
+                                            onClick={() => { this.toggle('3'); }}
+                                        >
+                                           Hình Ảnh
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink
+                                            className={classnames({ active: this.state.activeTab === '4' })}
+                                            onClick={() => { this.toggle('4'); }}
+                                        >
+                                            Chọn Chổ
                                         </NavLink>
                                     </NavItem>
                                 </Nav>
@@ -346,25 +376,101 @@ class ListContent extends Component {
                                     <TabPane tabId="1">
                                         <Row>
                                             <Col sm="12">
-                                                <h4>Tab 1 Contents</h4>
+                                                <Paper className={classes.root}>
+                                                    <Table className={classes.table}
+                                                           aria-label="simple table">
+                                                        <TableHead>
+                                                            <TableRow>
+                                                                <TableCell align="left"
+                                                                           style={{fontSize:18,color:'#000',fontWeight:500}}>Thời gian đi</TableCell>
+                                                                <TableCell align="left"
+                                                                           style={{fontSize:18,color:'#000',fontWeight:500}}>Điểm đến</TableCell>
+                                                                <TableCell align="left"
+                                                                           style={{fontSize:18,color:'#000',fontWeight:500}}>Địa chỉ</TableCell>
+                                                            </TableRow>
+                                                        </TableHead>
+                                                        <TableBody>
+                                                            {item.lichtrinh.map((row,key) => (
+                                                                <TableRow key={key}>
+                                                                    <TableCell align="left">{row.thoigiandi}</TableCell>
+                                                                    <TableCell align="left">{row.diemdi}</TableCell>
+                                                                    <TableCell align="left">{row.diachi}</TableCell>
+                                                                </TableRow>
+                                                            ))}
+                                                        </TableBody>
+                                                    </Table>
+                                                </Paper>
                                             </Col>
                                         </Row>
                                     </TabPane>
                                     <TabPane tabId="2">
                                         <Row>
-                                            <Col sm="6">
-                                                <Card body>
-                                                    <CardTitle>Special Title Treatment</CardTitle>
-                                                    <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                                                    <Button>Go somewhere</Button>
-                                                </Card>
+                                            <Col sm="12">
+                                            <h4>Tab 1 Contents</h4>
+                                        </Col>
+
+                                        </Row>
+                                    </TabPane>
+                                    <TabPane tabId="3">
+                                        <Row>
+                                            <Col sm="12">
+                                                <h4>Tab 3 Contents</h4>
                                             </Col>
-                                            <Col sm="6">
-                                                <Card body>
-                                                    <CardTitle>Special Title Treatment</CardTitle>
-                                                    <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                                                    <Button>Go somewhere</Button>
-                                                </Card>
+
+                                        </Row>
+                                    </TabPane>
+                                    <TabPane tabId="4">
+                                        <Row>
+                                            <Col sm="12">
+                                                <Paper className={classes.root}>
+                                                    {/*Start header intro seat*/}
+                                                    <Table>
+                                                        <TableBody>
+                                                            <TableRow>
+                                                                <TableCell align="left">
+                                                                    <Button style={{marginRight:"5px",
+                                                                        backgroundColor:"#fff"}}></Button>
+                                                                    Ghế Trống
+                                                                </TableCell>
+                                                                <TableCell align="left">
+                                                                    <Button  style={{marginRight:"5px",
+                                                                        backgroundColor:"#cfcfcf"}}></Button>
+                                                                    Ghế Đã Đặt
+                                                                </TableCell>
+                                                                <TableCell align="left">
+                                                                    <Button style={{marginRight:"5px",
+                                                                        backgroundColor:"#BADF41"}}></Button>
+                                                                    Ghế Đang Đặt
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        </TableBody>
+                                                    </Table>
+                                                {/*    End header seat*/}
+
+
+                                                <Paper style={{padding:"40PX"}}>
+                                                    {
+                                                        item.danhsachghe.map((item,key)=>{
+
+                                                            if(key === 7){
+                                                                    return (
+                                                                        <>
+                                                                            <Button className={`${item.dat? "kicked" : "un-kicked"}`}
+                                                                                >{item.stt}</Button><br/>
+                                                                        </>
+                                                                    )
+                                                            }else{
+                                                                return (
+                                                                    <>
+                                                                        <Button className={`${item.dat? "kicked" : "un-kicked"}`}>{item.stt}</Button>
+                                                                    </>
+                                                                )
+                                                            }
+                                                        })
+                                                    }
+                                                </Paper>
+
+                                                </Paper>
                                             </Col>
                                         </Row>
                                     </TabPane>
@@ -379,6 +485,7 @@ class ListContent extends Component {
 
     }
     showDetail= event =>{
+
     }
     toggle= tab => {
         if (this.state.activeTab !== tab) {
@@ -464,7 +571,15 @@ class ListContent extends Component {
         );
     }
 }
-
+const classes=makeStyles({
+    root:{
+        width: '100%',
+        overflowX: 'auto',
+    },
+    header:{
+        fontSize:18
+    }
+})
 const mapStateToProps=(state)=>({
     filterCarReducer:state.filterCarReducer
 });
