@@ -227,8 +227,23 @@
 }
 
 .kicked{
-background-color: #cfcfcf}
+  background-color: #cfcfcf;
+  color: #fff;
+}
+
 .un-kicked{
   background-color: #fff;
   color: #000;
+}
+.normal{
+  background-color: #fff;
+  color: #000;
+}
+.btn-seat{
+  margin: 10px;
+  height: 40px;
+  width: 40px;
+  &:hover{
+
+  }
 }

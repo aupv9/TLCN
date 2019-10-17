@@ -448,29 +448,39 @@ class ListContent extends Component {
                                                 {/*    End header seat*/}
 
 
-                                                <Paper style={{padding:"40PX"}}>
-                                                    {
-                                                        item.danhsachghe.map((item,key)=>{
 
-                                                            if(key === 7){
+                                                <Paper style={{padding:"40PX",borderBottomLeftRadius:"0"}}>
+                                                    <Box style={{position:"absolute",bottom:"50px",left:"25px"}}>
+                                                        <img width="20"
+                                                             className="img-responsive wheel-img"
+                                                             src="https://storage.googleapis.com/fe-production/images/Route/steering-wheel.svg"/>
+                                                    </Box>
+                                                    <Box style={{marginLeft:"20px"}}>
+                                                        {
+                                                            item.danhsachghe.map((item,key)=>{
+
+                                                                if(key === 6){
                                                                     return (
                                                                         <>
-                                                                            <Button className={`${item.dat? "kicked" : "un-kicked"}`}
-                                                                                >{item.stt}</Button><br/>
+                                                                            <Button className={`btn-seat normal ${item.dat? "kicked" : "select-seat"}`}
+                                                                            >{item.stt}</Button><br/>
                                                                         </>
                                                                     )
-                                                            }else{
-                                                                return (
-                                                                    <>
-                                                                        <Button className={`${item.dat? "kicked" : "un-kicked"}`}>{item.stt}</Button>
-                                                                    </>
-                                                                )
-                                                            }
-                                                        })
-                                                    }
+                                                                }else{
+                                                                    return (
+                                                                        <>
+                                                                            <Button className={`btn-seat normal ${item.dat? "kicked" : "un-kicked"}`}>{item.stt}</Button>
+                                                                        </>
+                                                                    )
+                                                                }
+                                                            })
+                                                        }
+                                                    </Box>
+
                                                 </Paper>
 
                                                 </Paper>
+                                                <Paper>1</Paper>
                                             </Col>
                                         </Row>
                                     </TabPane>
