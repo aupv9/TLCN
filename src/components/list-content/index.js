@@ -24,6 +24,7 @@ import {connect} from "react-redux";
 import * as _ from "lodash";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col ,Button } from 'reactstrap';
 import classnames from 'classnames';
+import StageSeat from "../paper-cho";
 /*
 * Component ListContent
 * Used giải quyết việc đặt lọc và đặt chỗ
@@ -425,84 +426,7 @@ class ListContent extends Component {
                                     <TabPane tabId="4">
                                         <Row>
                                             <Col sm="12">
-                                                <Paper className={classes.root}>
-                                                    {/*Start header intro seat*/}
-                                                    <Table>
-                                                        <TableBody>
-                                                            <TableRow>
-                                                                <TableCell align="left">
-                                                                    <Button style={{marginRight:"5px",
-                                                                        backgroundColor:"#fff"}}></Button>
-                                                                    Ghế Trống
-                                                                </TableCell>
-                                                                <TableCell align="left">
-                                                                    <Button  style={{marginRight:"5px",
-                                                                        backgroundColor:"#cfcfcf"}}></Button>
-                                                                    Ghế Đã Đặt
-                                                                </TableCell>
-                                                                <TableCell align="left">
-                                                                    <Button style={{marginRight:"5px",
-                                                                        backgroundColor:"#BADF41"}}></Button>
-                                                                    Ghế Đang Đặt
-                                                                </TableCell>
-                                                            </TableRow>
-                                                        </TableBody>
-                                                    </Table>
-                                                {/*    End header seat*/}
-
-
-
-                                                <Paper style={{padding:"40PX",borderBottomLeftRadius:"0"}}>
-                                                    <Box style={{position:"absolute",bottom:"50px",left:"25px"}}>
-                                                        <img width="20"
-                                                             className="img-responsive wheel-img"
-                                                             src="https://storage.googleapis.com/fe-production/images/Route/steering-wheel.svg"/>
-                                                    </Box>
-                                                    <Box style={{marginLeft:"20px"}}>
-                                                        {
-                                                            item.danhsachghe.map((item,key)=>{
-
-
-                                                                if(key === 6){
-                                                                    return (
-                                                                        <>
-                                                                            <Button className={`btn-seat normal ${item.dat? "kicked" : "select-seat"}`}
-                                                                                    disabled={item.dat}
-                                                                                   onClick={()=>this.putSeat(item)}>{item.stt}</Button><br/>
-                                                                        </>
-                                                                    );
-                                                                }else{
-                                                                    return (
-                                                                        <>
-                                                                            <Button className={`btn-seat normal ${item.dat? "kicked" : "un-kicked"}`}
-                                                                                    disabled={item.dat}
-                                                                                    onClick={()=>this.putSeat(item)}>{item.stt}</Button>
-                                                                        </>
-                                                                    );
-                                                                }
-                                                            })
-                                                        }
-                                                    </Box>
-
-                                                </Paper>
-
-                                                </Paper>
-                                                <Paper style={{marginTop:"3px"}}>
-                                                    <Typography>
-                                                        <Box textAlign="left"
-                                                             style={{marginLeft:"10px",paddingTop:"10px"}}>
-                                                            Số ghế:
-                                                            {this.state.valueTabs}
-                                                            {
-                                                                 this.state.arrSeatIndex.map((item,key)=>{
-                                                                     return (
-                                                                         <Box>{this.state.valueTabs}</Box>
-                                                                     );
-                                                                 })
-                                                                }
-                                                        </Box>
-                                                    </Typography>
-                                                </Paper>
+                                                <StageSeat danhSachGhe={item.danhsachghe}/>
                                             </Col>
                                         </Row>
                                     </TabPane>
@@ -525,15 +449,7 @@ class ListContent extends Component {
          })
          );
     }
-    putSeat = item =>{
-         if(_.indexOf(this.state.arrSeatSelected,item) !== -1){
-             _.pull(this.state.arrSeatSelected,item);
-             _.pull(this.state.arrSeatIndex,item);
-         }else{
-             this.state.arrSeatSelected.push(item);
-             this.state.arrSeatIndex.push(item.stt);
-         }
-    }
+
     showDetail= event =>{
 
     }
