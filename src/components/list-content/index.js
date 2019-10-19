@@ -14,7 +14,9 @@ import {
     AppBar, makeStyles,
     Table
     ,TableBody,TableCell,TableHead,TableRow
+
 } from "@material-ui/core";
+
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import {getCar} from "../../redux/action";
@@ -75,7 +77,9 @@ class ListContent extends Component {
             checkGioDi:[{name:"",check:false}],
             arrCar:[],
             arrFilter:[],
-            arrGioDiFilter:[]
+            arrGioDiFilter:[],
+            arrSeatSelected:[],
+            arrSeatIndex:[]
         };
 
     }
@@ -223,7 +227,6 @@ class ListContent extends Component {
     * Method thực hiện việc render cho danh sách các xe đạt tiêu chuẩn
     * return về jsx hiển thị ra display
     * */
-
      renderCars=()=>{
         return this.state.arrCar.map((item,index)=>{
             /*
@@ -459,19 +462,23 @@ class ListContent extends Component {
                                                         {
                                                             item.danhsachghe.map((item,key)=>{
 
+
                                                                 if(key === 6){
                                                                     return (
                                                                         <>
                                                                             <Button className={`btn-seat normal ${item.dat? "kicked" : "select-seat"}`}
-                                                                            >{item.stt}</Button><br/>
+                                                                                    disabled={item.dat}
+                                                                                   onClick={()=>this.putSeat(item)}>{item.stt}</Button><br/>
                                                                         </>
-                                                                    )
+                                                                    );
                                                                 }else{
                                                                     return (
                                                                         <>
-                                                                            <Button className={`btn-seat normal ${item.dat? "kicked" : "un-kicked"}`}>{item.stt}</Button>
+                                                                            <Button className={`btn-seat normal ${item.dat? "kicked" : "un-kicked"}`}
+                                                                                    disabled={item.dat}
+                                                                                    onClick={()=>this.putSeat(item)}>{item.stt}</Button>
                                                                         </>
-                                                                    )
+                                                                    );
                                                                 }
                                                             })
                                                         }
@@ -480,7 +487,22 @@ class ListContent extends Component {
                                                 </Paper>
 
                                                 </Paper>
-                                                <Paper>1</Paper>
+                                                <Paper style={{marginTop:"3px"}}>
+                                                    <Typography>
+                                                        <Box textAlign="left"
+                                                             style={{marginLeft:"10px",paddingTop:"10px"}}>
+                                                            Số ghế:
+                                                            {this.state.valueTabs}
+                                                            {
+                                                                 this.state.arrSeatIndex.map((item,key)=>{
+                                                                     return (
+                                                                         <Box>{this.state.valueTabs}</Box>
+                                                                     );
+                                                                 })
+                                                                }
+                                                        </Box>
+                                                    </Typography>
+                                                </Paper>
                                             </Col>
                                         </Row>
                                     </TabPane>
@@ -493,6 +515,24 @@ class ListContent extends Component {
             );
         });
 
+    }
+
+    showSeat=()=>{
+         return (this.state.arrSeatIndex.map((seat)=>{
+             return (
+                 <Box style={{marginRight:"2px"}}>{seat}, 11</Box>
+             );
+         })
+         );
+    }
+    putSeat = item =>{
+         if(_.indexOf(this.state.arrSeatSelected,item) !== -1){
+             _.pull(this.state.arrSeatSelected,item);
+             _.pull(this.state.arrSeatIndex,item);
+         }else{
+             this.state.arrSeatSelected.push(item);
+             this.state.arrSeatIndex.push(item.stt);
+         }
     }
     showDetail= event =>{
 
