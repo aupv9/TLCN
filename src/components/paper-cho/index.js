@@ -29,30 +29,10 @@ class StageSeat extends Component {
 
     constructor(props){
         super(props);
-        this.state={
-            arrSeatSelected:[],
-            arrSeatIndex:[],
-            index:0
-        };
     }
-    putSeat = item =>{
-        if(_.indexOf(this.state.arrSeatSelected,item) !== -1){
-            _.pull(this.state.arrSeatSelected,item);
-            _.pull(this.state.arrSeatIndex,item);
-        }else{
-            this.state.arrSeatSelected.push(item);
-            this.state.arrSeatIndex.push(item.stt);
-        }
 
-    }
     render() {
-        const danhSachGhe=this.props;
-        const numSeat = this.state.arrSeatIndex.map(item => (
-            <span key={item}>
-                {item}
-                {", "}
-        </span>
-        ));
+        const {danhSachGhe,resetSeat}=this.props;
 
         return (
             <>
@@ -87,10 +67,13 @@ class StageSeat extends Component {
                                      className="img-responsive wheel-img"
                                      src="https://storage.googleapis.com/fe-production/images/Route/steering-wheel.svg"/>
                             </Box>
+
                             <Paper style={{marginLeft:"20px"}}>
+                                {/*Render danh sách ghế*/}
                                 {
-                                    danhSachGhe.danhSachGhe.map((item,index)=>
-                                        <Seat seat={item}/>
+                                    danhSachGhe.map((item,index)=>
+                                        <Seat seat={item}
+                                                resetSeat={resetSeat}/>
                                     )
                                 }
                             </Paper>

@@ -28,6 +28,7 @@ const Car = (props) =>{
 
     const {putNull,nhaXe,gioDi,noiDi,gioDen,noiDen,timer,time,loaiXe,index,danhSachGhe,lichtrinh}=props;
     const [activeTab,setActiveTabs]=React.useState('1');
+    const [resetSeat,setResetSeat]=React.useState(false);
     const  toggle = tab => {
         if (activeTab !== tab) {
             setActiveTabs(tab);
@@ -41,12 +42,14 @@ const Car = (props) =>{
     /*Close detail car*/
     const toggleCarByIcon= id =>{
         putNull();
+        setResetSeat(true);
         document.getElementById("carDetail-"+id).style.display="none";
 
     }
     /**/
     const toggleCarByWrapper = id =>{
         putNull();
+        setResetSeat(true);
         const wrapper=document.getElementsByClassName("detail-wrapper");
         for (let i=0; i<wrapper.length; i++) {
            wrapper[i].style.display="none";
@@ -219,7 +222,8 @@ const Car = (props) =>{
                             <TabPane tabId="4">
                                 <Row>
                                     <Col sm="12">
-                                        <StageSeat danhSachGhe={danhSachGhe}/>
+                                        <StageSeat danhSachGhe={danhSachGhe}
+                                                    resetSeat={resetSeat}/>
                                     </Col>
                                 </Row>
                             </TabPane>

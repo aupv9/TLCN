@@ -282,18 +282,6 @@ class ListContent extends Component {
 
     }
 
-    showSeat=()=>{
-         return (this.state.arrSeatIndex.map((seat)=>{
-             return (
-                 <Box style={{marginRight:"2px"}}>{seat}, 11</Box>
-             );
-         })
-         );
-    }
-
-    showDetail= event =>{
-
-    }
     render() {
         return (
             <>
