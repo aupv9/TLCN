@@ -22,12 +22,12 @@ import * as _ from "lodash";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col ,Button } from 'reactstrap';
 import classnames from 'classnames';
 import StageSeat from "../paper-cho";
+import Car from '../car';
+
 /*
 * Component ListContent
 * Used giải quyết việc đặt lọc và đặt chỗ
 * */
-
-
 class ListContent extends Component {
     /*
    * Khi state thay đổi từ kết quả gọi service trả về từ server sẽ tiến hành xử lý
@@ -264,174 +264,18 @@ class ListContent extends Component {
 
             return (
                 <>
-                    <div className="cars-result"
-                         onClick={this.showDetail}
-                         key={index}>
-                        <div className="result-wrapper">
-                            <div className="result-inner">
-                                <div className="grid-inner">
-                                    <div className="col-info">
-                                        <div className="main-info">
-                                            <div className="cars-result-info">
-                                                <ol className="cars">
-                                                    <li className="car">
-                                                        <div className="cars-result-lefinfo">
-                                                            <div className="v-c-p">
-                                                                <div className="col-field carrier">
-                                                                    <div className="top">
-                                                                        <i
-                                                                            className="fas fa-bus"></i>
-                                                                        {/*<img src={item.hinhanh}*/}
-                                                                        {/*     alt="" />*/}
-                                                                    </div>
-                                                                    <div className="bottom">
-                                                                        {item.nhaxe}
-                                                                    </div>
-
-                                                                </div>
-                                                                <div className="col-field time-start">
-                                                                    <div className="top">
-                                                                        <div className="depart-time ">{gioDi}</div>
-                                                                    </div>
-                                                                    <div className="bottom">{noiDi}</div>
-                                                                </div>
-                                                                <div className="col-field route">
-                                                                    <div className="time">{timer}h{time}</div>
-                                                                    <div className="axis"></div>
-                                                                </div>
-                                                                <div className="col-field time-end">
-                                                                    <div className="top">
-                                                                        <div className="depart-time ">{gioDen}</div>
-                                                                    </div>
-                                                                    <div className="bottom">{noiDen}</div>
-                                                                </div>
-                                                                <div className="col-field info-car">
-                                                                    <div className="type">{item.loaixe}</div>
-                                                                </div>
-
-                                                                <div className="col-field detail">
-                                                                    <div className="top-row">
-                                                                        <img src={"https://img.icons8.com/ios-glyphs/30/000000/share.png"} />
-                                                                    </div>
-                                                                    <div className="show-detail">
-                                                                        <div className="dropdown-detail">
-                                                                            sss
-                                                                        </div>
-                                                                        <div className="button-detail">
-                                                                            <button><span>Chọn Chỗ</span></button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ol>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="detail-wrapper"
-                        id={`carDetail-`+index}
-                        style={{marginBottom:'10px',display:'block'}}>
-                        <AppBar position="static">
-                            <Box component="span"
-                                 m={5}>
-                                <Nav tabs>
-                                    <NavItem>
-                                        <NavLink
-                                            className={classnames({ active: this.state.activeTab === '1' })}
-                                            onClick={() => { this.toggle('1'); }}
-                                        >
-                                           Chi tiết
-                                        </NavLink>
-                                    </NavItem>
-                                    <NavItem>
-                                        <NavLink
-                                            className={classnames({ active: this.state.activeTab === '2' })}
-                                            onClick={() => { this.toggle('2'); }}
-                                        >
-                                            Đánh Giá
-                                        </NavLink>
-                                    </NavItem>
-                                    <NavItem>
-                                        <NavLink
-                                            className={classnames({ active: this.state.activeTab === '3' })}
-                                            onClick={() => { this.toggle('3'); }}
-                                        >
-                                           Hình Ảnh
-                                        </NavLink>
-                                    </NavItem>
-                                    <NavItem>
-                                        <NavLink
-                                            className={classnames({ active: this.state.activeTab === '4' })}
-                                            onClick={() => { this.toggle('4'); }}
-                                        >
-                                            Chọn Chổ
-                                        </NavLink>
-                                    </NavItem>
-                                </Nav>
-                                <TabContent activeTab={this.state.activeTab}>
-                                    <TabPane tabId="1">
-                                        <Row>
-                                            <Col sm="12">
-                                                <Paper className={classes.root}>
-                                                    <Table className={classes.table}
-                                                           aria-label="simple table">
-                                                        <TableHead>
-                                                            <TableRow>
-                                                                <TableCell align="left"
-                                                                           style={{fontSize:18,color:'#000',fontWeight:500}}>Thời gian đi</TableCell>
-                                                                <TableCell align="left"
-                                                                           style={{fontSize:18,color:'#000',fontWeight:500}}>Điểm đến</TableCell>
-                                                                <TableCell align="left"
-                                                                           style={{fontSize:18,color:'#000',fontWeight:500}}>Địa chỉ</TableCell>
-                                                            </TableRow>
-                                                        </TableHead>
-                                                        <TableBody>
-                                                            {item.lichtrinh.map((row,key) => (
-                                                                <TableRow key={key}>
-                                                                    <TableCell align="left">{row.thoigiandi}</TableCell>
-                                                                    <TableCell align="left">{row.diemdi}</TableCell>
-                                                                    <TableCell align="left">{row.diachi}</TableCell>
-                                                                </TableRow>
-                                                            ))}
-                                                        </TableBody>
-                                                    </Table>
-                                                </Paper>
-                                            </Col>
-                                        </Row>
-                                    </TabPane>
-                                    <TabPane tabId="2">
-                                        <Row>
-                                            <Col sm="12">
-                                            <h4>Tab 1 Contents</h4>
-                                        </Col>
-
-                                        </Row>
-                                    </TabPane>
-                                    <TabPane tabId="3">
-                                        <Row>
-                                            <Col sm="12">
-                                                <h4>Tab 3 Contents</h4>
-                                            </Col>
-
-                                        </Row>
-                                    </TabPane>
-                                    <TabPane tabId="4">
-                                        <Row>
-                                            <Col sm="12">
-                                                <StageSeat danhSachGhe={item.danhsachghe}/>
-                                            </Col>
-                                        </Row>
-                                    </TabPane>
-                                </TabContent>
-
-                            </Box>
-                        </AppBar>
-                    </div>
+                  <Car nhaXe={item.nhaxe}
+                       gioDi={gioDi}
+                       noiDi={noiDi}
+                       gioDen={gioDen}
+                       noiDen={noiDen}
+                       timer={timer}
+                       time={time}
+                       loaiXe={item.loaixe}
+                       index={index}
+                       danhSachGhe={item.danhsachghe}
+                       lichtrinh={item.lichtrinh}
+                        key={index}/>
                 </>
             );
         });
@@ -449,13 +293,6 @@ class ListContent extends Component {
 
     showDetail= event =>{
 
-    }
-    toggle= tab => {
-        if (this.state.activeTab !== tab) {
-            this.setState({
-                activeTab: tab
-            });
-        }
     }
     render() {
         return (
@@ -479,7 +316,7 @@ class ListContent extends Component {
                                     <div className="filter-list">
                                         <div >
                                             <ExpansionPanel >
-                                                <ExpansionPanelSummary  expandIcon={<ExpandMoreIcon />}>
+                                                <ExpansionPanelSummary  >
                                                     <Typography>HÃNG XE </Typography>
                                                 </ExpansionPanelSummary>
                                                 <ExpansionPanelDetails>
@@ -489,7 +326,7 @@ class ListContent extends Component {
                                                 </ExpansionPanelDetails>
                                             </ExpansionPanel>
                                             <ExpansionPanel >
-                                                <ExpansionPanelSummary  expandIcon={<ExpandMoreIcon />}>
+                                                <ExpansionPanelSummary >
                                                     <Typography >GIỜ ĐI</Typography>
                                                 </ExpansionPanelSummary>
                                                 <ExpansionPanelDetails>
@@ -501,7 +338,8 @@ class ListContent extends Component {
                                                 </ExpansionPanelDetails>
                                             </ExpansionPanel>
                                             <ExpansionPanel >
-                                                <ExpansionPanelSummary  expandIcon={<ExpandMoreIcon />}>
+                                                {/*expandIcon={<ExpandMoreIcon />}*/}
+                                                <ExpansionPanelSummary  >
                                                     <Typography >NƠI ĐI</Typography>
                                                 </ExpansionPanelSummary>
                                                 <ExpansionPanelDetails>
@@ -534,15 +372,7 @@ class ListContent extends Component {
         );
     }
 }
-const classes=makeStyles({
-    root:{
-        width: '100%',
-        overflowX: 'auto',
-    },
-    header:{
-        fontSize:18
-    }
-})
+
 const mapStateToProps=(state)=>({
     filterCarReducer:state.filterCarReducer
 });

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
-    AppBar,
     Box,
     makeStyles,
     Paper,
@@ -12,11 +11,10 @@ import {
     TableRow,
     Typography
 } from "@material-ui/core";
-import {Button, Col, Nav, NavItem, NavLink, Row, TabContent, TabPane} from "reactstrap";
-import classnames from "classnames";
+import {Button, Col} from "reactstrap";
 import * as _ from "lodash";
 import Seat from "../seat";
-
+import {connect} from "react-redux";
 const classes=makeStyles({
     root:{
         width: '100%',
@@ -76,16 +74,13 @@ class StageSeat extends Component {
                                     </TableCell>
                                     <TableCell align="left">
                                         <Button style={{marginRight:"5px",
-                                            backgroundColor:"#BADF41"}}></Button>
+                                            backgroundColor:"#007BFF"}}></Button>
                                         Ghế Đang Đặt
                                     </TableCell>
                                 </TableRow>
                             </TableBody>
                         </Table>
                         {/*    End header seat*/}
-
-
-
                         <Paper style={{padding:"40PX",borderBottomLeftRadius:"0"}}>
                             <Box style={{position:"absolute",bottom:"50px",left:"25px"}}>
                                 <img width="20"
@@ -99,9 +94,7 @@ class StageSeat extends Component {
                                     )
                                 }
                             </Paper>
-
                         </Paper>
-
                     </Paper>
                     <Paper style={{marginTop:"3px"}}>
                         <Typography>
@@ -109,18 +102,21 @@ class StageSeat extends Component {
                                  style={{marginLeft:"10px",paddingTop:"10px"}}>
                                 Số ghế:
                                 {
-                                    numSeat
+                                    this.props.seats.seat.map(item =>  (
+                                            <span>{item.MaGhe}{" "}</span>
+                                    ))
                                 }
                             </Box>
                         </Typography>
                     </Paper>
                 </Col>
-
             </>
         );
     }
 }
 
 StageSeat.propTypes = {};
-
-export default StageSeat;
+const mapStateToProps=(state)=>({
+    seats:state.seat
+});
+export default connect(mapStateToProps,null)(StageSeat);

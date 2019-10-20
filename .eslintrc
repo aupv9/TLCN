@@ -1,7 +1,7 @@
 {
   "parser": "babel-eslint",
   "plugins": [
-    "react"
+    "react","react-hooks"
   ],
   "extends": [
     "eslint:recommended",
@@ -27,6 +27,8 @@
      "no-unused-vars": 0,
      "wrap-iife": 1,
       "no-var": 1,
-      "react/jsx-key": 0
+      "react/jsx-key": 0,
+      "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+      "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
   }
 }

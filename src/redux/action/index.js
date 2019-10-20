@@ -23,6 +23,19 @@ export const getCar= (start, end, date) =>{
                             }
                         );
                     });
-
     };
 };
+
+export  const putSeat = (item,status)=>{
+    return {
+            type:types.PUT_SEAT,
+            payload:item,
+            status
+    };
+}
+
+export  const putNull = ()=>{
+    return {
+        type:types.PUT_NULL
+    };
+}

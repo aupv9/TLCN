@@ -51,6 +51,7 @@
     "@material-ui/icons": "^4.4.1",
     "eslint": "^6.3.0",
     "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.1.2",
     "redux-devtools": "^3.5.0"
   }
 }
