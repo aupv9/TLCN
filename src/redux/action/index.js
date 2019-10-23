@@ -34,7 +34,7 @@ export  const putSeat = (item,status)=>{
     };
 }
 
-export  const putNull = ()=>{
+export  const putNull = () =>{
     return {
         type:types.PUT_NULL
     };

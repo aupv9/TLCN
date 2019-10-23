@@ -26,7 +26,7 @@ const useStyles =makeStyles({
 })
 const Car = (props) =>{
 
-    const {putNull,nhaXe,gioDi,noiDi,gioDen,noiDen,timer,time,loaiXe,index,danhSachGhe,lichtrinh}=props;
+    const {putNull,nhaXe,gioDi,noiDi,gioDen,noiDen,timer,time,loaiXe,index,arrSeat,lichtrinh}=props;
     const [activeTab,setActiveTabs]=React.useState('1');
     const [resetSeat,setResetSeat]=React.useState(false);
     const  toggle = tab => {
@@ -38,11 +38,18 @@ const Car = (props) =>{
     const setNullSeat=()=>{
         putNull();
     }
-
+    /*Remove bg seat*/
+    const removeBg=()=>{
+        const btnSeat=document.getElementsByClassName("btn");
+        for (let i=0; i<btnSeat.length; i++) {
+            btnSeat[i].classList.remove("bg-primary");
+        }
+    }
     /*Close detail car*/
     const toggleCarByIcon= id =>{
         putNull();
         setResetSeat(true);
+        removeBg();
         document.getElementById("carDetail-"+id).style.display="none";
 
     }
@@ -50,19 +57,19 @@ const Car = (props) =>{
     const toggleCarByWrapper = id =>{
         putNull();
         setResetSeat(true);
+        removeBg();
         const wrapper=document.getElementsByClassName("detail-wrapper");
         for (let i=0; i<wrapper.length; i++) {
            wrapper[i].style.display="none";
         }
         document.getElementById("carDetail-"+id).style.display="block";
-
     }
     const classes = useStyles();
     return (
         <>
             <div className="cars-result"
                  style={{marginBottom:"10px"}}
-            onClick={()=>toggleCarByWrapper(index)}>
+                onClick={()=>toggleCarByWrapper(index)}>
                 <div className="result-wrapper">
                     <div className="result-inner">
                         <div className="grid-inner">
@@ -205,10 +212,10 @@ const Car = (props) =>{
                             </TabPane>
                             <TabPane tabId="2">
                                 <Row>
-                                    <Col sm="12">
+                                    <Col sm="12"
+                                        style={{marginLeft:"0"}}>
                                         <h4>Tab 1 Contents</h4>
                                     </Col>
-
                                 </Row>
                             </TabPane>
                             <TabPane tabId="3">
@@ -216,14 +223,13 @@ const Car = (props) =>{
                                     <Col sm="12">
                                         <h4>Tab 3 Contents</h4>
                                     </Col>
-
                                 </Row>
                             </TabPane>
                             <TabPane tabId="4">
                                 <Row>
                                     <Col sm="12">
-                                        <StageSeat danhSachGhe={danhSachGhe}
-                                                    resetSeat={resetSeat}/>
+                                        <StageSeat arrSeat={arrSeat}
+                                                    />
                                     </Col>
                                 </Row>
                             </TabPane>
@@ -234,7 +240,9 @@ const Car = (props) =>{
          </>
     );
 }
-
-Car.propTypes = {};
+//putNull,nhaXe,gioDi,noiDi,gioDen,noiDen,timer,time,loaiXe,index,arrSeat,lichtrinh
+Car.propTypes = {
+    putNull:PropTypes.func.isRequired
+};
 
 export default connect(null,{putNull})(Car);

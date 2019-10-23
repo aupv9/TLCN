@@ -8,16 +8,27 @@ import {putSeat} from "../../redux/action";
 
 const Seat = (props) =>{
     //const classes = useStyles();
+    /*đây là trạng thái của 1 seat*/
     const [isPut,setPut]=new React.useState(false);
-    const {seat,putSeat,seats,resetSeat}=props;
+
+    /*ref props*/
+    const {seat,putSeat,seats}=props;
+
+    /*style cho seat dựa trên isPut*/
     const colorBook = isPut ? "bg-primary" : "";
+
+    /*seat đã được đặt hay chưa*/
     const checkSeat = seat.dat ? " bg-dark" : "";
-    // const reSetSeat=resetSeat.resetSeat? "":"";
+
+    /*func put seat*/
     const handlePut= isPut =>{
         setPut(isPut);
+        /*action redux*/
         putSeat(seat,isPut);
-
     }
+    const putSeats =()=>{
+        putSeat(seat,isPut);
+    };
     return (
         <>
             <Button style={{backgroundColor:"#fff",color:"#000"}}

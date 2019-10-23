@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import NumberFormat from 'react-number-format';
 import {
     Box,
     makeStyles,
@@ -7,14 +8,15 @@ import {
     Table,
     TableBody,
     TableCell,
-    TableHead,
     TableRow,
-    Typography
+    Typography, Radio,RadioGroup,FormControlLabel,FormControl,FormLabel
 } from "@material-ui/core";
-import {Button, Col} from "reactstrap";
+import {Button, Col, Nav, NavItem, NavLink, Row, TabContent, TabPane} from "reactstrap";
 import * as _ from "lodash";
 import Seat from "../seat";
 import {connect} from "react-redux";
+import classnames from "classnames";
+
 const classes=makeStyles({
     root:{
         width: '100%',
@@ -24,19 +26,29 @@ const classes=makeStyles({
         fontSize:18
     }
 })
-class StageSeat extends Component {
+const StageSeat =(props)=> {
 
+    /*Map props*/
+    const {seats,arrSeat}=props;
 
-    constructor(props){
-        super(props);
+    /*State activeTab*/
+    const [activeTab,setActiveTabs]=React.useState('1');
+
+    const [value,setValue]=React.useState("1")
+
+    /*Method select tab*/
+    const  toggle = tab => {
+        if (activeTab !== tab) {
+            setActiveTabs(tab);
+        }
     }
 
-    render() {
-        const {danhSachGhe,resetSeat}=this.props;
+    /*Method tính tổng tiền đã đặt*/
 
         return (
             <>
-                <Col md="12">
+                <Col md="12"
+                    style={{marginLeft:"0"}}>
                     <Paper className={classes.root}>
                         {/*Start header intro seat*/}
                         <Table>
@@ -62,43 +74,112 @@ class StageSeat extends Component {
                         </Table>
                         {/*    End header seat*/}
                         <Paper style={{padding:"40PX",borderBottomLeftRadius:"0"}}>
-                            <Box style={{position:"absolute",bottom:"50px",left:"25px"}}>
-                                <img width="20"
-                                     className="img-responsive wheel-img"
-                                     src="https://storage.googleapis.com/fe-production/images/Route/steering-wheel.svg"/>
+                            <Box style={{position:"absolute",bottom:"140px",left:"25px"}}>
+                                {/*<img width="25"*/}
+                                {/*     className="img-responsive wheel-img"*/}
+                                {/*     src="https://storage.googleapis.com/fe-production/images/Route/steering-wheel.svg"/>*/}
                             </Box>
 
                             <Paper style={{marginLeft:"20px"}}>
                                 {/*Render danh sách ghế*/}
                                 {
-                                    danhSachGhe.map((item,index)=>
+                                    arrSeat.map((item,index)=>
                                         <Seat seat={item}
-                                                resetSeat={resetSeat}/>
+                                             />
                                     )
                                 }
                             </Paper>
                         </Paper>
                     </Paper>
-                    <Paper style={{marginTop:"3px"}}>
+                    <Paper style={{marginTop:"3px",height:"100px"}}>
                         <Typography>
                             <Box textAlign="left"
-                                 style={{marginLeft:"10px",paddingTop:"10px"}}>
+                                 style={{paddingTop:"10px"}}>
                                 Số ghế:
                                 {
-                                    this.props.seats.seat.map(item =>  (
-                                            <span>{item.MaGhe}{" "}</span>
+                                    seats.seat.map(item =>  (
+                                            <span >{item.MaGhe}{" "}</span>
                                     ))
-                                }
+                                }<br/>
+                                Tổng Tiền:
+                                {/*{*/}
+                                {/*    this.props.seats.priceSeats*/}
+                                {/*}*/}
+                                <NumberFormat thousandSeparator={false}
+                                              style={{border:"none"}}
+                                               value={seats.priceSeats}
+                                               suffix={".000đ"} />
                             </Box>
                         </Typography>
+                    </Paper>
+                    <Paper style={{marginTop:"3px"}}>
+                        <Typography style={{fontWeight:"500",fontSize:"20px",marginLeft:"15px"}}>
+                            Chọn nơi đi và nơi đến
+                        </Typography>
+                        <Box>
+                            <Nav tabs
+                                style={{marginLeft:"50px",marginTop:"20px"}}>
+                                <NavItem>
+                                    <NavLink
+                                        className={classnames({ active:activeTab === '1' })}
+                                        onClick={() => {toggle('1'); }}
+                                    >
+                                        Điểm Đi
+                                    </NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink
+                                        className={classnames({ active:activeTab === '2' })}
+                                        onClick={() => { toggle('2'); }}
+                                            >
+                                        Điểm Đến
+                                    </NavLink>
+                                </NavItem>
+                            </Nav>
+                            <TabContent activeTab={activeTab}>
+                                <TabPane tabId="1"
+                                         style={{marginLeft:"50px",marginTop:"20px"}}>
+                                    <FormControl component="fieldset"
+                                                 >
+                                        <FormLabel component="legend">Gender</FormLabel>
+                                        <RadioGroup aria-label="gender"
+                                                    name="gender1"
+                                                    value={value}
+                                                   >
+                                            <FormControlLabel
+                                                value="female"
+                                                control={<Radio />}
+                                                label="Female" />
+                                            <FormControlLabel value="male"
+                                                              control={<Radio />}
+                                                              label="Male" />
+                                            <FormControlLabel value="other"
+                                                              control={<Radio />}
+                                                              label="Other" />
+                                            <FormControlLabel
+                                                value="disabled"
+                                                disabled
+                                                control={<Radio />}
+                                                label="(Disabled option)"
+                                            />
+                                        </RadioGroup>
+                                    </FormControl>
+                                </TabPane>
+                                <TabPane tabId="2"
+                                         style={{marginLeft:"50px",marginTop:"20px"}}>
+                                    2
+                                </TabPane>
+                            </TabContent>
+                        </Box>
                     </Paper>
                 </Col>
             </>
         );
     }
-}
 
-StageSeat.propTypes = {};
+StageSeat.propTypes = {
+    arrSeatIndex:PropTypes.object.isRequired
+};
 const mapStateToProps=(state)=>({
     seats:state.seat
 });

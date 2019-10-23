@@ -273,7 +273,7 @@ class ListContent extends Component {
                        time={time}
                        loaiXe={item.loaixe}
                        index={index}
-                       danhSachGhe={item.danhsachghe}
+                       arrSeat={item.danhsachghe}
                        lichtrinh={item.lichtrinh}
                         key={index}/>
                 </>
