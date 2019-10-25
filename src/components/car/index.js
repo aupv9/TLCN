@@ -26,7 +26,7 @@ const useStyles =makeStyles({
 })
 const Car = (props) =>{
 
-    const {putNull,nhaXe,gioDi,noiDi,gioDen,noiDen,timer,time,loaiXe,index,arrSeat,lichtrinh}=props;
+    const {start,end,putNull,nhaXe,gioDi,noiDi,gioDen,noiDen,timer,time,loaiXe,index,arrSeat,lichtrinh}=props;
     const [activeTab,setActiveTabs]=React.useState('1');
     const [resetSeat,setResetSeat]=React.useState(false);
     const  toggle = tab => {
@@ -229,6 +229,9 @@ const Car = (props) =>{
                                 <Row>
                                     <Col sm="12">
                                         <StageSeat arrSeat={arrSeat}
+                                                   lichTrinh={lichtrinh}
+                                                   start={start}
+                                                   end={end}
                                                     />
                                     </Col>
                                 </Row>

@@ -264,7 +264,9 @@ class ListContent extends Component {
 
             return (
                 <>
-                  <Car nhaXe={item.nhaxe}
+                  <Car start={this.props.params.start}
+                      end={this.props.params.end}
+                       nhaXe={item.nhaxe}
                        gioDi={gioDi}
                        noiDi={noiDi}
                        gioDen={gioDen}
@@ -275,7 +277,8 @@ class ListContent extends Component {
                        index={index}
                        arrSeat={item.danhsachghe}
                        lichtrinh={item.lichtrinh}
-                        key={index}/>
+                        key={index}
+                        />
                 </>
             );
         });

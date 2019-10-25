@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import NumberFormat from 'react-number-format';
 import {
@@ -11,7 +11,7 @@ import {
     TableRow,
     Typography, Radio,RadioGroup,FormControlLabel,FormControl,FormLabel
 } from "@material-ui/core";
-import {Button, Col, Nav, NavItem, NavLink, Row, TabContent, TabPane} from "reactstrap";
+import {Button, Col, Nav, NavItem, NavLink, TabContent, TabPane} from "reactstrap";
 import * as _ from "lodash";
 import Seat from "../seat";
 import {connect} from "react-redux";
@@ -29,22 +29,56 @@ const classes=makeStyles({
 const StageSeat =(props)=> {
 
     /*Map props*/
-    const {seats,arrSeat}=props;
+    const {seats,arrSeat,lichTrinh,start,end}=props;
 
     /*State activeTab*/
     const [activeTab,setActiveTabs]=React.useState('1');
 
-    const [value,setValue]=React.useState("1")
+    /*Xử Lý trước khi gán cho radio*/
+    const [listAddressStart,setListAddressStart]=React.useState([]);
+    const [listAddressEnd,setListAddressEnd]=React.useState([]);
+
+    /*Value lưu điểm đi và điểm đến*/
+    const [valueStart,setValueStart]=React.useState("");
+    const [valueEnd,setValueEnd]=React.useState("");
+
+    /*Method filter điểm đi và điểm đến*/
+    const handleListStart = () =>{
+        //Khởi tạo mảng lưu địa chỉ
+        let arrStart=[],arrEnd=[];
+        for(const item of lichTrinh){
+            if(item.tinh === parseInt(start)){
+                arrStart.push(item.thoigiandi+"-"+" "+item.diachi);
+            }
+            if(item.tinh === parseInt(end)){
+                arrEnd.push(item.thoigiandi+"-"+item.diachi);
+            }
+        }
+        setListAddressStart(arrStart);
+        setListAddressEnd(arrEnd);
+    }
+
+    /*Lifecyle*/
+    React.useEffect(()=>{
+        handleListStart();
+    },[]);
 
     /*Method select tab*/
     const  toggle = tab => {
         if (activeTab !== tab) {
             setActiveTabs(tab);
         }
+
     }
 
-    /*Method tính tổng tiền đã đặt*/
+    const changeStart= event =>{
+        setValueStart(event.target.value);
+    }
 
+    const changeEnd = event =>{
+        setValueEnd(event.target.value);
+    }
+    /*Method tính tổng tiền đã đặt*/
         return (
             <>
                 <Col md="12"
@@ -141,34 +175,62 @@ const StageSeat =(props)=> {
                                          style={{marginLeft:"50px",marginTop:"20px"}}>
                                     <FormControl component="fieldset"
                                                  >
-                                        <FormLabel component="legend">Gender</FormLabel>
+                                        <FormLabel component="legend">Điểm Đón</FormLabel>
                                         <RadioGroup aria-label="gender"
-                                                    name="gender1"
-                                                    value={value}
+                                                    onChange={changeStart}
                                                    >
-                                            <FormControlLabel
-                                                value="female"
-                                                control={<Radio />}
-                                                label="Female" />
-                                            <FormControlLabel value="male"
-                                                              control={<Radio />}
-                                                              label="Male" />
-                                            <FormControlLabel value="other"
-                                                              control={<Radio />}
-                                                              label="Other" />
-                                            <FormControlLabel
-                                                value="disabled"
-                                                disabled
-                                                control={<Radio />}
-                                                label="(Disabled option)"
-                                            />
+                                            {
+                                                listAddressStart.map((item,index)=>{
+                                                    return(
+                                                        <FormControlLabel
+                                                            key={index}
+                                                            value={item}
+                                                            control={<Radio/>}
+                                                            label={item}/>
+                                                    );
+                                                })
+                                            }
+
                                         </RadioGroup>
                                     </FormControl>
                                 </TabPane>
                                 <TabPane tabId="2"
                                          style={{marginLeft:"50px",marginTop:"20px"}}>
-                                    2
+                                    <FormControl component="fieldset"
+                                    >
+                                        <FormLabel component="legend">Điểm Đến</FormLabel>
+                                        <RadioGroup aria-label="gender"
+                                                    onChange={changeEnd}
+                                        >
+                                            {
+                                                listAddressEnd.map((item,index)=>{
+                                                    return(
+                                                        <FormControlLabel
+                                                            key={index}
+                                                            value={item}
+                                                            control={<Radio/>}
+                                                            label={item}/>
+                                                    );
+                                                })
+                                            }
+
+                                        </RadioGroup>
+                                    </FormControl>
                                 </TabPane>
+                                <Paper>
+                                    <Typography>
+                                        Điểm Đi:
+                                        {
+                                            valueStart
+                                        }
+                                    </Typography>
+                                    <Typography>
+                                        Điểm Đến:
+                                        {
+                                            valueEnd
+                                        }
+                                    </Typography>
+                                </Paper>
                             </TabContent>
                         </Box>
                     </Paper>
