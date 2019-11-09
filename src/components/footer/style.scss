@@ -2,10 +2,74 @@
 
 
 #footer{
-  background: #333F48;
+  background: #4b5a4b;
 }
 @media only screen and (max-width: 400px){
   #footer{
     display: none;
   }
 }
+
+#myBtn {
+  display: block;
+  position: fixed;
+  bottom: 10%;
+  border: #176cf6;
+  outline: none;
+  background-color: #dac3c3;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 20px;
+  font-size: 18px;
+}
+
+#myBtn:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+//.go-top  {
+//  position: fixed;
+//  bottom: 10%;
+//  right: 0.5em;
+//  text-decoration: none;
+//  font-size: 40px;
+//  z-index: 100000;
+//}
+
+
+
+
+
+.scroll {
+  opacity: 0.3;
+  background-color: aqua;
+  position: fixed;
+  bottom: 10%;
+  right: 0.5em;
+  border-radius: 5px;
+  border: none;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.go-top {
+  position: fixed;
+  cursor: pointer;
+  bottom: 5%;
+  right: 1%;
+  color: #ffffff;
+  background-color: #c679e3;
+  z-index: 100;
+  width: fit-content;
+  text-align: center;
+  height: fit-content;
+  border-radius: 10px;
+  line-height: normal;
+  //-webkit-transition: 0.5s;
+  transition: 0.5s;
+  opacity: 0.5;
+
+}
+
