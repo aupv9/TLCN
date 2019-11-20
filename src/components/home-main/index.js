@@ -55,7 +55,7 @@ class Home_Main extends Component {
                 *   khi nhập vào search box điểm đi show ra list đia điểm
                 * */
                 this.getElementId("listRe").classList.add("smartboxS");
-                this.getElementId("listRe").classList.remove("smartboxE")
+               this.getElementId("listRe").classList.remove("smartboxE")
                 break;
             case 2:
                 /*Nhập vào search box điểm đi show ra list địa điểm
@@ -103,24 +103,23 @@ class Home_Main extends Component {
     * Khi chọn địa điểm sẽ set state địa điểm đi và đến
     * */
     setIdPro=(e)=>{
-        let name=e.target.dataset.name;
-        let id=e.target.dataset.id
+        let nameAddress=e.target.dataset.name;
+        let idAddress=e.target.dataset.id
         if(this.state.position){
             this.setState({
-                nameStart:name,
-                idStart:id
+                nameStart:nameAddress,
+                idStart:idAddress
             });
         }else{
             this.setState({
-                nameEnd:name,
-                idEnd:id
+                nameEnd:nameAddress,
+                idEnd:idAddress
             });
         }
     }
     /*
     * Chuyển vị trí đ điểm đi và đến
     * */
-    // eslint-disable-next-line no-unused-vars
     onSwitch=()=>{
         let start=this.state.nameStart;
         let idStart=this.state.idStart
@@ -158,7 +157,7 @@ class Home_Main extends Component {
                                             <div className={"primary-content"}>
                                                <section className="title-section">
                                                     <div className="section-container ">
-                                                        <h1 className="title">Book [ bus ] online</h1>
+                                                        <h1 className="title">Book bus online</h1>
                                                         <h2 className="subTitle">Search and compare hundreds of travel
                                                             sites at once</h2>
                                                     </div>
@@ -183,6 +182,39 @@ class Home_Main extends Component {
                                                                                   value={this.state.nameStart}
                                                                                   className="col-field"
                                                                                   placeholder="Từ đâu?"/>
+                                                                                 <div className="smartbox-air"
+                                                                                        style={{display:"none"}}
+                                                                                        id="listRe">
+                                                                                        <ul className="list-box"
+                                                                                            id="listPro">
+                                                                                        {
+                                                                                           
+                                                                                                this.toSearch()?this.toSearch().map((item,key)=>{
+                                                                                                    console.log(item);
+                                                                                                        return(
+                                                                                                            <li 
+                                                                                                                style={{color:"black"}}
+                                                                                                                role="option"
+                                                                                                                onMouseDown={this.setIdPro}
+                                                                                                                data-id={item.MA}
+                                                                                                                data-name={item.NAME}
+                                                                                                                key={key}
+                                                                                                                id={`station-`+item.MA}
+                                                                                                                className="" >
+                                                                                                                <i  onMouseDown={this.setIdPro}
+                                                                                                                    data-id={item.MA}
+                                                                                                                    data-name={item.NAME}
+                                                                                                                    className="fas fa-bus"></i>
+                                                                                                                <span  onMouseDown={this.setIdPro}
+                                                                                                                    data-id={item.MA}
+                                                                                                                    data-name={item.NAME} >{item.NAME}
+                                                                                                                    </span>
+                                                                                                            </li>
+                                                                                                        );
+                                                                                                    }):this.offList()
+                                                                                            }
+                                                                                        </ul>
+                                                                            </div>
                                                                            <button id="switch-btn"
                                                                                    className=""
                                                                                    onClick={this.onSwitch} >
@@ -194,6 +226,39 @@ class Home_Main extends Component {
                                                                                   placeholder="Đến đâu?"
                                                                                   onBlur={this.offList}
                                                                                   value={this.state.nameEnd}/>
+                                                                                  <div className="smartbox-air"
+                                                                                        style={{display:"none"}}
+                                                                                        id="listRe">
+                                                                                        <ul className="list-box"
+                                                                                            id="listPro">
+                                                                                        {
+                                                                                           
+                                                                                                this.toSearch()?this.toSearch().map((item,key)=>{
+                                                                                                    console.log(item);
+                                                                                                        return(
+                                                                                                            <li 
+                                                                                                                style={{color:"black"}}
+                                                                                                                role="option"
+                                                                                                                onMouseDown={this.setIdPro}
+                                                                                                                data-id={item.MA}
+                                                                                                                data-name={item.NAME}
+                                                                                                                key={key}
+                                                                                                                id={`station-`+item.MA}
+                                                                                                                className="" >
+                                                                                                                <i  onMouseDown={this.setIdPro}
+                                                                                                                    data-id={item.MA}
+                                                                                                                    data-name={item.NAME}
+                                                                                                                    className="fas fa-bus"></i>
+                                                                                                                <span  onMouseDown={this.setIdPro}
+                                                                                                                    data-id={item.MA}
+                                                                                                                    data-name={item.NAME} >{item.NAME}
+                                                                                                                    </span>
+                                                                                                            </li>
+                                                                                                        );
+                                                                                                    }):this.offList()
+                                                                                            }
+                                                                                        </ul>
+                                                                            </div>
                                                                            <DatePicker className={"col-field"}
                                                                                        selected={this.state.startDate}
                                                                                        onChange={this.handleChange}
@@ -216,36 +281,7 @@ class Home_Main extends Component {
                         </div>
                     </div>
                 </main>
-                <div className="smartbox-air"
-                     style={{display:"none"}}
-                     id="listRe">
-                    <ul className="list-box"
-                        id="listPro">
-                       {
-                            this.toSearch()?this.toSearch().map((item,key)=>{
-                                    return(
-                                        <li role="option"
-                                            onMouseDown={this.setIdPro}
-                                            data-id={item.MA}
-                                            data-name={item.NAME}
-                                            key={key}
-                                            id={`station-`+item.MA}
-                                            className="" >
-                                            <i  onMouseDown={this.setIdPro}
-                                                data-id={item.MA}
-                                                data-name={item.NAME}
-                                                className="fas fa-bus"></i>
-                                            <span  onMouseDown={this.setIdPro}
-                                                   data-id={item.MA}
-                                                   data-name={item.NAME} >{item.NAME}
-                                                  </span>
-                                        </li>
-                                    );
-                                }):this.offList()
-                        }
-                    </ul>
-                </div>
-
+               
             </>
         );
     }

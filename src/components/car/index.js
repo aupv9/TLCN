@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {AppBar, Box, Paper, Table, TableBody, TableCell, TableHead, TableRow,Button} from "@material-ui/core";
 import {Col, Nav, NavItem, NavLink, Row, TabContent, TabPane} from "reactstrap";
@@ -7,9 +7,7 @@ import StageSeat from "../paper-cho";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import CloseIcon from '@material-ui/icons/Close';
 import {connect} from "react-redux";
-import {putNull} from "../../redux/action";
-
-
+import './style.scss';
 const useStyles =makeStyles({
     root:{
         width: '100%',
@@ -26,50 +24,41 @@ const useStyles =makeStyles({
 })
 const Car = (props) =>{
 
+    //des props
     const {start,end,putNull,nhaXe,gioDi,noiDi,gioDen,noiDen,timer,time,loaiXe,index,arrSeat,lichtrinh}=props;
     const [activeTab,setActiveTabs]=React.useState('1');
-    const [resetSeat,setResetSeat]=React.useState(false);
     const  toggle = tab => {
         if (activeTab !== tab) {
             setActiveTabs(tab);
         }
     }
-    /*Set Null Seat*/
-    const setNullSeat=()=>{
-        putNull();
-    }
-    /*Remove bg seat*/
-    const removeBg=()=>{
-        const btnSeat=document.getElementsByClassName("btn");
-        for (let i=0; i<btnSeat.length; i++) {
-            btnSeat[i].classList.remove("bg-primary");
-        }
-    }
+
     /*Close detail car*/
     const toggleCarByIcon= id =>{
-        putNull();
-        setResetSeat(true);
-        removeBg();
+
         document.getElementById("carDetail-"+id).style.display="none";
 
     }
     /**/
     const toggleCarByWrapper = id =>{
-        putNull();
-        setResetSeat(true);
-        removeBg();
         const wrapper=document.getElementsByClassName("detail-wrapper");
         for (let i=0; i<wrapper.length; i++) {
            wrapper[i].style.display="none";
         }
         document.getElementById("carDetail-"+id).style.display="block";
     }
+
+    // Open toggle seat
+    const toggleSeatDetail = id =>{
+        document.getElementById("seat-detail-"+id).classList.add("seat-info-detail");
+        // .style.display="block";
+    }
     const classes = useStyles();
     return (
         <>
             <div className="cars-result"
-                 style={{marginBottom:"10px"}}
-                onClick={()=>toggleCarByWrapper(index)}>
+                 style={{marginBottom:"10px",textAlign:"center"}}
+                >
                 <div className="result-wrapper">
                     <div className="result-inner">
                         <div className="grid-inner">
@@ -101,6 +90,13 @@ const Car = (props) =>{
                                                         <div className="col-field route">
                                                             <div className="time">{timer}h{time}</div>
                                                             <div className="axis"></div>
+                                                            <div style={{textAlign:"center",
+                                                                marginTop:"10px",
+                                                                textDecoration:"underline"
+                                                               }}>
+                                                                <a  style={{ color:"33A1D5"}}
+                                                                   onClick={()=>toggleCarByWrapper(index)}>Chi tiết</a>
+                                                            </div>
                                                         </div>
                                                         <div className="col-field time-end">
                                                             <div className="top">
@@ -111,7 +107,6 @@ const Car = (props) =>{
                                                         <div className="col-field info-car">
                                                             <div className="type">{loaiXe}</div>
                                                         </div>
-
                                                         <div className="col-field detail">
                                                             <div className="top-row">
                                                                 <img src={"https://img.icons8.com/ios-glyphs/30/000000/share.png"} />
@@ -121,7 +116,7 @@ const Car = (props) =>{
                                                                     sss
                                                                 </div>
                                                                 <div className="button-detail">
-                                                                    <button><span>Chọn Chỗ</span></button>
+                                                                    <button onClick={()=>toggleSeatDetail(index)}><span>Chọn Chỗ</span></button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -170,14 +165,6 @@ const Car = (props) =>{
                                     Hình Ảnh
                                 </NavLink>
                             </NavItem>
-                            <NavItem>
-                                <NavLink
-                                    className={classnames({ active:activeTab === '4' })}
-                                    onClick={() => {toggle('4'); }}
-                                >
-                                    Chọn Chổ
-                                </NavLink>
-                            </NavItem>
                         </Nav>
                         <TabContent activeTab={activeTab}>
                             <TabPane tabId="1">
@@ -213,7 +200,7 @@ const Car = (props) =>{
                             <TabPane tabId="2">
                                 <Row>
                                     <Col sm="12"
-                                        style={{marginLeft:"0"}}>
+                                        style={{marginLeft:"-10px"}}>
                                         <h4>Tab 1 Contents</h4>
                                     </Col>
                                 </Row>
@@ -225,20 +212,20 @@ const Car = (props) =>{
                                     </Col>
                                 </Row>
                             </TabPane>
-                            <TabPane tabId="4">
-                                <Row>
-                                    <Col sm="12">
-                                        <StageSeat arrSeat={arrSeat}
-                                                   lichTrinh={lichtrinh}
-                                                   start={start}
-                                                   end={end}
-                                                    />
-                                    </Col>
-                                </Row>
-                            </TabPane>
                         </TabContent>
                     </Box>
                 </AppBar>
+            </div>
+            <div id={`seat-detail-`+index}
+                 style={{display:"none"}}>
+                <Row>
+                    <StageSeat arrSeat={arrSeat}
+                               lichTrinh={lichtrinh}
+                               start={start}
+                               end={end}
+                               index={index}
+                    />
+                </Row>
             </div>
          </>
     );
@@ -248,4 +235,4 @@ Car.propTypes = {
     putNull:PropTypes.func.isRequired
 };
 
-export default connect(null,{putNull})(Car);
+export default connect(null,{})(Car);

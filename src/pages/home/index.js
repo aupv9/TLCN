@@ -18,7 +18,6 @@ class Home extends Component {
 	* Method render component dựa vào route
 	* */
 	render() {
-
 		return (
             <>
                 <Header />

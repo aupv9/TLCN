@@ -26,9 +26,6 @@ const Seat = (props) =>{
         /*action redux*/
         putSeat(seat,isPut);
     }
-    const putSeats =()=>{
-        putSeat(seat,isPut);
-    };
     return (
         <>
             <Button style={{backgroundColor:"#fff",color:"#000"}}

@@ -10,16 +10,17 @@ let seat = (state=initState,action) =>{
     switch (action.type) {
         case types.PUT_SEAT:
             if(action.status){
-                return {
-                    ...state,
-                   seat: state.seat.concat(
-                       {
-                           MaGhe:action.payload.maGhe,
-                           Gia:action.payload.gia
-                       }
-                   ),
-                    priceSeats:action.payload.gia+_.sumBy(state.seat,(o)=>{return o.Gia;})
-                };
+                    return {
+                        ...state,
+                        seat: state.seat.concat(
+                            {
+                                MaGhe:action.payload.maGhe,
+                                Gia:action.payload.gia
+                            }
+                        ),
+                        priceSeats:action.payload.gia+_.sumBy(state.seat,(o)=>{return o.Gia;})
+                    };
+
             }else{
                 return {
                     ...state,

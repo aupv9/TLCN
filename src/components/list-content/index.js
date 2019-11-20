@@ -2,26 +2,17 @@ import React, {Component} from 'react';
 import './style.scss';
 import * as types from "../../redux/type";
 import PropTypes from 'prop-types';
-import seat from '../../img/seat.svg';
 import {
     Checkbox,
     ExpansionPanel,
     ExpansionPanelDetails,
     ExpansionPanelSummary,
     Typography,
-    Box,
-    Paper,
-    AppBar, makeStyles,
-    Table
-    ,TableBody,TableCell,TableHead,TableRow
-
+    
 } from "@material-ui/core";
 import {getCar} from "../../redux/action";
 import {connect} from "react-redux";
 import * as _ from "lodash";
-import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col ,Button } from 'reactstrap';
-import classnames from 'classnames';
-import StageSeat from "../paper-cho";
 import Car from '../car';
 
 /*
@@ -297,7 +288,7 @@ class ListContent extends Component {
                                     <div className="common-filter">
                                         <div className="count-grid">
                                             <div className="count">
-                                                <p>Có tổng cộng là <span></span> chuyến</p>
+                                                <p>Có tổng cộng là <span>{this.state.arrCar.length}</span> chuyến</p>
                                             </div>
                                         </div>
                                     </div>
