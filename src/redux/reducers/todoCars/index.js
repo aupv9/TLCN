@@ -19,9 +19,5 @@ let filterCarReducer= (state=initState,action) =>{
         default:
             return state;
     }
-
-
 }
-
-
 export default filterCarReducer;

@@ -1,10 +1,10 @@
-import * as types from '../type';
+import * as types from '../../type';
 import axios from 'axios';
-import {URL_API} from "../type";
+
 
 export const getCar= (start, end, date) =>{
     return dispatch =>{
-        axios.post(URL_API+`/Cars/start=${start}&end=${end}&date=${date}`)
+        axios.post(types.URL_API+`/Cars/start=${start}&end=${end}&date=${date}`)
                     .then(
                         (response)=>
                         {

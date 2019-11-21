@@ -16,7 +16,7 @@ import classnames from "classnames";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CloseIcon from '@material-ui/icons/Close';
-import {putNull} from "../../redux/action";
+import {putNull} from "../../redux/action/car";
 
 
 

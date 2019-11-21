@@ -10,7 +10,7 @@ import {
     Typography,
     
 } from "@material-ui/core";
-import {getCar} from "../../redux/action";
+import {getCar} from "../../redux/action/car";
 import {connect} from "react-redux";
 import * as _ from "lodash";
 import Car from '../car';

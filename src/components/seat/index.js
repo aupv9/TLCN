@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Button} from "reactstrap";
 import {connect} from "react-redux";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {putSeat} from "../../redux/action";
+import {putSeat} from "../../redux/action/car";
 
 
 const Seat = (props) =>{
