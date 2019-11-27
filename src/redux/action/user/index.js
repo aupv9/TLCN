@@ -9,7 +9,7 @@ export const  signup = (user)=>{
     return dispatch =>{
      
         axios.post(
-            types.URL_API+`/ssign-up`,user
+            types.URL_API+`/sign-up`,user
         )
         .then(res =>{
            

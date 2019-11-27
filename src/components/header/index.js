@@ -76,20 +76,20 @@ const Header =(props)=> {
                     </Typography>
 
                 {/* Login/register modal */}
-                    <Button color="primary" data-toggle="modal" data-target="#registerModal">
-                        <Typography className={classes.textBtn}>
-                          TẠO TÀI KHOẢN
-                        </Typography>
-                    </Button>
-                    <Button color="primary" data-toggle="modal" data-target="#loginModal">
+                    <Button color="primary"  href="/sign-in">
                         <Typography className={classes.textBtn}>
                           ĐĂNG NHẬP
                         </Typography>
                     </Button>
+                    <Button color="primary" href="/sign-up">
+                        <Typography className={classes.textBtn}>                       
+                          TẠO TÀI KHOẢN
+                        </Typography>
+                    </Button>
 
-                    <ModalRegister></ModalRegister>
+                    {/* <ModalRegister></ModalRegister> */}
                           {/*  Modal Login*/}
-                    <ModalLogin></ModalLogin>
+                    {/* <ModalLogin></ModalLogin> */}
                   </Toolbar>
                 </AppBar>           
             </>

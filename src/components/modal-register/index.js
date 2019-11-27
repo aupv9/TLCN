@@ -17,13 +17,14 @@ const ModalRegister =(props)=>  {
     
       useEffect(() => {
         if(props.logUser.action === types.SIGN_UP_SUCCESS){
-          console.log("success");
+          setLogiSucces(true);
+          document.getElementsByClassName("show")[0].classList.remove("show");
         }else{
-          console.log("failed");
+          setLogiSucces(false);
         }
       });
     /*State*/
-   
+    const [isLogiSucces,setLogiSucces] =useState(false);
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
     const [repassword,setRepassword]=useState("");
@@ -127,11 +128,13 @@ const ModalRegister =(props)=>  {
       setIsRePasswordValid(isRePasswordValid);
       setErrorRePasswordMessage(errorRePasswordMessage);
     }
+
     const resetMessage = () =>{
       setErrorEmailMessage("");
       setErrorPasswordMessage("");
       setErrorRePasswordMessage("");
     }
+
     /*Regiter */
     const register = () =>{
         const user={
@@ -143,14 +146,16 @@ const ModalRegister =(props)=>  {
     return (
          <>
             {/* Modal Sign up */}
-                    <div>
-                         {/* Modal */}
-                          <div className="modal hide" 
+              <div>
+                    {
+                      !isLogiSucces?(
+                          <div 
+                             className="modal hide" 
                               id="registerModal" 
                               tabIndex={-1} 
                               role="dialog" 
                               aria-labelledby="myModalLabel" 
-                              aria-hidden="true">
+                              aria-hidden="true" >
                             <div className="modal-dialog" role="document">
                               {/*Content*/}
                               <div className="modal-content form-elegant">
@@ -232,8 +237,11 @@ const ModalRegister =(props)=>  {
                               {/*/.Content*/}
                             </div>
                           </div>
-                          {/* Modal */}                        
-            </div>          
+                                     
+                      ):null
+                    }
+                         
+              </div>          
         </>
     );
 
