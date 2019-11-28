@@ -17,7 +17,6 @@ import {connect} from "react-redux";
 
 
 const useStyles = makeStyles(theme => ({
-
     header:{
       backgroundColor:"#fff",
       color: "rgba(0,0,0,.75)"
@@ -47,7 +46,6 @@ const useStyles = makeStyles(theme => ({
       color: "rgb(83, 146, 249)",
       fontFamily:"mallory,Helvetica Neue,Helvetica,Arial,sans-serif"
     }
-
 }));
 
 

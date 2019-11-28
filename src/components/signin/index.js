@@ -52,9 +52,6 @@ const SignIn =(props)=> {
   
    const classes = useStyles();
    const [countLog,setCountLog]=useState(1);
-   useEffect(() => {
-      
-   },[])
    /* Side effect*/
    useEffect(() => {
     if(props.logUser.action === types.LOGIN_SUCCESS){
@@ -74,6 +71,7 @@ const SignIn =(props)=> {
       });
     }
   });
+
   /*State*/
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");

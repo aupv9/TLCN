@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ListContent from "../list-content";
 import IntroList from "../intro-list";
-
+import SearchHeader from "../search-header";
 /*
 * Component ListXe
 * dùng render danh sách các xe tìm được
@@ -14,7 +14,8 @@ class ListXe extends Component {
         const params=this.props.match.params;
         return (
             <>
-               <IntroList/>
+               {/* <IntroList/> */}
+               <SearchHeader></SearchHeader>
                 <ListContent params={params}/>
             </>
         );
