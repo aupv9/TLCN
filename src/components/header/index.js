@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import './style.scss';
 import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,10 +7,14 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import logo from '../../img/logo.jpg';
-import ModalRegister from '../modal-register';
-import ModalLogin from '../modal-login';
+import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import {delTokenSession} from '../../redux/action/user';
+import {connect} from "react-redux";
+
 
 const useStyles = makeStyles(theme => ({
 
@@ -45,10 +49,47 @@ const useStyles = makeStyles(theme => ({
     }
 
 }));
-const Header =(props)=> {
- 
-  const classes = useStyles();
 
+
+const Header =(props)=> {
+  
+  const checkLogin=JSON.parse(localStorage.getItem("isLogin"));
+  const [isLogin,setLogin]=useState(true);
+  
+  useEffect(() => {
+    setLogin(checkLogin);
+    setUserName(JSON.parse(localStorage.getItem("name")));
+  })
+
+  useEffect(()=>{
+      if(isLogin){
+          setLogin(true);
+          setUserName(JSON.parse(localStorage.getItem("name")));
+      }else{
+          setLogin(false);
+          setUserName("");
+      }
+  },[props.logUser.token])
+  const classes = useStyles();  
+  
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const [userName,setUserName]=useState("");
+
+  const handleLogout=()=>{
+    localStorage.removeItem("name");
+    localStorage.setItem("isLogin",JSON.stringify(false));
+    setLogin(false);
+    props.delSession();
+
+  }
+  const handleMenu = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
         return (
             <>   
                 <AppBar position="static"
@@ -75,21 +116,57 @@ const Header =(props)=> {
                     </Link>
                     </Typography>
 
-                {/* Login/register modal */}
-                    <Button color="primary"  href="/sign-in">
-                        <Typography className={classes.textBtn}>
-                          ĐĂNG NHẬP
+                    {
+                      isLogin?(
+                        <div>
+                      <IconButton
+                        aria-label="account of current user"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        onClick={handleMenu}
+                        color="inherit"
+                      >
+                        <AccountCircle />
+                        <Typography className={classes.username}>
+                            {userName}
                         </Typography>
-                    </Button>
-                    <Button color="primary" href="/sign-up">
-                        <Typography className={classes.textBtn}>                       
-                          TẠO TÀI KHOẢN
-                        </Typography>
-                    </Button>
-
-                    {/* <ModalRegister></ModalRegister> */}
-                          {/*  Modal Login*/}
-                    {/* <ModalLogin></ModalLogin> */}
+                       
+                      </IconButton>
+                      <Menu
+                        id="menu-appbar"
+                        anchorEl={anchorEl}
+                        anchorOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        open={open}
+                        onClose={handleClose}
+                      >
+                        <MenuItem 
+                          onClick={handleLogout}
+                        >Đăng Xuất</MenuItem>
+                      </Menu>
+                    </div>
+                      ):(
+                        <div>
+                        <Button color="primary"  href="/sign-in">
+                            <Typography className={classes.textBtn}>
+                              ĐĂNG NHẬP
+                            </Typography>
+                        </Button>
+                        <Button color="primary" href="/sign-up">
+                            <Typography className={classes.textBtn}>                       
+                              TẠO TÀI KHOẢN
+                            </Typography>
+                        </Button>
+                      </div>
+                      )
+                    }
                   </Toolbar>
                 </AppBar>           
             </>
@@ -99,4 +176,14 @@ const Header =(props)=> {
 
 Header.propTypes = {};
 
-export default Header;
+const mapStateToProps =(state)=>({
+  logUser:state.logUser
+});
+const mapDispatchToProps = dispatch => {
+  return {
+    delSession:()=>{
+      delTokenSession();
+    }
+  };
+};
+export default connect(mapStateToProps,mapDispatchToProps)(Header);

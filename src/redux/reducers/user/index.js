@@ -15,6 +15,25 @@ let logUser= (state=initState,action) =>{
             return {
                 ...state
             }
+        case types.LOGIN_SUCCESS:
+            return{
+                ...state,
+                token:action.payload
+            }
+        case types.LOGIN_FAILED:
+            return{
+                ...state
+            }
+        case types.SET_TOKEN:
+            return{
+                ...state,
+                token:action.payload
+            }
+        case types.DEL_TOKEN:
+            return{
+                ...state,
+                token:""
+            }       
         default:
             return state;
     }
