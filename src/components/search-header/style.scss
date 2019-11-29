@@ -1,0 +1,10 @@
+.MuiInput-underline{
+    &:before{
+        border-bottom: 0px !important;
+    }
+}
+
+#date-picker-inline-label{
+    padding: 10px;
+
+}
