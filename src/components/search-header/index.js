@@ -20,6 +20,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import RoomIcon from '@material-ui/icons/Room';
 import * as LIST from '../../contants';
 import * as _ from "lodash";
+import { set } from 'date-fns/esm';
 
 
 const useStyles = makeStyles(theme => ({
@@ -35,13 +36,13 @@ const useStyles = makeStyles(theme => ({
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
-      alignContent:"",
-      justifyContent: 'center',
-      width:"80%",
+      alignContent:"center",
+      justifyContent: 'space-around',
+      width:"85%",
       height:"100%",
       margin:"auto",
       boxShadow:"none",
-      backgroundColor:"#20274D"
+      backgroundColor:"#20274D" 
     },
     input:{
       backgroundColor:"#fff",
@@ -72,13 +73,21 @@ const useStyles = makeStyles(theme => ({
       alignItems: 'center',
       justifyContent:"center",
       alignContent:"center",
-      width:"70%",
+      width:"75%",
     },
-    searchContentItem:{
+    searchContentItemBegin:{
       width:"350px",
       zIndex:"2000",
       marginTop:"-14px",
      display:"none",
+     marginLeft:"10px"
+    },
+    searchContentItemEnd:{
+      width:"350px",
+      zIndex:"2000",
+      marginTop:"-14px",
+      display:"none",
+      marginLeft:"370px"
     },
     listProvince:{
       overflow:"scroll",
@@ -95,28 +104,39 @@ const SearchHeader = (props) =>{
     /* State */
     const [provinces,setProvinces] =useState(LIST.LIST_PROVINCE);
     const [locate,setLocate] =useState("");
-    const [selectedDate, setSelectedDate] =useState(new Date('2019-08-18T21:11:54'));
+
+    const [selectedDate, setSelectedDate] =useState(new Date('2019-08-18'));
     const [nameBeginLocate,setNameBeginLocate] =useState("");
+    const [nameEndLocate,setNameEndLocate] =useState("");
+
+    const [idBeginLocate,setIdBeginLocate] =useState(0);
+    const [idEndLocate,setIdEndLocate] =useState(0);
+
+    const [date,setDate] =useState('2019-08-18');
     const [endLocate,setEndLocate] =useState("");
 
     /* Change date */
     const changeDate = date => {
       setSelectedDate(date);
+      let month=parseInt(selectedDate.getMonth()+1);
+      console.log(selectedDate.getDate()+1+"-"+month+"-"+selectedDate.getFullYear());
+      const dateLook=selectedDate.getDate()+1+"-"+month+"-"+selectedDate.getFullYear()
+      setDate(dateLook);
     };
     
     const selectProvince = (sign,event) =>{
       switch (sign) {
         case 1:
-            
-            setNameBeginLocate(event.target.dataset.name);
+          setNameBeginLocate(event.target.dataset.name);
+          setIdBeginLocate(event.target.dataset.id);
           break;
         case 2:
-          setEndLocate(event.target.value);
+          setNameEndLocate(event.target.dataset.name);
+          setIdEndLocate(event.target.dataset.id);
           break;
         default:
           break;
       }
-    
     };
 
     /* */
@@ -126,7 +146,10 @@ const SearchHeader = (props) =>{
           setProvinces(toSearchProvince(locate));
           document.getElementById("list-search-begin").style.display="block";
           break;
-
+        case 2:
+            setProvinces(toSearchProvince(locate));
+            document.getElementById("list-search-end").style.display="block";
+            break;
         default:
           break;
       }
@@ -143,7 +166,13 @@ const SearchHeader = (props) =>{
             setNameBeginLocate(event.target.value);
             document.getElementById("list-search-begin").style.display="block";
             break;
-        
+          case 2:
+              /* */
+              setLocate(event.target.value);
+              setProvinces(toSearchProvince(locate));
+              setNameEndLocate(event.target.value);
+              document.getElementById("list-search-end").style.display="block";
+              break;
           default:
             break;
         }
@@ -161,22 +190,28 @@ const SearchHeader = (props) =>{
     const handleBlurSearchBegin= (sign, event) =>{
         switch (sign) {
           case 1:
-           
             document.getElementById("list-search-begin").style.display="none";
-
             break;
-        
+          case 2:          
+              document.getElementById("list-search-end").style.display="none";  
+              break;
           default:
             break;
         }
     };
+
+    /**Method Re search */
+    const handleReSearch =()=>{
+    
+     props.history.push(`/list-xe/${idBeginLocate}/${idEndLocate}/${date}`);
+    }
     return (
         <div className={classes.root}>
         
             <AppBar position="static" 
                    className={classes.container} >
             <Toolbar>
-               <Container component="main" >
+               <Container component="main" maxWidth={"lg"} >
                   <Grid container 
                         >
                         <Grid item 
@@ -207,7 +242,7 @@ const SearchHeader = (props) =>{
                                       id="password"
                                       color="white"
                                       placeholder="Đi đến"
-                                      // value={endLocate}
+                                      value={nameEndLocate}
                                       onChange={(e)=>handleChangeSearch(2,e)}
                                       onBlur={(e)=>handleBlurSearchBegin(2,e)}
                                       onClick={(e)=>handleClickSearch(2,e)}
@@ -241,6 +276,7 @@ const SearchHeader = (props) =>{
                                 fullWidth
                                 variant="contained"
                                 color="primary"
+                                onClick={handleReSearch}
                               >
                                 TÌM KIẾM
                               </Button>
@@ -253,7 +289,7 @@ const SearchHeader = (props) =>{
             <Container component="main">
                 <Grid container>
                       <Grid item
-                            className={classes.searchContentItem}
+                            className={classes.searchContentItemBegin}
                             id="list-search-begin">
                           <Paper >
                                <List component="nav"
@@ -289,8 +325,36 @@ const SearchHeader = (props) =>{
                                 </List>
                           </Paper>
                       </Grid>
-                      <Grid item>
-                        
+                      <Grid item
+                            className={classes.searchContentItemEnd}
+                            id="list-search-end">
+                          <Paper >
+                               <List component="nav"
+                                     className={classes.listProvince}
+                                     >
+                                    {
+                                      provinces.map(province =>{
+                                        return (
+                                          <ListItem button
+                                                    data-id={province.MA}
+                                                    data-name={province.NAME}
+                                                    onMouseDown={(e)=>selectProvince(2,e)}                 
+                                          >
+                                            <ListItemIcon>
+                                              <RoomIcon />
+                                            </ListItemIcon>
+                                              <span data-id={province.MA}
+                                                    data-name={province.NAME}
+                                                    onMouseDown={(e)=>selectProvince(2,e)} 
+                                              >
+                                                    {province.NAME}
+                                              </span>
+                                          </ListItem>
+                                        )  
+                                      })
+                                    }
+                                </List>
+                          </Paper>
                       </Grid>
                 </Grid>                 
             </Container>
