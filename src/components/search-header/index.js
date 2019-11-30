@@ -20,7 +20,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import RoomIcon from '@material-ui/icons/Room';
 import * as LIST from '../../contants';
 import * as _ from "lodash";
-import { set } from 'date-fns/esm';
+import { toast ,ToastContainer} from 'react-toastify';
 
 
 const useStyles = makeStyles(theme => ({
@@ -105,22 +105,21 @@ const SearchHeader = (props) =>{
     const [provinces,setProvinces] =useState(LIST.LIST_PROVINCE);
     const [locate,setLocate] =useState("");
 
-    const [selectedDate, setSelectedDate] =useState(new Date('2019-08-18'));
+    const [selectedDate, setSelectedDate] =useState(new Date());
     const [nameBeginLocate,setNameBeginLocate] =useState("");
     const [nameEndLocate,setNameEndLocate] =useState("");
 
     const [idBeginLocate,setIdBeginLocate] =useState(0);
     const [idEndLocate,setIdEndLocate] =useState(0);
 
-    const [date,setDate] =useState('2019-08-18');
+    const [date,setDate] =useState('9-8-2019');
     const [endLocate,setEndLocate] =useState("");
 
     /* Change date */
     const changeDate = date => {
-      setSelectedDate(date);
-      let month=parseInt(selectedDate.getMonth()+1);
-      console.log(selectedDate.getDate()+1+"-"+month+"-"+selectedDate.getFullYear());
-      const dateLook=selectedDate.getDate()+1+"-"+month+"-"+selectedDate.getFullYear()
+      let month=parseInt(date.getMonth());
+      const dateLook=month+"-"+date.getDate()+"-"+date.getFullYear();
+      setSelectedDate(dateLook);
       setDate(dateLook);
     };
     
@@ -202,8 +201,18 @@ const SearchHeader = (props) =>{
 
     /**Method Re search */
     const handleReSearch =()=>{
-    
-     props.history.push(`/list-xe/${idBeginLocate}/${idEndLocate}/${date}`);
+      if(idBeginLocate !== 0 && idEndLocate !==0){
+        props.history.push(`/list-xe/${idBeginLocate}/${idEndLocate}/${date}`);
+      }else{
+        toast.warn("Phải chọn điểm đi và điểm đến !", {
+          position: "bottom-right",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true
+        });
+      }
     }
     return (
         <div className={classes.root}>
@@ -285,6 +294,7 @@ const SearchHeader = (props) =>{
                </Container>
                
             </Toolbar>
+            
             </AppBar>
             <Container component="main">
                 <Grid container>
@@ -358,6 +368,14 @@ const SearchHeader = (props) =>{
                       </Grid>
                 </Grid>                 
             </Container>
+            <ToastContainer position="top-right"
+                    autoClose={1000}
+                    hideProgressBar={true}
+                    newestOnTop={false}
+                    rtl={false}
+                    pauseOnVisibilityChange
+                    draggable
+                    pauseOnHover></ToastContainer>
       </div>
     );
 

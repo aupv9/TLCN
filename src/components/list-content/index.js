@@ -26,7 +26,7 @@ class ListContent extends Component {
     componentWillReceiveProps(nextProps, nextContext) {
         const filter=nextProps.filterCarReducer;
         //khi action thành công
-        if(filter.action === types.GET_LIST_CAR_SUCCESS){
+        if(filter.action === types.GET_LIST_CAR_SUCCESS && filter.payload !== null) {
             let setNhaXe=new Set();
             let setGioDi=new Set();
             let arrNhaXe=[];

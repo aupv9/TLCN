@@ -60,6 +60,10 @@ const Header =(props)=> {
   })
 
   useEffect(()=>{
+
+      if(props.logUser.DEL_TOKEN){
+        console.log(props.logUser.DEL_TOKEN);
+      }
       if(isLogin){
           setLogin(true);
           setUserName(JSON.parse(localStorage.getItem("name")));
@@ -180,7 +184,7 @@ const mapStateToProps =(state)=>({
 const mapDispatchToProps = dispatch => {
   return {
     delSession:()=>{
-      delTokenSession();
+      dispatch(delTokenSession());
     }
   };
 };

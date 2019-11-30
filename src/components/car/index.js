@@ -7,6 +7,8 @@ import StageSeat from "../paper-cho";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import CloseIcon from '@material-ui/icons/Close';
 import {connect} from "react-redux";
+import { toast ,ToastContainer} from 'react-toastify';
+
 import './style.scss';
 const useStyles =makeStyles({
     root:{
@@ -50,8 +52,22 @@ const Car = (props) =>{
 
     // Open toggle seat
     const toggleSeatDetail = id =>{
-        document.getElementById("seat-detail-"+id).classList.add("seat-info-detail");
-        // .style.display="block";
+        console.log(props.logUser.token);
+        if(props.logUser.token !== ""&& props.logUser.token !== undefined)
+        {
+            document.getElementById("seat-detail-"+id).classList.add("seat-info-detail");
+            // .style.display="block";
+        }else{
+            toast.warn("Phải đăng nhập sau đó mới tiến hành đặt chỗ !", {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+              });
+        }
+       
     }
     const classes = useStyles();
     return (
@@ -227,6 +243,14 @@ const Car = (props) =>{
                     />
                 </Row>
             </div>
+            <ToastContainer position="top-right"
+                    autoClose={1000}
+                    hideProgressBar={true}
+                    newestOnTop={false}
+                    rtl={false}
+                    pauseOnVisibilityChange
+                    draggable
+                    pauseOnHover></ToastContainer>
          </>
     );
 }
@@ -234,5 +258,7 @@ const Car = (props) =>{
 Car.propTypes = {
     putNull:PropTypes.func.isRequired
 };
-
-export default connect(null,{})(Car);
+const mapStateToProps =(state)=>({
+    logUser:state.logUser
+});
+export default connect(mapStateToProps,{})(Car);
