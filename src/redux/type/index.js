@@ -10,5 +10,5 @@ export const SET_TOKEN="SET_TOKEN";
 export const DEL_TOKEN="DEL_TOKEN";
 
 
-export const URL_API=`https://webapi-service.herokuapp.com/api`;
+export const URL_API=`https://api-serivice-vexe.herokuapp.com/api`;
 export const URL_API_LOCAL=`http://localhost:8080/api`;

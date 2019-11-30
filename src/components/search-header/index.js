@@ -31,15 +31,13 @@ const useStyles = makeStyles(theme => ({
     menuButton: {
       marginRight: theme.spacing(2),
     },
-    title: {
-      flexGrow: 1,
-    },
     container:{
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
       alignContent:"",
-      width:"70%",
+      justifyContent: 'center',
+      width:"80%",
       height:"100%",
       margin:"auto",
       boxShadow:"none",
@@ -80,7 +78,7 @@ const useStyles = makeStyles(theme => ({
       width:"350px",
       zIndex:"2000",
       marginTop:"-14px",
-      display:"none",
+     display:"none",
     },
     listProvince:{
       overflow:"scroll",
@@ -98,7 +96,7 @@ const SearchHeader = (props) =>{
     const [provinces,setProvinces] =useState(LIST.LIST_PROVINCE);
     const [locate,setLocate] =useState("");
     const [selectedDate, setSelectedDate] =useState(new Date('2019-08-18T21:11:54'));
-    const [beginLocate,setBeginLocate] =useState("");
+    const [nameBeginLocate,setNameBeginLocate] =useState("");
     const [endLocate,setEndLocate] =useState("");
 
     /* Change date */
@@ -106,19 +104,18 @@ const SearchHeader = (props) =>{
       setSelectedDate(date);
     };
     
-    const selectProvince = (event) =>{
-      console.log(event);
-      // switch (sign) {
-      //   case 1:
-         
-      //     setBeginLocate(event.target.value);
-      //     break;
-      //   case 2:
-      //     setEndLocate(event.target.value);
-      //     break;
-      //   default:
-      //     break;
-      // }
+    const selectProvince = (sign,event) =>{
+      switch (sign) {
+        case 1:
+            
+            setNameBeginLocate(event.target.dataset.name);
+          break;
+        case 2:
+          setEndLocate(event.target.value);
+          break;
+        default:
+          break;
+      }
     
     };
 
@@ -140,8 +137,10 @@ const SearchHeader = (props) =>{
         
         switch (sign) {
           case 1:
+            /* */
             setLocate(event.target.value);
             setProvinces(toSearchProvince(locate));
+            setNameBeginLocate(event.target.value);
             document.getElementById("list-search-begin").style.display="block";
             break;
         
@@ -162,7 +161,9 @@ const SearchHeader = (props) =>{
     const handleBlurSearchBegin= (sign, event) =>{
         switch (sign) {
           case 1:
+           
             document.getElementById("list-search-begin").style.display="none";
+
             break;
         
           default:
@@ -177,7 +178,7 @@ const SearchHeader = (props) =>{
             <Toolbar>
                <Container component="main" >
                   <Grid container 
-                        justify="space-around">
+                        >
                         <Grid item 
                               className={classes.gridItem}
                               >
@@ -191,7 +192,7 @@ const SearchHeader = (props) =>{
                                       onChange={(e)=>handleChangeSearch(1,e)}
                                       onBlur={(e)=>handleBlurSearchBegin(1,e)}
                                       onClick={(e)=>handleClickSearch(1,e)}
-                                      value={beginLocate}
+                                      value={nameBeginLocate}
                                 />
                             
                         </Grid>
@@ -264,18 +265,18 @@ const SearchHeader = (props) =>{
                                           <ListItem button
                                                     data-id={province.MA}
                                                     data-name={province.NAME}
-                                                    onClick={()=>console.log(1)}                                              
+                                                    onMouseDown={(e)=>selectProvince(1,e)}                 
                                           >
                                             <ListItemIcon>
                                               <RoomIcon />
                                             </ListItemIcon>
                                             {/* <ListItemText primary={province.NAME} 
                                                           data-id={province.MA}
-                                                          onClick={selectProvince}
+                                                          onMouseDown={selectProvince}
                                                           /> */}
                                               <span data-id={province.MA}
                                                     data-name={province.NAME}
-                                                    onClick={()=>console.log(1)}        
+                                                    onMouseDown={(e)=>selectProvince(1,e)} 
                                               >
                                                     {province.NAME}
                                               </span>
