@@ -7,17 +7,20 @@ import {
     TableBody,
     TableCell,
     TableRow,
-    Button
+    Container,
 } from "@material-ui/core";
 import {Col} from "reactstrap";
 import Seat from "../seat";
 import {connect} from "react-redux";
 import classnames from "classnames";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import CloseIcon from '@material-ui/icons/Close';
 import {putNull} from "../../redux/action/car";
-
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import GridListTileBar from '@material-ui/core/GridListTileBar';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import IconButton from '@material-ui/core/IconButton';
+import InfoIcon from '@material-ui/icons/Info';
 
 
 /*Style reactstrap*/
@@ -34,24 +37,19 @@ const btnNext={
 const inputStyle={
     width: "550px"
 }
-const useStyles =makeStyles({
-    root:{
-        width: '100%',
-        overflowX: 'auto',
+const useStyles = makeStyles(theme => ({
+    gridList: {
+      width: 300,
+      height: 435,
     },
-    header:{
-        fontSize:18
+    icon: {
+      color: 'rgba(255, 255, 255, 0.54)',
     },
-    button:{
-        width: "50px",
-        position:"absolute",
-        right:"10px"
-    }
-})
+  }));
 const StageSeat =(props)=> {
 
     /*Map props*/
-    const {seats,arrSeat,lichTrinh,start,end,index}=props;
+    const {seats,arrSeat,start,end,index}=props;
 
     /*State activeTab*/
     const [activeTab,setActiveTabs]=React.useState('1');
@@ -65,24 +63,24 @@ const StageSeat =(props)=> {
     const [valueEnd,setValueEnd]=React.useState("");
 
     /*Method filter điểm đi và điểm đến*/
-    const handleListStart = () =>{
-        //Khởi tạo mảng lưu địa chỉ
-        let arrStart=[],arrEnd=[];
-        for(const item of lichTrinh){
-            if(item.tinh === parseInt(start)){
-                arrStart.push(item.thoigiandi+"-"+" "+item.diachi);
-            }
-            if(item.tinh === parseInt(end)){
-                arrEnd.push(item.thoigiandi+"-"+item.diachi);
-            }
-        }
-        setListAddressStart(arrStart);
-        setListAddressEnd(arrEnd);
-    }
+    // const handleListStart = () =>{
+    //     //Khởi tạo mảng lưu địa chỉ
+    //     let arrStart=[],arrEnd=[];
+    //     for(const item of lichTrinh){
+    //         if(item.tinh === parseInt(start)){
+    //             arrStart.push(item.thoigiandi+"-"+" "+item.diachi);
+    //         }
+    //         if(item.tinh === parseInt(end)){
+    //             arrEnd.push(item.thoigiandi+"-"+item.diachi);
+    //         }
+    //     }
+    //     setListAddressStart(arrStart);
+    //     setListAddressEnd(arrEnd);
+    // }
 
     /*Lifecyle*/
     React.useEffect(()=>{
-        handleListStart();
+        //handleListStart();
     },[]);
 
     /*Method select tab*/
@@ -131,49 +129,54 @@ const StageSeat =(props)=> {
         return (
             <>
                 <Col md="12"
-                    style={{marginLeft:"0"}}>
-                    <Paper >
-                        <Button className={classes.button}
+                    style={{marginLeft:"0",paddingRight:"0px"}}>
+                    <Paper  style={{padding:"0"}}>
+                        {/* <Button className={classes.button}
                                 onClick={()=>toggleCarByIcon()}
-                        ><CloseIcon onClick={()=>toggleCarByIcon()}/></Button>
+                        ><CloseIcon onClick={()=>toggleCarByIcon()}/></Button> */}
                         {/*Start header intro seat*/}
                         <Table>
                             <TableBody>
                                 <TableRow>
                                     <TableCell align="left">
-                                        <Button style={{marginRight:"5px",
-                                            backgroundColor:"#fff"}}></Button>
-                                        Ghế Trống
+                                        <Paper style={{width:"30px", height:"10px",backgroundColor:"#fff"}}></Paper>Ghế Trống
                                     </TableCell>
                                     <TableCell align="left">
-                                        <Button  style={{marginRight:"5px",
-                                            backgroundColor:"#cfcfcf"}}></Button>
+                                        <Paper style={{width:"30px", height:"10px",backgroundColor:"#7C7F83"}}></Paper>
                                         Ghế Đã Đặt
                                     </TableCell>
                                     <TableCell align="left">
-                                        <Button style={{marginRight:"5px",
-                                            backgroundColor:"#007BFF"}}></Button>
+                                        <Paper style={{width:"30px", height:"10px",backgroundColor:"#007BFF"}}></Paper>
                                         Ghế Đang Đặt
                                     </TableCell>
                                 </TableRow>
                             </TableBody>
                         </Table>
                         {/*    End header seat*/}
-                        <Paper style={{padding:"40PX",borderBottomLeftRadius:"0"}}>
-                            <Paper style={{marginLeft:"20px"}}>
+                        <Paper style={{padding:"10PX",
+                                borderBottomLeftRadius:"0",
+                                textAlign:"center"}}>
+                            
                                 {/*<Box style={{position:"absolute",bottom:"65%",left:"25px"}}>*/}
                                 {/*    <img width="25"*/}
                                 {/*         className="img-responsive wheel-img"*/}
                                 {/*         src="https://storage.googleapis.com/fe-production/images/Route/steering-wheel.svg"/>*/}
                                 {/*</Box>*/}
                                 {/*Render danh sách ghế*/}
+                                <GridList cellHeight={100} 
+                                          cellWidth={100}
+                                            className={classes.gridList}>
                                 {
+                                    
                                     arrSeat.map((item,index)=>
-                                        <Seat seat={item}
-                                    />
+                                        <GridListTile key={item}>
+                                            <Seat seat={item} />
+                                        </GridListTile>
                                     )
                                 }
-                            </Paper>
+                                </GridList>
+                                
+                                
                         </Paper>
                     </Paper>
                     {/*<Paper style={{marginTop:"5px",height:"100px"}}>*/}

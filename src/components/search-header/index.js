@@ -172,7 +172,7 @@ const SearchHeader = (props) =>{
               setNameEndLocate(event.target.value);
               document.getElementById("list-search-end").style.display="block";
               break;
-          default:
+           default:
             break;
         }
        

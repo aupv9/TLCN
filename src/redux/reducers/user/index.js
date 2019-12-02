@@ -2,6 +2,7 @@ import * as types from '../../type';
 
 
 let initState={
+    
 };
 let logUser= (state=initState,action) =>{
 

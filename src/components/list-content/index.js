@@ -55,6 +55,9 @@ class ListContent extends Component {
     /**/
     componentDidMount() {
         this.props.getCars(this.props.params.start,this.props.params.end,this.props.params.date);
+        if(this.props.logUser.token !== undefined){
+            console.log(this.props.logUser.token);
+        }
     }
 
     /*Hàm khởi tạo 1 trong init mount của react chạy trước đi component được render*/
@@ -356,7 +359,8 @@ class ListContent extends Component {
 }
 
 const mapStateToProps=(state)=>({
-    filterCarReducer:state.filterCarReducer
+    filterCarReducer:state.filterCarReducer,
+    logUser:state.logUser
 });
 const mapDispatchToProps = dispatch => {
     return {

@@ -28,7 +28,7 @@ const Seat = (props) =>{
     }
     return (
         <>
-            <Button style={{backgroundColor:"#fff",color:"#000"}}
+            <Button style={{backgroundColor:"#fff",color:"#000",width:"50px",height:"30px"}}
                     variant="contained"
                     className={"m-3 " + colorBook + checkSeat }
                     disabled={seat.dat ? true : false}

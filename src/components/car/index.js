@@ -8,8 +8,9 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import CloseIcon from '@material-ui/icons/Close';
 import {connect} from "react-redux";
 import { toast ,ToastContainer} from 'react-toastify';
-
+import Location from '../../components/location';
 import './style.scss';
+import AirlineSeatReclineNormalIcon from '@material-ui/icons/AirlineSeatReclineNormal';
 const useStyles =makeStyles({
     root:{
         width: '100%',
@@ -53,7 +54,7 @@ const Car = (props) =>{
     // Open toggle seat
     const toggleSeatDetail = id =>{
         console.log(props.logUser.token);
-        if(props.logUser.token !== ""&& props.logUser.token !== undefined)
+        if(props.logUser.token !== ""&& props.logUser.token !== undefined || JSON.parse(localStorage.getItem("isLogin")))
         {
             document.getElementById("seat-detail-"+id).classList.add("seat-info-detail");
             // .style.display="block";
@@ -224,7 +225,10 @@ const Car = (props) =>{
                             <TabPane tabId="3">
                                 <Row>
                                     <Col sm="12">
-                                        <h4>Tab 3 Contents</h4>
+                                        <h4>
+                                           <AirlineSeatReclineNormalIcon  className={"MuiSvgIcon-colorPrimary"} 
+                                                        fontSize="large"/> 
+                                        </h4>
                                     </Col>
                                 </Row>
                             </TabPane>
@@ -233,14 +237,33 @@ const Car = (props) =>{
                 </AppBar>
             </div>
             <div id={`seat-detail-`+index}
-                 style={{display:"none"}}>
+                 style={{display:"none","marginBottom":"10px"}}>
                 <Row>
-                    <StageSeat arrSeat={arrSeat}
-                               lichTrinh={lichtrinh}
-                               start={start}
-                               end={end}
-                               index={index}
-                    />
+                    <Col md="4" 
+                        style={{paddingLeft:"0px",paddingRight:"0px"}}
+                        > 
+                        <StageSeat arrSeat={arrSeat}
+                                    start={start}
+                                    end={end}
+                                    index={index}
+                            />
+                    </Col>
+                    <Col md="4"
+                         style={{paddingLeft:"0px",paddingRight:"0px"}}> 
+                        <Location  lichTrinh={lichtrinh} 
+                                    start={start}
+                                    end={end}></Location>
+                    </Col>
+                    <Col md="4"
+                        style={{paddingLeft:"5px",paddingRight:"0px"}}
+                        > 
+                        <StageSeat arrSeat={arrSeat}
+                                    lichTrinh={lichtrinh}
+                                    start={start}
+                                    end={end}
+                                    index={index}
+                            />
+                    </Col>
                 </Row>
             </div>
             <ToastContainer position="top-right"

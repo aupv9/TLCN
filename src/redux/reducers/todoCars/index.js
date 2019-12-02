@@ -1,7 +1,8 @@
 import * as types from '../../type';
 
-
-let initState={};
+let initState={
+    
+};
 let filterCarReducer= (state=initState,action) =>{
 
     state.action=action.type;
