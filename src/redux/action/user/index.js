@@ -45,16 +45,30 @@ export const signIn = (user)=>{
         })
     }
 }
-
+/**Set JWT  */
 export const setTokenSession= (token)=>{
-    console.log(token);
         return{
         type:types.SET_TOKEN,
         payload:token
     }
 }
+/**Del JWT */
 export const delTokenSession= ()=>{
     return{
         type:types.DEL_TOKEN
+    }
+}
+/*Set location start */
+export const setStartLocation=(location)=>{
+    return{
+        type:types.SET_START_LOCATION,
+        payload:location
+    }
+}
+/*Set location end*/
+export const setEndLocation=(location)=>{
+    return{
+        type:types.SET_END_LOCATION,
+        payload:location
     }
 }

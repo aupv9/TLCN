@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {AppBar, Box, Paper, Table, TableBody, TableCell, TableHead, TableRow,Button} from "@material-ui/core";
+import {AppBar, Box, Paper, Table, 
+    TableBody, TableCell, TableHead,
+     TableRow,Button,Typography} from "@material-ui/core";
 import {Col, Nav, NavItem, NavLink, Row, TabContent, TabPane} from "reactstrap";
 import classnames from "classnames";
 import StageSeat from "../paper-cho";
@@ -11,6 +13,11 @@ import { toast ,ToastContainer} from 'react-toastify';
 import Location from '../../components/location';
 import './style.scss';
 import AirlineSeatReclineNormalIcon from '@material-ui/icons/AirlineSeatReclineNormal';
+import Informationuser from '../../components/information'; 
+import NumberFormat from 'react-number-format';
+import {putNull} from "../../redux/action/car";
+
+
 const useStyles =makeStyles({
     root:{
         width: '100%',
@@ -30,6 +37,7 @@ const Car = (props) =>{
     //des props
     const {start,end,putNull,nhaXe,gioDi,noiDi,gioDen,noiDen,timer,time,loaiXe,index,arrSeat,lichtrinh}=props;
     const [activeTab,setActiveTabs]=React.useState('1');
+    const [triggerShow,settriggerShow]=React.useState(false);
     const  toggle = tab => {
         if (activeTab !== tab) {
             setActiveTabs(tab);
@@ -50,24 +58,56 @@ const Car = (props) =>{
         }
         document.getElementById("carDetail-"+id).style.display="block";
     }
+    const resetCarInfo= ()=>{ 
+        const carInfo=document.getElementsByClassName("infor-car");
+        for (const car of carInfo) {
+            car.classList.remove("seat-info-detail");
+        } 
+    }
+     /*Remove bg seat*/
+    const resetSeat=()=>{
+        const btnSeat=document.getElementsByClassName("MuiSvgIcon-root");
+        for (let i=0; i<btnSeat.length; i++) {
+            btnSeat[i].classList.remove("MuiSvgIcon-colorPrimary");
+        }
+    }
 
     // Open toggle seat
     const toggleSeatDetail = id =>{
-        console.log(props.logUser.token);
-        if(props.logUser.token !== ""&& props.logUser.token !== undefined || JSON.parse(localStorage.getItem("isLogin")))
-        {
-            document.getElementById("seat-detail-"+id).classList.add("seat-info-detail");
-            // .style.display="block";
+        if(!triggerShow){
+            if(props.user.token !== ""&& props.user.token !== undefined || JSON.parse(localStorage.getItem("isLogin")))
+            {
+                /*Reset danh sách ghế trong redux */
+                putNull();
+                /*Reset background ghế */
+                resetSeat();
+                /*Ẩn đi thông tin xe */
+                resetCarInfo();
+                /*Set display của xe */
+                document.getElementById("seat-detail-"+id).classList.add("seat-info-detail");
+            }else{
+                toast.warn("Phải đăng nhập sau đó mới tiến hành đặt chỗ !", {
+                    position: "top-right",
+                    autoClose: 1000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                  });
+            }
+            settriggerShow(!triggerShow);
         }else{
-            toast.warn("Phải đăng nhập sau đó mới tiến hành đặt chỗ !", {
-                position: "top-right",
-                autoClose: 1000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true
-              });
+           /*Reset danh sách ghế trong redux */
+           putNull();
+           /*Reset background ghế */
+           resetSeat();
+           /*Ẩn đi thông tin xe */
+           resetCarInfo();
+           /*Set display của xe */
+            document.getElementById("seat-detail-"+id).classList.remove("seat-info-detail");
+            settriggerShow(!triggerShow);
         }
+        
        
     }
     const classes = useStyles();
@@ -237,6 +277,7 @@ const Car = (props) =>{
                 </AppBar>
             </div>
             <div id={`seat-detail-`+index}
+                 className={"infor-car"}
                  style={{display:"none","marginBottom":"10px"}}>
                 <Row>
                     <Col md="4" 
@@ -255,15 +296,57 @@ const Car = (props) =>{
                                     end={end}></Location>
                     </Col>
                     <Col md="4"
-                        style={{paddingLeft:"5px",paddingRight:"0px"}}
+                        style={{paddingLeft:"0px",paddingRight:"0px"}}
                         > 
-                        <StageSeat arrSeat={arrSeat}
-                                    lichTrinh={lichtrinh}
-                                    start={start}
-                                    end={end}
-                                    index={index}
-                            />
+                        <Informationuser/>
                     </Col>
+                </Row>
+                <Row style={{marginTop:"2px",width:"1030px",height:"auto"}}>                            
+                    <Col md="12">
+                        <Paper style={{padding:"10px"}}>
+                            <Row>
+                                <Col md="6">
+                                    <Typography >
+                                        Số ghế:{
+                                            props.seat.seat.map((item,index)=>{ 
+                                                return(
+                                                    <>
+                                                        <span key={index}>
+                                                            {item.MaGhe+" "}
+                                                        </span>
+                                                    </>
+                                                )
+                                            })
+                                        }
+                                    </Typography>   
+                                    <Typography>
+                                        Tổng tiền: 
+                                    <NumberFormat thousandSeparator={false}
+                                              style={{border:"none"}}
+                                              value={props.seat.priceSeats}
+                                               suffix={".000đ"}
+                                              defaultValue={"0đ"}
+                                              isAllowed={true}/>
+                                    </Typography>
+
+                                </Col>
+                                <Col md="6">
+                                    <Typography>
+                                        Điểm đi:{
+                                            props.user.locationStart?props.user.locationStart:""
+                                        }
+                                    </Typography>
+                                    <Typography>
+                                        Điểm đến:{
+                                            props.user.locationEnd?props.user.locationEnd:""
+                                        }
+                                    </Typography>
+                                </Col>
+                               
+                            </Row>
+                            
+                        </Paper>  
+                    </Col>     
                 </Row>
             </div>
             <ToastContainer position="top-right"
@@ -282,6 +365,7 @@ Car.propTypes = {
     putNull:PropTypes.func.isRequired
 };
 const mapStateToProps =(state)=>({
-    logUser:state.logUser
+    user:state.user,
+    seat:state.seat
 });
-export default connect(mapStateToProps,{})(Car);
+export default connect(mapStateToProps,{putNull})(Car);

@@ -54,9 +54,9 @@ const SignIn =(props)=> {
    const [countLog,setCountLog]=useState(1);
    /* Side effect*/
    useEffect(() => {
-    if(props.logUser.action === types.LOGIN_SUCCESS){
+    if(props.user.action === types.LOGIN_SUCCESS){
         /*Save token xuống redux */
-        props.setSession(props.logUser.token);
+        props.setSession(props.user.token);
         /*Save để giữ đăng nhập trên browser */
         if(!props.token){
           localStorage.setItem("isLogin",JSON.stringify(true));
@@ -65,7 +65,7 @@ const SignIn =(props)=> {
         /*Chuyển về page home */
         props.history.push("/");
     }
-    if(props.logUser.action === types.LOGIN_FAILED){
+    if(props.user.action === types.LOGIN_FAILED){
       toast.error("Sai Mật Khẩu Hoặc Tài Khoản!", {
         position: toast.POSITION.TOP_RIGHT
       });
@@ -239,7 +239,7 @@ const SignIn =(props)=> {
 }
 
 const mapStateToProps =(state)=>({
-  logUser:state.logUser
+  user:state.user
 });
 const mapDispatchToProps = dispatch => {
   return {

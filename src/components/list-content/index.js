@@ -26,7 +26,7 @@ class ListContent extends Component {
     componentWillReceiveProps(nextProps, nextContext) {
         const filter=nextProps.filterCarReducer;
         //khi action thành công
-        if(filter.action === types.GET_LIST_CAR_SUCCESS && filter.payload !== null) {
+        if(filter.action === types.GET_LIST_CAR_SUCCESS ) {
             let setNhaXe=new Set();
             let setGioDi=new Set();
             let arrNhaXe=[];
@@ -49,15 +49,18 @@ class ListContent extends Component {
                 arrCarTemp:filter.data,
 
             }));
+        }else{
+            this.setState(state =>({
+                arrCar:[],
+                arrCarTemp:[],
+
+            }));
         }
     }
 
     /**/
     componentDidMount() {
         this.props.getCars(this.props.params.start,this.props.params.end,this.props.params.date);
-        if(this.props.logUser.token !== undefined){
-            console.log(this.props.logUser.token);
-        }
     }
 
     /*Hàm khởi tạo 1 trong init mount của react chạy trước đi component được render*/
@@ -297,7 +300,8 @@ class ListContent extends Component {
                                     </div>
                                 </div>
                                 {/*Fiter list container*/}
-                                <div className="filterListContainer">
+                                <div className="filterListContainer" 
+                                    >
                                     <div className="filter-list">
                                         <div >
                                             <ExpansionPanel >
@@ -348,9 +352,7 @@ class ListContent extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-right">
-                            s
-                        </div>
+                        
                     </div>
                 </div>
             </>
@@ -360,7 +362,7 @@ class ListContent extends Component {
 
 const mapStateToProps=(state)=>({
     filterCarReducer:state.filterCarReducer,
-    logUser:state.logUser
+    user:state.user
 });
 const mapDispatchToProps = dispatch => {
     return {

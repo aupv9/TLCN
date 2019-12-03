@@ -51,14 +51,14 @@ const FormError=(isHidden,errorMessage) =>{
     const classes = useStyles();
     
     useEffect(() => {
-      if(props.logUser.action === types.SIGN_UP_SUCCESS){
+      if(props.user.action === types.SIGN_UP_SUCCESS){
           toast.success("Success Sign Up !", {
               position: toast.POSITION.TOP_RIGHT
             });
           // resetForm();
           //props.history.push("/");
       }
-      if(props.logUser.action === types.SIGN_UP_FAILED){
+      if(props.user.action === types.SIGN_UP_FAILED){
         toast.error("Failed Sign Up !", {
           position: toast.POSITION.TOP_RIGHT
         });
@@ -114,7 +114,7 @@ const FormError=(isHidden,errorMessage) =>{
         };
     }
   }
-
+  /*method thực hiện check  */
   const validatePassword=(password,type)=>{
     const lengthPassword=password.length;
     switch(type){
@@ -199,7 +199,7 @@ const FormError=(isHidden,errorMessage) =>{
             username:email,
             password:password
           }
-        props.registerUser(user);
+        props.registeruser(user);
       }else{
         toast.warn("Mật khẩu không khớp", {
             position: toast.POSITION.TOP_RIGHT
@@ -209,7 +209,7 @@ const FormError=(isHidden,errorMessage) =>{
   }
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
+       <CssBaseline /> 
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -300,11 +300,11 @@ const FormError=(isHidden,errorMessage) =>{
   );
 }
 const mapStateToProps =(state)=>({
-    logUser:state.logUser
+    user:state.user
 });
 const mapDispatchToProps = dispatch => {
   return {
-    registerUser: (user) => {
+    registeruser: (user) => {
           dispatch(signup(user));
       }
     };

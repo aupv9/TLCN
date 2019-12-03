@@ -9,7 +9,8 @@ import {
 } from "@material-ui/core";
 import classnames from "classnames";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
-
+import {connect} from "react-redux";
+import {setStartLocation, setEndLocation} from '../../redux/action/user';
 
 
 /*Style reactstrap*/
@@ -46,18 +47,14 @@ const Location = (props)=> {
      const [listAddressStart,setListAddressStart]=React.useState([]);
      const [listAddressEnd,setListAddressEnd]=React.useState([]);
 
-    /*Value lưu điểm đi và điểm đến*/
-    const [valueStart,setValueStart]=React.useState("");
-    const [valueEnd,setValueEnd]=React.useState("");
-
+    
     /*Set value điểm đi*/
     const changeStart= event =>{
-        console.log(event.target.value);
-        setValueStart(event.target.value);
+        props.setLocateStart(event.target.value);
     }
     /*Set value điểm đến*/
     const changeEnd = event =>{
-        setValueEnd(event.target.value);
+        props.setLocateEnd(event.target.value);
     }
     /*Method filter điểm đi và điểm đến*/
     const handleListStart = () =>{
@@ -131,7 +128,6 @@ const Location = (props)=> {
                                                     );
                                                 })
                                             }
-
                                         </RadioGroup>
                                     </FormControl>
                                 </TabPane>
@@ -154,14 +150,11 @@ const Location = (props)=> {
                                                     );
                                                 })
                                             }
-
                                         </RadioGroup>
                                     </FormControl>
                                 </TabPane>
-
-                             </TabContent>
+                            </TabContent>
                     </Paper>
-                       
                 </Grid>
             </Grid>
        </Container>     
@@ -169,4 +162,18 @@ const Location = (props)=> {
     
 }
 
-export default Location;
+
+const mapStateToProps =(state)=>({
+    
+});
+
+const mapDispatchToProps =(dispatch)=>({
+    setLocateStart:(location)=>{
+        dispatch(setStartLocation(location))
+    },
+    setLocateEnd:(location)=>{
+        dispatch(setEndLocation(location))
+    }
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Location);

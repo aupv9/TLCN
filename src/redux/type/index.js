@@ -8,6 +8,10 @@ export const LOGIN_SUCCESS="LOGIN_SUCCESS";
 export const LOGIN_FAILED="LOGIN_FAILED";
 export const SET_TOKEN="SET_TOKEN";
 export const DEL_TOKEN="DEL_TOKEN";
+export const SET_START_LOCATION="SET_START_LOCATION";
+export const DEL_START_LOCATION="DEL_START_LOCATION";
+export const SET_END_LOCATION="SET_END_LOCATION";
+export const DEL_END_LOCATION="DEL_END_LOCATION";
 
 
 export const URL_API=`https://api-serivice-vexe.herokuapp.com/api`;

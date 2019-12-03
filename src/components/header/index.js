@@ -56,27 +56,27 @@ const Header =(props)=> {
   
   useEffect(() => {
     setLogin(checkLogin);
-    setUserName(JSON.parse(localStorage.getItem("name")));
+    setuserName(JSON.parse(localStorage.getItem("name")));
   })
 
   useEffect(()=>{
 
-      if(props.logUser.DEL_TOKEN){
-        console.log(props.logUser.DEL_TOKEN);
+      if(props.user.DEL_TOKEN){
+        console.log(props.user.DEL_TOKEN);
       }
       if(isLogin){
           setLogin(true);
-          setUserName(JSON.parse(localStorage.getItem("name")));
+          setuserName(JSON.parse(localStorage.getItem("name")));
       }else{
           setLogin(false);
-          setUserName("");
+          setuserName("");
       }
-  },[props.logUser.token])
+  },[props.user.token])
   const classes = useStyles();  
   
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const [userName,setUserName]=useState("");
+  const [userName,setuserName]=useState("");
 
   const handleLogout=()=>{
     localStorage.removeItem("name");
@@ -173,13 +173,12 @@ const Header =(props)=> {
                 </AppBar>           
             </>
         );
-    
 }
 
 Header.propTypes = {};
 
 const mapStateToProps =(state)=>({
-  logUser:state.logUser
+  user:state.user
 });
 const mapDispatchToProps = dispatch => {
   return {

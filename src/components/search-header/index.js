@@ -22,7 +22,7 @@ import * as LIST from '../../contants';
 import * as _ from "lodash";
 import { toast ,ToastContainer} from 'react-toastify';
 
-
+/**Style of component */
 const useStyles = makeStyles(theme => ({
     root: {
       backgroundColor: "#20274D !important",  
@@ -202,6 +202,7 @@ const SearchHeader = (props) =>{
     /**Method Re search */
     const handleReSearch =()=>{
       if(idBeginLocate !== 0 && idEndLocate !==0){
+        console.log("in");
         props.history.push(`/list-xe/${idBeginLocate}/${idEndLocate}/${date}`);
       }else{
         toast.warn("Phải chọn điểm đi và điểm đến !", {

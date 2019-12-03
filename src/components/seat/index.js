@@ -37,7 +37,7 @@ const Seat = (props) =>{
                         <EventSeatIcon  className={colorBook + checkSeat}  
                                     onClick={()=>handlePut(!isPut)}   
                                     disabled={seat.dat ? true : false}                
-                                     fontSize="large"/>
+                                    fontSize="large"/>
                         </IconButton>
                     </Tooltip>
                     

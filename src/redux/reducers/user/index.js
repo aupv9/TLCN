@@ -4,7 +4,7 @@ import * as types from '../../type';
 let initState={
     
 };
-let logUser= (state=initState,action) =>{
+let User= (state=initState,action) =>{
 
     state.action=action.type;
     switch (action.type) {
@@ -34,9 +34,19 @@ let logUser= (state=initState,action) =>{
             return{
                 ...state,
                 token:""
-            }       
+            }
+        case types.SET_START_LOCATION:
+            return{
+                ...state,
+                locationStart:action.payload,
+            }
+        case types.SET_END_LOCATION:
+            return{
+                ...state,
+                locationEnd:action.payload,
+           }
         default:
             return state;
     }
 }
-export default logUser;
+export default User;
