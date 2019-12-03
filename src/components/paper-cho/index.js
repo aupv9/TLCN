@@ -139,14 +139,14 @@ const StageSeat =(props)=> {
                             <TableBody>
                                 <TableRow>
                                     <TableCell align="left">
-                                        <Paper style={{width:"30px", height:"10px",backgroundColor:"#fff"}}></Paper>Ghế Trống
+                                        <Paper style={{width:"30px", height:"10px",backgroundColor:"#757575"}}></Paper>Ghế Trống
                                     </TableCell>
                                     <TableCell align="left">
-                                        <Paper style={{width:"30px", height:"10px",backgroundColor:"#7C7F83"}}></Paper>
+                                        <Paper style={{width:"30px", height:"10px",backgroundColor:"#BDBDBD"}}></Paper>
                                         Ghế Đã Đặt
                                     </TableCell>
                                     <TableCell align="left">
-                                        <Paper style={{width:"30px", height:"10px",backgroundColor:"#007BFF"}}></Paper>
+                                        <Paper style={{width:"30px", height:"10px",backgroundColor:"#3F51B5"}}></Paper>
                                         Ghế Đang Đặt
                                     </TableCell>
                                 </TableRow>
@@ -165,17 +165,18 @@ const StageSeat =(props)=> {
                                 {/*Render danh sách ghế*/}
                                 <GridList cellHeight={100} 
                                           cellWidth={100}
-                                            className={classes.gridList}>
+                                          className={classes.gridList}
+                                          cols={4}
+                                          spacing={3}>
                                 {
                                     
                                     arrSeat.map((item,index)=>
-                                        <GridListTile key={item}>
+                                        <GridListTile key={index}>
                                             <Seat seat={item} />
                                         </GridListTile>
                                     )
                                 }
                                 </GridList>
-                                
                                 
                         </Paper>
                     </Paper>

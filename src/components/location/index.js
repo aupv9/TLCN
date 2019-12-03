@@ -52,6 +52,7 @@ const Location = (props)=> {
 
     /*Set value điểm đi*/
     const changeStart= event =>{
+        console.log(event.target.value);
         setValueStart(event.target.value);
     }
     /*Set value điểm đến*/
