@@ -133,7 +133,6 @@ const SearchHeader = (props) =>{
         case 2:
           setNameEndLocate(event.target.dataset.name);
           setIdEndLocate(event.target.dataset.id);
-          
 
           break;
         default:
@@ -207,7 +206,7 @@ const SearchHeader = (props) =>{
     const handleReSearch =()=>{
       if(idBeginLocate !== 0 && idEndLocate !==0){
         props.history.push(`/list-xe/${idBeginLocate}/${idEndLocate}/${date}`);
-
+        window.location.reload();
       }else{
         toast.warn("Phải chọn điểm đi và điểm đến !", {
           position: "bottom-right",

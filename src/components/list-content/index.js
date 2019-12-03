@@ -14,6 +14,7 @@ import {getCar} from "../../redux/action/car";
 import {connect} from "react-redux";
 import * as _ from "lodash";
 import Car from '../car';
+import { toast ,ToastContainer} from 'react-toastify';
 
 /*
 * Component ListContent
@@ -24,15 +25,7 @@ class ListContent extends Component {
    * Khi state thay đổi từ kết quả gọi service trả về từ server sẽ tiến hành xử lý
    * */
     componentWillReceiveProps(nextProps, nextContext) {
-        if(this.props.params.start !== this.state.startId){
-            this.setState({
-                startId:this.props.params.start,
-                endId:this.props.params.end,
-                date:this.props.params.date
-            })
-            this.props.getCars(this.props.params.start,this.props.params.end,this.props.params.date);
-            
-        }
+        
         const filter=nextProps.filterCarReducer;
         //khi action thành công
         if(filter.action === types.GET_LIST_CAR_SUCCESS && filter.data.length > 0) {
@@ -58,21 +51,25 @@ class ListContent extends Component {
                 arrCarTemp:filter.data,
 
             }));
-        }else{
-            alert("Không có chuyến xe nào bạn cần tìm!");
+        }
+        if(filter.data.length <= 0){
+            toast.warn("Không có xe nào !", {
+                position: toast.POSITION.TOP_RIGHT
+              }); 
         }
     }
 
     /**/
     componentDidMount() {
-        this.setState(state =>{
-            return {
+        if(this.props.params.start !== this.state.startId){
+            this.setState({
                 startId:this.props.params.start,
                 endId:this.props.params.end,
                 date:this.props.params.date
-            }
-        })
+            })
+        }
         this.props.getCars(this.props.params.start,this.props.params.end,this.props.params.date);
+
     }
    
     /*Hàm khởi tạo 1 trong init mount của react chạy trước đi component được render*/
@@ -370,7 +367,16 @@ class ListContent extends Component {
                         </div>
                         
                     </div>
+                
                 </div>
+                <ToastContainer position="top-right"
+                          autoClose={1000}
+                          hideProgressBar={true}
+                          newestOnTop={false}
+                          rtl={false}
+                          pauseOnVisibilityChange
+                          draggable
+                          pauseOnHover></ToastContainer>
             </>
         );
     }

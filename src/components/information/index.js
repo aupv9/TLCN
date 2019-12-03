@@ -11,6 +11,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import {connect} from "react-redux";
+import {setTicket} from '../../redux/action/ticket';
 
 
 const useStyles = makeStyles(theme => ({
@@ -34,6 +36,34 @@ const useStyles = makeStyles(theme => ({
 const Informationuser =()=> {
     const classes = useStyles();
 
+    /*State lưu các thông tin người đặt  */
+    const [name,setName]=useState("");
+    const [phone,setPhone]=useState("");
+    const [email,setEmail]=useState("");
+    const [note,setNote]=useState("");
+
+
+    /*Set value thông tin người dùng */
+    const handleInputChange= event => {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        switch (name){
+          case "name":
+            setName(value);
+          case "phone":
+            setPhone(value);
+          case "email":
+            setEmail(value);
+          case "note":
+            setNote(value);
+        }
+      }
+      
+    /**method đặt vé */
+    const setTicket =()=>{
+
+    }
     return (
         <Container component="main" maxWidth="xs"
                     className={classes.container}>
@@ -46,70 +76,70 @@ const Informationuser =()=> {
                           NHẬP THÔNG TIN
                        </Typography>
                        <div className={classes.form} >
-              <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    label="Họ tên"
-                    name="email"
-                    autoComplete="email"
-                    className={classes.input}
-                // onChange={handleInputChange}
-               //  onBlur={handleEmailValidation}
-              />
-              {/* / {FormError(isEmailValid,errorEmailMessage)} */}
+                            <TextField
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    id="name"
+                                    label="Họ tên"
+                                    name="name"
+                                    className={classes.input}
+                                    onChange={handleInputChange}
+                            //  onBlur={handleEmailValidation}
+                            />
+                            {/* / {FormError(isEmailValid,errorEmailMessage)} */}
 
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Số điện thoại"
-                type="password"
-                id="password"
-                className={classes.input}
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="phone"
+                                label="Số điện thoại"
+                                type="number"
+                                id="phone"
+                                className={classes.input}
 
-                // onChange={handleInputChange}
-                //onBlur={handlePasswordValidation}
+                                // onChange={handleInputChange}
+                                //onBlur={handlePasswordValidation}
 
-              />
-              {/* {FormError(isPasswordValid,errorPasswordMessage)}  */}
-            
-              <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email"
-                    name="email"
-                    autoComplete="email"
-                    className={classes.input}
-                // onChange={handleInputChange}
-               //  onBlur={handleEmailValidation}
-              />
-               <TextField
-                    id="outlined-multiline-static"
-                    label="Ghi Chú"
-                    multiline
-                    rows="4"
-                    placeholder="Nhà xe cố gắng phục vụ quý khách "
-                    variant="outlined"
-                    className={classes.textNote}
-                    />
-                <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                        //onClick={login}
-                    >
-                        Tiếp tục
-                    </Button>
+                            />
+                            {/* {FormError(isPasswordValid,errorPasswordMessage)}  */}
+                            
+                            <TextField
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    id="email"
+                                    label="Email"
+                                    name="email"
+                                    type="email"
+                                    className={classes.input}
+                                // onChange={handleInputChange}
+                            //  onBlur={handleEmailValidation}
+                            />
+                            <TextField
+                                    id="note"
+                                    label="Ghi Chú"
+                                    multiline
+                                    rows="4"
+                                    placeholder="Nhà xe cố gắng phục vụ quý khách "
+                                    variant="outlined"
+                                    name="note"
+                                    className={classes.textNote}
+                                    />
+                                <Button
+                                        type="submit"
+                                        fullWidth
+                                        variant="contained"
+                                        color="primary"
+                                        className={classes.submit}
+                                        onClick={setTicket}
+                                    >
+                                        Tiếp tục
+                                    </Button>
                         </div>
                     </Paper>
                   </Grid>
@@ -118,5 +148,15 @@ const Informationuser =()=> {
     );
     
 }
+const mapStateToProps=(state)=>({
+    user:state.user
+});
+const mapDispatchToProps = dispatch => {
+    return {
+        setTicket: (ticket) => {
+            dispatch(setTicket(ticket));
+        }
+    };
+};
 
-export default Informationuser;
+export default connect(mapStateToProps,mapDispatchToProps)(Informationuser);
