@@ -24,9 +24,18 @@ class ListContent extends Component {
    * Khi state thay đổi từ kết quả gọi service trả về từ server sẽ tiến hành xử lý
    * */
     componentWillReceiveProps(nextProps, nextContext) {
+        if(this.props.params.start !== this.state.startId){
+            this.setState({
+                startId:this.props.params.start,
+                endId:this.props.params.end,
+                date:this.props.params.date
+            })
+            this.props.getCars(this.props.params.start,this.props.params.end,this.props.params.date);
+            
+        }
         const filter=nextProps.filterCarReducer;
         //khi action thành công
-        if(filter.action === types.GET_LIST_CAR_SUCCESS ) {
+        if(filter.action === types.GET_LIST_CAR_SUCCESS && filter.data.length > 0) {
             let setNhaXe=new Set();
             let setGioDi=new Set();
             let arrNhaXe=[];
@@ -50,19 +59,22 @@ class ListContent extends Component {
 
             }));
         }else{
-            this.setState(state =>({
-                arrCar:[],
-                arrCarTemp:[],
-
-            }));
+            alert("Không có chuyến xe nào bạn cần tìm!");
         }
     }
 
     /**/
     componentDidMount() {
+        this.setState(state =>{
+            return {
+                startId:this.props.params.start,
+                endId:this.props.params.end,
+                date:this.props.params.date
+            }
+        })
         this.props.getCars(this.props.params.start,this.props.params.end,this.props.params.date);
     }
-
+   
     /*Hàm khởi tạo 1 trong init mount của react chạy trước đi component được render*/
     constructor(props) {
         super(props);
@@ -74,7 +86,11 @@ class ListContent extends Component {
             arrFilter:[],
             arrGioDiFilter:[],
             arrSeatSelected:[],
-            arrSeatIndex:[]
+            arrSeatIndex:[],
+            startId:0,
+            endId:0,
+            date:""
+
         };
 
     }
@@ -247,9 +263,9 @@ class ListContent extends Component {
                 }
             }
             /*Format giờ và nơi */
-            const allTimeSplitGioDen=gioDen.split(":");
+            const allTimeSplitGioDen=gioDen?gioDen.split(":"):"";
             const allTimeFirstGioDen=allTimeSplitGioDen[0]+allTimeSplitGioDen[1];
-            const allTimeSplitGioDi=gioDi.split(":");
+            const allTimeSplitGioDi=gioDi?gioDi.split(":"):"";
             const allTimeFirstGioDi=allTimeSplitGioDi[0]+allTimeSplitGioDi[1];
             var allTime=0;
             if(allTimeSplitGioDen[1] > 0){

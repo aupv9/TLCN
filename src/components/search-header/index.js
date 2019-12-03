@@ -112,15 +112,16 @@ const SearchHeader = (props) =>{
     const [idBeginLocate,setIdBeginLocate] =useState(0);
     const [idEndLocate,setIdEndLocate] =useState(0);
 
-    const [date,setDate] =useState('9-8-2019');
+    const [date,setDate] =useState('26-8-2019');
     const [endLocate,setEndLocate] =useState("");
 
     /* Change date */
     const changeDate = date => {
       let month=parseInt(date.getMonth());
-      const dateLook=month+"-"+date.getDate()+"-"+date.getFullYear();
+      const dateLook=parseInt(month+1)+"-"+date.getDate()+"-"+date.getFullYear();
+      const dateFake=date.getDate()+"-"+parseInt(month+1)+"-"+date.getFullYear();
       setSelectedDate(dateLook);
-      setDate(dateLook);
+      setDate(dateFake);
     };
     
     const selectProvince = (sign,event) =>{
@@ -132,6 +133,8 @@ const SearchHeader = (props) =>{
         case 2:
           setNameEndLocate(event.target.dataset.name);
           setIdEndLocate(event.target.dataset.id);
+          
+
           break;
         default:
           break;
@@ -143,6 +146,7 @@ const SearchHeader = (props) =>{
       switch (sign) {
         case 1:
           setProvinces(toSearchProvince(locate));
+
           document.getElementById("list-search-begin").style.display="block";
           break;
         case 2:
@@ -202,8 +206,8 @@ const SearchHeader = (props) =>{
     /**Method Re search */
     const handleReSearch =()=>{
       if(idBeginLocate !== 0 && idEndLocate !==0){
-        console.log("in");
         props.history.push(`/list-xe/${idBeginLocate}/${idEndLocate}/${date}`);
+
       }else{
         toast.warn("Phải chọn điểm đi và điểm đến !", {
           position: "bottom-right",
@@ -246,7 +250,6 @@ const SearchHeader = (props) =>{
                             <TextField
                                       className={classes.input}
                                       variant="outlined"
-                                     
                                       name="repassword"
                                       type="text"
                                       id="password"
@@ -265,7 +268,7 @@ const SearchHeader = (props) =>{
                           <KeyboardDatePicker
                                       className={classes.datepicker}                                   
                                       variant="inline"
-                                      format="MM/dd/yyyy"
+                                      format="dd/MM/yyyy"
                                       borderBottom="none"
                                       id="date-picker-inline"
                                       label="Ngày đi"

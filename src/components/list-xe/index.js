@@ -16,7 +16,9 @@ class ListXe extends Component {
             <>
                {/* <IntroList/> */}
                <SearchHeader {...this.props}></SearchHeader>
-                <ListContent params={params}/>
+                <ListContent params={params}
+                    {...this.props}
+                />
             </>
         );
     }
