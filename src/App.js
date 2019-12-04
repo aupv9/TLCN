@@ -1,8 +1,9 @@
 import React,{Component} from 'react';
 import './App.css';
-import {BrowserRouter as Router} from 'react-router-dom';
-import Router_URL from "./components/router_url";
+import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
+import Home from "./pages/home";
+import Payment from './components/payment';
 
 class App extends Component{
 
@@ -10,7 +11,16 @@ class App extends Component{
       return (
           <>
               <Router>
-                  <Router_URL/>
+                   <Switch>
+                       <Route  
+                          
+						              path={["/","/home"]}
+                          component={({ props }) => (
+                         <Home  {...props} />
+                            )}
+                          />
+                        
+                   </Switch>
               </Router>
           </>
       );

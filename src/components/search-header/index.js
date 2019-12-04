@@ -21,6 +21,9 @@ import RoomIcon from '@material-ui/icons/Room';
 import * as LIST from '../../contants';
 import * as _ from "lodash";
 import { toast ,ToastContainer} from 'react-toastify';
+import {
+  useHistory
+} from "react-router-dom";
 
 /**Style of component */
 const useStyles = makeStyles(theme => ({
@@ -100,7 +103,7 @@ const useStyles = makeStyles(theme => ({
 const SearchHeader = (props) =>{
 
     const classes = useStyles();
-    
+    let history=useHistory();
     /* State */
     const [provinces,setProvinces] =useState(LIST.LIST_PROVINCE);
     const [locate,setLocate] =useState("");
@@ -205,7 +208,7 @@ const SearchHeader = (props) =>{
     /**Method Re search */
     const handleReSearch =()=>{
       if(idBeginLocate !== 0 && idEndLocate !==0){
-        props.history.push(`/list-xe/${idBeginLocate}/${idEndLocate}/${date}`);
+        history.push(`/list-xe/${idBeginLocate}/${idEndLocate}/${date}`);
         window.location.reload();
       }else{
         toast.warn("Phải chọn điểm đi và điểm đến !", {

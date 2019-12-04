@@ -76,7 +76,8 @@ const Header =(props)=> {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const [userName,setuserName]=useState("");
-
+ /*Time */
+ const [timeout,setTimeout] = useState(10000);
   const handleLogout=()=>{
     localStorage.removeItem("name");
     localStorage.setItem("isLogin",JSON.stringify(false));
@@ -87,10 +88,33 @@ const Header =(props)=> {
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
   };
-
+  const timeOut = () => {
+    if (timeout === 0) {
+      alert("Time out! Please re-book ");
+      props.history.goBack();
+      window.location.reload();
+    }
+  };
+useEffect(() => {
+    let timer = setInterval(() => {
+        const newCount = timeout - 1;
+        setTimeout(newCount >= 0 ? newCount : timeOut());
+      }, 1000);
+    return () => {
+        clearInterval(timer);
+      };
+})
   const handleClose = () => {
     setAnchorEl(null);
   };
+   /*Format time  */
+   const format= (time) =>{
+    let seconds = time % 60;
+    let minutes = Math.floor(time / 60);
+    minutes = minutes.toString().length === 1 ? "0" + minutes : minutes;
+    seconds = seconds.toString().length === 1 ? "0" + seconds : seconds;
+    return minutes + ":" + seconds;
+}
         return (
             <>   
                 <AppBar position="static"
@@ -117,6 +141,8 @@ const Header =(props)=> {
                     </Link>
                     </Typography>
 
+                    
+                   
                     {
                       isLogin?(
                         <div>

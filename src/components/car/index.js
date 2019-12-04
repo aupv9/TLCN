@@ -17,7 +17,6 @@ import Informationuser from '../../components/information';
 import NumberFormat from 'react-number-format';
 import {putNull,selectCar,delCar} from "../../redux/action/car";
 
-
 const useStyles =makeStyles({
     root:{
         width: '100%',
@@ -41,7 +40,7 @@ const Car = (props) =>{
     const  toggle = tab => {
         if (activeTab !== tab) {
             setActiveTabs(tab);
-        }
+        } 
     }
 
     /*Close detail car*/
@@ -311,7 +310,7 @@ const Car = (props) =>{
                     <Col md="4"
                         style={{paddingLeft:"0px",paddingRight:"0px"}}
                         > 
-                        <Informationuser/>
+                        <Informationuser />
                     </Col>
                 </Row>
                 <Row style={{marginTop:"2px",width:"1030px",height:"auto"}}>                            

@@ -14,7 +14,8 @@ export const SET_END_LOCATION="SET_END_LOCATION";
 export const DEL_END_LOCATION="DEL_END_LOCATION";
 export const PUT_CAR="PUT_CAR";
 export const DEL_CAR="DEL_CAR";
-
+export const SAVE_TICKET="SAVE_TICKET";
+export const UNSAVE_TICKET="UNSAVE_TICKET";
 
 export const URL_API=`https://api-serivice-vexe.herokuapp.com/api`;
 export const URL_API_LOCAL=`http://localhost:8080/api`;

@@ -6,6 +6,8 @@ import Footer from "../../components/footer";
 import ListXe from "../../components/list-xe";
 import SignIn from "../../components/signin";
 import SignUp from "../../components/signup";
+import Payment from "../../components/payment";
+
 import './style.scss';
 
 /*
@@ -24,24 +26,28 @@ class Home extends Component {
             <>
                 <Header />
                     <Route exact
-						   path={["/","/home"]}
+						   path={["/"]}
 						   render={(props)=> <Home_Main {...props}/> }
-
 						   />
                     <Route exact
-						   path={["/list-xe/:start/:end/:date","/home/list-xe/:start/:end/:date"]}
+						   path={[`/list-xe/:start/:end/:date`]}
 						   render={(props)=> <ListXe {...props} /> } 
-
 						   />
 					<Route exact
-						   path={["/sign-in","/home/sign-in"]}
+						   path={["/sign-in"]}
 						   render={(props)=> <SignIn {...props} />}
 					/>
-					<Route exact
-						   path={["/sign-up","/home/sign-up"]}
+					<Route 
+						   path={["/sign-up"]}
 						   render={(props)=> <SignUp {...props} />}
 					/>
+					 <Route 
+						   path={["/payment","/home/payment"]}
+						   render={(props)=> <Payment {...props} />}
+					/>
+					
                 <Footer/>
+				
             </>
 		);
 	}

@@ -7,8 +7,11 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {connect} from "react-redux";
-import {setTicket} from '../../redux/action/ticket';
+import {saveTicket} from '../../redux/action/ticket';
 import { toast ,ToastContainer} from 'react-toastify';
+import {
+  useHistory
+} from "react-router-dom";
 
 
 const useStyles = makeStyles(theme => ({
@@ -31,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   }));
 const Informationuser =(props)=> {
     const classes = useStyles();
-
+    let history=useHistory();
     /*State lưu các thông tin người đặt  */
     const [name,setName]=useState("");
     const [phone,setPhone]=useState("");
@@ -54,8 +57,13 @@ const Informationuser =(props)=> {
           case "note":
             setNote(value);
         }
-      }
-
+    }
+    /**Random string  */
+    const  randomString=(length, chars)=>{
+      var result = '';
+      for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+      return result;
+  }
     /**method đặt vé */
     const setTicketUp =()=>{
 
@@ -104,10 +112,11 @@ const Informationuser =(props)=> {
               const element = arrLocationEnd[index];
               noiTra+=element+" ";
           } 
-        const _id="";
+          
+          const _id=randomString(6,'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
           const ticket={
             _id:_id,
-            hangxe:"",
+            khachhang:name,
             noidon:noiDon,
             giodon:arrLocationStart[0],
             noitra:noiTra,
@@ -115,17 +124,18 @@ const Informationuser =(props)=> {
             giave:priceSeat,
             phuthu:0,
             soghe:seats,
-            hinhthucthanhtoan:"",
             tinhtrang:false,
             huy:false,
             sdt:phone,
             email:email
           }
-          props.setTicket();
+         history.push("/payment");
+         props.saveTicket(ticket);
       }
       
       
     }
+
     return (
         <Container component="main" maxWidth="xs"
                     className={classes.container}>
@@ -163,7 +173,7 @@ const Informationuser =(props)=> {
                                 id="phone"
                                 className={classes.input}
 
-                                // onChange={handleInputChange}
+                                 onChange={handleInputChange}
                                 //onBlur={handlePasswordValidation}
 
                             />
@@ -179,7 +189,7 @@ const Informationuser =(props)=> {
                                     name="email"
                                     type="email"
                                     className={classes.input}
-                                // onChange={handleInputChange}
+                                onChange={handleInputChange}
                             //  onBlur={handleEmailValidation}
                             />
                             <TextField
@@ -224,8 +234,8 @@ const mapStateToProps=(state)=>({
 });
 const mapDispatchToProps = dispatch => {
     return {
-        setTicket: (ticket,token) => {
-            dispatch(setTicket(ticket,token));
+        saveTicket:(ticket)=>{
+            dispatch(saveTicket(ticket));
         }
     };
 };

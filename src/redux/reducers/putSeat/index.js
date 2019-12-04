@@ -33,6 +33,16 @@ let seat = (state=initState,action) =>{
                 ...state,
                 seat: []
             }
+        case types.SAVE_TICKET:
+            return {
+                ...state,
+                ticket:action.payload
+            }
+        case types.UNSAVE_TICKET:
+            return {
+                ...state,
+                ticket:{}
+            }
         default:
             return state;
     }
