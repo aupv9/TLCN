@@ -274,8 +274,10 @@ class ListContent extends Component {
 
             return (
                 <>
-                  <Car start={this.props.params.start}
-                      end={this.props.params.end}
+                  <Car key={index}
+                       car={item}
+                       start={this.props.params.start}
+                       end={this.props.params.end}
                        nhaXe={item.nhaxe}
                        gioDi={gioDi}
                        noiDi={noiDi}
@@ -287,7 +289,7 @@ class ListContent extends Component {
                        index={index}
                        arrSeat={item.danhsachghe}
                        lichtrinh={item.lichtrinh}
-                        key={index}
+                        
                         />
                 </>
             );

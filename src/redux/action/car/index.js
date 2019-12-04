@@ -42,3 +42,16 @@ export  const putNull = () =>{
     };
 }
 
+/**Chọn xe để đặt chỗ */
+export const selectCar=(car)=>{
+    return {
+        type:types.PUT_CAR,
+        payload:car
+    }
+}
+/*Del khỏi store */
+export const delCar=()=>{
+    return {
+        type:types.DEL_CAR
+    }
+}

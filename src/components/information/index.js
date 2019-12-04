@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -13,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {connect} from "react-redux";
 import {setTicket} from '../../redux/action/ticket';
+import { toast ,ToastContainer} from 'react-toastify';
 
 
 const useStyles = makeStyles(theme => ({
@@ -33,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     }
     
   }));
-const Informationuser =()=> {
+const Informationuser =(props)=> {
     const classes = useStyles();
 
     /*State lưu các thông tin người đặt  */
@@ -59,10 +55,76 @@ const Informationuser =()=> {
             setNote(value);
         }
       }
-      
-    /**method đặt vé */
-    const setTicket =()=>{
 
+    /**method đặt vé */
+    const setTicketUp =()=>{
+
+      
+      if( props.seat.seat.length <= 0){
+
+        toast.error("Phải chọn ghế !", {
+          position: toast.POSITION.TOP_RIGHT
+        });
+
+      }else if(props.user.locationStart === undefined || props.user.locationEnd === undefined){
+
+        toast.error("Phải chọn  nơi đi và nơi đến !", {
+          position: toast.POSITION.TOP_RIGHT
+        });
+
+      }else if(!name || !phone || !email ){
+
+        toast.error("Phải nhập đầy đủ thông tin!", {
+          position: toast.POSITION.TOP_RIGHT
+        });
+
+      }else{
+        let seats="";
+        props.seat.seat.forEach(seat =>{
+            seats+=seat.MaGhe+" ";
+        });
+        let priceSeat=0;
+        props.seat.seat.forEach(seat =>{
+          priceSeat+=seat.Gia;
+        });
+          /*Xử lý nơi đón */
+          
+          const arrLocationStart=props.user.locationStart.split("-");
+          let noiDon="";
+  
+          for (let index = 1; index < arrLocationStart.length; index++) {
+              const element = arrLocationStart[index];
+              noiDon+=element+" ";
+          }
+          /*Xử lý nơi trả */
+          const arrLocationEnd=props.user.locationEnd.split("-");
+          let noiTra="";
+  
+          for (let index = 1; index < arrLocationEnd.length; index++) {
+              const element = arrLocationEnd[index];
+              noiTra+=element+" ";
+          } 
+        const _id="";
+          const ticket={
+            _id:_id,
+            hangxe:"",
+            noidon:noiDon,
+            giodon:arrLocationStart[0],
+            noitra:noiTra,
+            giotra:arrLocationEnd[0],
+            giave:priceSeat,
+            phuthu:0,
+            soghe:seats,
+            hinhthucthanhtoan:"",
+            tinhtrang:false,
+            huy:false,
+            sdt:phone,
+            email:email
+          }
+          props.setTicket();
+      }
+      
+      
     }
     return (
         <Container component="main" maxWidth="xs"
@@ -136,7 +198,7 @@ const Informationuser =()=> {
                                         variant="contained"
                                         color="primary"
                                         className={classes.submit}
-                                        onClick={setTicket}
+                                        onClick={setTicketUp}
                                     >
                                         Tiếp tục
                                     </Button>
@@ -144,17 +206,26 @@ const Informationuser =()=> {
                     </Paper>
                   </Grid>
             </Grid>
+            <ToastContainer position="top-right"
+                          autoClose={1000}
+                          hideProgressBar={true}
+                          newestOnTop={false}
+                          rtl={false}
+                          pauseOnVisibilityChange
+                          draggable
+                          pauseOnHover></ToastContainer>
       </Container>    
     );
     
 }
 const mapStateToProps=(state)=>({
-    user:state.user
+    user:state.user,
+    seat:state.seat
 });
 const mapDispatchToProps = dispatch => {
     return {
-        setTicket: (ticket) => {
-            dispatch(setTicket(ticket));
+        setTicket: (ticket,token) => {
+            dispatch(setTicket(ticket,token));
         }
     };
 };

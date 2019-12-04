@@ -12,6 +12,8 @@ export const SET_START_LOCATION="SET_START_LOCATION";
 export const DEL_START_LOCATION="DEL_START_LOCATION";
 export const SET_END_LOCATION="SET_END_LOCATION";
 export const DEL_END_LOCATION="DEL_END_LOCATION";
+export const PUT_CAR="PUT_CAR";
+export const DEL_CAR="DEL_CAR";
 
 
 export const URL_API=`https://api-serivice-vexe.herokuapp.com/api`;

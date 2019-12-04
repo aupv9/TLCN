@@ -15,7 +15,7 @@ import './style.scss';
 import AirlineSeatReclineNormalIcon from '@material-ui/icons/AirlineSeatReclineNormal';
 import Informationuser from '../../components/information'; 
 import NumberFormat from 'react-number-format';
-import {putNull} from "../../redux/action/car";
+import {putNull,selectCar,delCar} from "../../redux/action/car";
 
 
 const useStyles =makeStyles({
@@ -35,7 +35,7 @@ const useStyles =makeStyles({
 const Car = (props) =>{
 
     //des props
-    const {start,end,putNull,nhaXe,gioDi,noiDi,gioDen,noiDen,timer,time,loaiXe,index,arrSeat,lichtrinh}=props;
+    const {car,start,end,putNull,nhaXe,gioDi,noiDi,gioDen,noiDen,timer,time,loaiXe,index,arrSeat,lichtrinh}=props;
     const [activeTab,setActiveTabs]=React.useState('1');
     const [triggerShow,settriggerShow]=React.useState(false);
     const  toggle = tab => {
@@ -78,11 +78,17 @@ const Car = (props) =>{
             if(props.user.token !== ""&& props.user.token !== undefined || JSON.parse(localStorage.getItem("isLogin")))
             {
                 /*Reset danh sách ghế trong redux */
-                putNull();
+                props.resetSeats();
+
                 /*Reset background ghế */
                 resetSeat();
+
                 /*Ẩn đi thông tin xe */
                 resetCarInfo();
+                
+                /* Select Car*/
+                props.setCar(car);
+
                 /*Set display của xe */
                 document.getElementById("seat-detail-"+id).classList.add("seat-info-detail");
             }else{
@@ -95,14 +101,21 @@ const Car = (props) =>{
                     draggable: true
                   });
             }
+            props.resetSeats();
             settriggerShow(!triggerShow);
         }else{
            /*Reset danh sách ghế trong redux */
-           putNull();
+           props.resetSeats();
+
            /*Reset background ghế */
            resetSeat();
+
            /*Ẩn đi thông tin xe */
            resetCarInfo();
+
+           /*Del car */
+           props.delCar();
+
            /*Set display của xe */
             document.getElementById("seat-detail-"+id).classList.remove("seat-info-detail");
             settriggerShow(!triggerShow);
@@ -364,8 +377,23 @@ const Car = (props) =>{
 Car.propTypes = {
     putNull:PropTypes.func.isRequired
 };
+
 const mapStateToProps =(state)=>({
     user:state.user,
     seat:state.seat
 });
-export default connect(mapStateToProps,{putNull})(Car);
+const mapDispatchToProps = dispatch => {
+    return{
+        resetSeats:()=>{ 
+            dispatch(putNull());
+        },
+        setCar:(car)=>{
+            dispatch(selectCar(car));
+        },
+        delCar:()=>{
+            dispatch(delCar());
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Car);

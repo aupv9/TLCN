@@ -62,7 +62,6 @@ const Header =(props)=> {
   useEffect(()=>{
 
       if(props.user.DEL_TOKEN){
-        console.log(props.user.DEL_TOKEN);
       }
       if(isLogin){
           setLogin(true);

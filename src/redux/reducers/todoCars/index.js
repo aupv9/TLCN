@@ -17,6 +17,16 @@ let filterCarReducer= (state=initState,action) =>{
                 ...state,
                 data: action.payload
             }
+        case types.PUT_CAR:
+            return {
+                ...state,
+                selectCar: action.payload
+            }
+        case types.DEL_CAR:
+            return {
+                ...state,
+                selectCar: {}
+            }        
         default:
             return state;
     }

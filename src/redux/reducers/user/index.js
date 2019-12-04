@@ -19,7 +19,8 @@ let User= (state=initState,action) =>{
         case types.LOGIN_SUCCESS:
             return{
                 ...state,
-                token:action.payload
+                token:action.payload.token,
+                roles:action.payload.roles
             }
         case types.LOGIN_FAILED:
             return{
