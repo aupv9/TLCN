@@ -51,14 +51,13 @@ const FormError=(isHidden,errorMessage) =>{
 const SignIn =(props)=> {
   
    const classes = useStyles();
-   const [countLog,setCountLog]=useState(1);
    /* Side effect*/
    useEffect(() => {
     if(props.user.action === types.LOGIN_SUCCESS){
         /*Save token xuống redux */
         props.setSession(props.user.token);
         /*Save để giữ đăng nhập trên browser */
-        localStorage.setItem("isLogin",JSON.stringify(true));
+          localStorage.setItem("isLogin",JSON.stringify(true));
           localStorage.setItem("name",JSON.stringify(email));
           localStorage.setItem("token",JSON.stringify(props.user.token));
         /*Chuyển về page home */
@@ -152,9 +151,7 @@ const SignIn =(props)=> {
       password:password
     }
     props.loginCallAPI(user);
-    let count=countLog+1;
-
-    setCountLog(count);
+    
    }
   
     return (

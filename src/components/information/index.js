@@ -128,7 +128,8 @@ const Informationuser =(props)=> {
             huy:false,
             sdt:phone,
             email:email
-          }
+          };
+         localStorage.setItem("ticket",JSON.stringify(ticket));
          history.push("/payment");
          props.saveTicket(ticket);
       }

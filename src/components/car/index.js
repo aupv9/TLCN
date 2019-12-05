@@ -74,8 +74,9 @@ const Car = (props) =>{
     // Open toggle seat
     const toggleSeatDetail = id =>{
         if(!triggerShow){
-            if(props.user.token !== undefined && JSON.parse(localStorage.getItem("token")))
+            if(props.user.token !== undefined && props.user.token || JSON.parse(localStorage.getItem("token")) !== null)
             {
+                console.log(JSON.parse(localStorage.getItem("token")));
                 /*Reset danh sách ghế trong redux */
                 props.resetSeats();
 

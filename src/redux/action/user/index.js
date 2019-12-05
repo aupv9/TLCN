@@ -8,7 +8,7 @@ export const  signup = (user)=>{
     return dispatch =>{
        
         axios.post(
-            types.URL_API_LOCAL+`/sign-up`,
+            types.URL_API+`/sign-up`,
             user
         )
         .then(res =>{
@@ -29,7 +29,7 @@ export const  signup = (user)=>{
 export const signIn = (user)=>{
     return dispatch =>{
         axios.post(
-            types.URL_API_LOCAL+`/login`,
+            types.URL_API+`/login`,
             user
         )
         .then(res =>{

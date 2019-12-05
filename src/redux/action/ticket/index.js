@@ -6,7 +6,7 @@ import axios from 'axios';
 export const setTicket=(ticket,token)=>{
 
     return dispatch =>{
-        axios.post(types.URL_API_LOCAL+`/ve`,ticket,{headers:{
+        axios.post(types.URL_API+`/ve`,ticket,{headers:{
             'Authorization':token
           }})
         .then(res => {

@@ -6,7 +6,7 @@ import axios from 'axios';
 export const getCar= (start, end, date) =>{
     return dispatch =>{
 
-        axios.get(types.URL_API_LOCAL+`/Cars/start=${start}&end=${end}&date=${date}`)
+        axios.get(types.URL_API+`/Cars/start=${start}&end=${end}&date=${date}`)
                     .then(
                         (response)=>
                         {

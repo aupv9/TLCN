@@ -14,6 +14,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import {delTokenSession} from '../../redux/action/user';
 import {connect} from "react-redux";
+import * as types from '../../redux/type';
 
 
 const useStyles = makeStyles(theme => ({
@@ -52,25 +53,15 @@ const useStyles = makeStyles(theme => ({
 const Header =(props)=> {
   
   const checkLogin=JSON.parse(localStorage.getItem("isLogin"));
-  const [isLogin,setLogin]=useState(true);
-  
+  const [isLogin,setLogin]=useState(false);
+    
   useEffect(() => {
-    // if(JSON.parse(localStorage.getItem("token"))){
-    //   props.setSession(props.user.token);
-    // }
-    setLogin(checkLogin);
-    setuserName(JSON.parse(localStorage.getItem("name")));
-  })
+    if(checkLogin !== null){
+      setLogin(checkLogin);
+      setuserName(JSON.parse(localStorage.getItem("name")));
+    }
+  },[props.user.action])
 
-  useEffect(()=>{
-      if(isLogin){
-          setLogin(true);
-          setuserName(JSON.parse(localStorage.getItem("name")));
-      }else{
-          setLogin(false);
-          setuserName("");
-      }
-  },[props.user.token])
   const classes = useStyles();  
   
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -137,14 +128,11 @@ useEffect(() => {
                             className={classes.contentHeader}>
                         Tra cứu vé
                     </Link>
-                    <Link to={"/quan-ly-ve"} 
+                    {/* <Link to={"/quan-ly-ve"} 
                             className={classes.contentHeader}>
                         Quản lý vé
-                    </Link>
+                    </Link> */}
                     </Typography>
-
-                    
-                   
                     {
                       isLogin?(
                         <div>

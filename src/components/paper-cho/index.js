@@ -7,7 +7,8 @@ import {
     TableBody,
     TableCell,
     TableRow,
-    Button
+    Button,
+    Container
 } from "@material-ui/core";
 import {Col} from "reactstrap";
 import Seat from "../seat";
@@ -24,7 +25,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 const useStyles = makeStyles(theme => ({
     gridList: {
       width: 300,
-      height: 435,
+      height: 400,
     },
     icon: {
       color: 'rgba(255, 255, 255, 0.54)',
@@ -82,25 +83,71 @@ const StageSeat =(props)=> {
                                 borderBottomLeftRadius:"0",
                                 textAlign:"center",height:"472px"}}>
                             
-                                {/*<Box style={{position:"absolute",bottom:"65%",left:"25px"}}>*/}
-                                {/*    <img width="25"*/}
-                                {/*         className="img-responsive wheel-img"*/}
-                                {/*         src="https://storage.googleapis.com/fe-production/images/Route/steering-wheel.svg"/>*/}
-                                {/*</Box>*/}
+                            {/* <GridList cellHeight={40} 
+                                          cellWidth={40}
+                                          className={classes.gridList}
+                                          cols={4}
+                                          >
+                                <Table className={classes.table} aria-label="simple table">
+                               <TableBody>
+                                    <TableRow>
+                                        <TableCell size="small">
+                                            
+                                        </TableCell>
+                                        <TableCell size="small">
+                                            <Seat seat={arrSeat[1]} />
+                                        </TableCell>
+                                        <TableCell size="small">
+                                            <Seat seat={arrSeat[4]} />
+                                        </TableCell>
+                                        <TableCell size="small">
+                                            <Seat seat={arrSeat[7]} />
+                                        </TableCell>
+                                        <TableCell size="small">
+                                            <Seat seat={arrSeat[10]} />
+                                        </TableCell>
+                                        <TableCell size="small">
+                                            <Seat seat={arrSeat[12]} />
+                                        </TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                            <TableCell>
+                                            <img width="20" class="img-responsive wheel-img" src="https://storage.googleapis.com/fe-production/images/Route/steering-wheel.svg"></img>
+                                            </TableCell>
+                                        </TableRow>
+                                    <TableRow>
+                                        <TableCell>
+                                        <img width="20" class="img-responsive wheel-img" src="https://storage.googleapis.com/fe-production/images/Route/steering-wheel.svg"></img>
+                                        </TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell>
+                                        <img width="20" class="img-responsive wheel-img" src="https://storage.googleapis.com/fe-production/images/Route/steering-wheel.svg"></img>
+                                        </TableCell>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                                </GridList>  */}
+                           
                                 {/*Render danh sách ghế*/}
-                                <GridList cellHeight={100} 
-                                          cellWidth={100}
+                                <GridList cellHeight={50} 
+                                          cellWidth={50}
                                           className={classes.gridList}
                                           cols={4}
                                           spacing={3}>
                                 {        
                                     arrSeat.map((item,index)=>
+
                                         <GridListTile key={index}>
                                             <Seat seat={item} />
                                         </GridListTile>
                                     )
                                 }
                                 </GridList>
+                                <Container component="main" style={{textAlign:"right"}}>
+                                    <img width="20" class="img-responsive wheel-img" src="https://storage.googleapis.com/fe-production/images/Route/steering-wheel.svg"></img>
+                                </Container>
+
                         </Paper>
                     </Paper>
                 </Col>

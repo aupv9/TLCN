@@ -57,9 +57,9 @@ const Payment=(props) => {
    
     const classes = useStyles();
     const [valuePay, setValuePay] = React.useState("CHTL");
-
+    const [ticket,setTicket]=useState("");
     /*Time */
-    const [timeout,setTimeout] = useState(3000);
+    const [timeout,setTimeout] = useState(300);
 
     const timeOut = () => {
         if (timeout === 0) {
@@ -70,9 +70,10 @@ const Payment=(props) => {
       };
 
     useEffect(() => {
-        if(types.PUT_TICKET_SUCCESS === props.seat.action){
+        if( props.seat.action === types.PUT_TICKET_SUCCESS){
             console.log("đặt vé thành công");
-        }else{
+        }
+        if(props.seat.action === types.PUT_TICKET_FAILED){
             console.log("đặt vé thất bại");
         }
     },[props.seat.action]);
@@ -85,8 +86,11 @@ const Payment=(props) => {
         return () => {
             clearInterval(timer);
           };
-    })
+    });
 
+    useEffect(() => {
+        
+    },[]);
     const handleChange = event => {
         console.log(event.target.value);
         setValuePay(event.target.value);
@@ -104,10 +108,11 @@ const Payment=(props) => {
                 ...props.seat.ticket,
                 hinhthucthanhtoan:valuePay
             }
-            console.log(ticket,props.user.token);
-            props.setTicket(ticket,props.user.token);
+            console.log(JSON.parse(localStorage.getItem('token')));
+            props.setTicket(ticket,JSON.parse(localStorage.getItem('token')));
         }
     }
+
     /*Format time  */
     const format= (time) =>{
         let seconds = time % 60;
