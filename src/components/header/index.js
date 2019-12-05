@@ -55,14 +55,14 @@ const Header =(props)=> {
   const [isLogin,setLogin]=useState(true);
   
   useEffect(() => {
+    // if(JSON.parse(localStorage.getItem("token"))){
+    //   props.setSession(props.user.token);
+    // }
     setLogin(checkLogin);
     setuserName(JSON.parse(localStorage.getItem("name")));
   })
 
   useEffect(()=>{
-
-      if(props.user.DEL_TOKEN){
-      }
       if(isLogin){
           setLogin(true);
           setuserName(JSON.parse(localStorage.getItem("name")));
@@ -80,7 +80,9 @@ const Header =(props)=> {
  const [timeout,setTimeout] = useState(10000);
   const handleLogout=()=>{
     localStorage.removeItem("name");
-    localStorage.setItem("isLogin",JSON.stringify(false));
+    localStorage.removeItem("token");
+    localStorage.removeItem("isLogin");
+
     setLogin(false);
     props.delSession();
 

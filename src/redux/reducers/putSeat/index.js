@@ -43,6 +43,15 @@ let seat = (state=initState,action) =>{
                 ...state,
                 ticket:{}
             }
+        case types.PUT_TICKET_SUCCESS:
+            return {
+                ...state
+            }
+        case types.PUT_TICKET_FAILED:
+                return {
+                    ...state
+                }
+                    
         default:
             return state;
     }

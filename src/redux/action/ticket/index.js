@@ -6,12 +6,15 @@ import axios from 'axios';
 export const setTicket=(ticket,token)=>{
 
     return dispatch =>{
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': token
-          }
-        
-        axios.post();
+        axios.post(types.URL_API_LOCAL+`/ve`,ticket,{headers:{
+            'Authorization':token
+          }})
+        .then(res => {
+            dispatch({ type:types.PUT_TICKET_SUCCESS});
+        })
+        .catch(err =>{
+            dispatch({ type:types.PUT_TICKET_FAILED });
+        });
     }
 }
 

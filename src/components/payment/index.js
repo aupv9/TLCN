@@ -16,6 +16,8 @@ import Button from '@material-ui/core/Button';
 import NumberFormat from 'react-number-format';
 import {connect} from "react-redux";
 import {setTicket} from '../../redux/action/ticket';
+import { toast ,ToastContainer} from 'react-toastify';
+import * as types from '../../redux/type';
 
 const useStyles = makeStyles(theme => ({
     header:{
@@ -54,7 +56,7 @@ const useStyles = makeStyles(theme => ({
 const Payment=(props) => {
    
     const classes = useStyles();
-    const [value, setValue] = React.useState('female');
+    const [valuePay, setValuePay] = React.useState("CHTL");
 
     /*Time */
     const [timeout,setTimeout] = useState(3000);
@@ -66,7 +68,16 @@ const Payment=(props) => {
           window.location.reload();
         }
       };
+
     useEffect(() => {
+        if(types.PUT_TICKET_SUCCESS === props.seat.action){
+            console.log("đặt vé thành công");
+        }else{
+            console.log("đặt vé thất bại");
+        }
+    },[props.seat.action]);
+    useEffect(() => {
+       
         let timer = setInterval(() => {
             const newCount = timeout - 1;
             setTimeout(newCount >= 0 ? newCount : timeOut());
@@ -78,12 +89,24 @@ const Payment=(props) => {
 
     const handleChange = event => {
         console.log(event.target.value);
-        setValue(event.target.value);
+        setValuePay(event.target.value);
     };
 
 
     const onPay=()=>{
 
+        if(!valuePay){
+            toast.error("Phải chọn phương thức thanh toán!", {
+                position: toast.POSITION.TOP_RIGHT
+              });
+        }else{
+            const ticket={
+                ...props.seat.ticket,
+                hinhthucthanhtoan:valuePay
+            }
+            console.log(ticket,props.user.token);
+            props.setTicket(ticket,props.user.token);
+        }
     }
     /*Format time  */
     const format= (time) =>{
@@ -111,7 +134,7 @@ const Payment=(props) => {
                         <TableHead>
                         <TableRow>
                             <TableCell align="left">
-                                <RadioGroup aria-label="pay" name="payment" value={value} onChange={handleChange}>
+                                <RadioGroup aria-label="pay" name="payment" value={valuePay} onChange={handleChange}>
                                     <FormControlLabel value="Visa,Master,JCB" control={<Radio />} label="Thẻ thanh toán quốc tế Visa, MasterCard, JCB" />
                                     <Divider />
                                     <FormControlLabel value="IB" control={<Radio />} label="Thẻ ATM nội địa/ Internet Banking" />
@@ -236,7 +259,15 @@ const Payment=(props) => {
                                               isAllowed={true}/>
                     </Typography>
                 </Grid>                
-            </Grid>              
+            </Grid>       
+            <ToastContainer position="top-right"
+                          autoClose={1000}
+                          hideProgressBar={true}
+                          newestOnTop={false}
+                          rtl={false}
+                          pauseOnVisibilityChange
+                          draggable
+                          pauseOnHover></ToastContainer>       
             </Container>
         </div>
     );
@@ -250,7 +281,7 @@ const mapStateToProps=(state)=>({
 const mapDispatchToProps = dispatch => {
     return {
         setTicket:(ticket,token)=>{
-            dispatch(setTicket(ticket));
+            dispatch(setTicket(ticket,token));
         }
     };
 };

@@ -58,10 +58,9 @@ const SignIn =(props)=> {
         /*Save token xuống redux */
         props.setSession(props.user.token);
         /*Save để giữ đăng nhập trên browser */
-        if(!props.token){
-          localStorage.setItem("isLogin",JSON.stringify(true));
+        localStorage.setItem("isLogin",JSON.stringify(true));
           localStorage.setItem("name",JSON.stringify(email));
-        }
+          localStorage.setItem("token",JSON.stringify(props.user.token));
         /*Chuyển về page home */
         props.history.push("/");
     }
@@ -247,7 +246,7 @@ const mapDispatchToProps = dispatch => {
         dispatch(signIn(user));
       },
     setSession:(token)=>{
-      setTokenSession(token);
+      dispatch(setTokenSession(token));
     }
   };
 };
