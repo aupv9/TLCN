@@ -55,7 +55,7 @@ const SignIn =(props)=> {
    useEffect(() => {
     if(props.user.action === types.LOGIN_SUCCESS){
         /*Save token xuống redux */
-        props.setSession(props.user.token);
+          props.setSession(props.user.token);
         /*Save để giữ đăng nhập trên browser */
           localStorage.setItem("isLogin",JSON.stringify(true));
           localStorage.setItem("name",JSON.stringify(email));

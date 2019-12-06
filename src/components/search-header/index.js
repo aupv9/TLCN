@@ -374,14 +374,7 @@ const SearchHeader = (props) =>{
                       </Grid>
                 </Grid>                 
             </Container>
-            <ToastContainer position="top-right"
-                    autoClose={1000}
-                    hideProgressBar={true}
-                    newestOnTop={false}
-                    rtl={false}
-                    pauseOnVisibilityChange
-                    draggable
-                    pauseOnHover></ToastContainer>
+            <ToastContainer></ToastContainer>
       </div>
     );
 

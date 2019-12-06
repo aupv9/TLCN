@@ -54,11 +54,21 @@ const Header =(props)=> {
   
   const checkLogin=JSON.parse(localStorage.getItem("isLogin"));
   const [isLogin,setLogin]=useState(false);
-    
   useEffect(() => {
-    if(checkLogin !== null){
+    localStorage.removeItem("name");
+    localStorage.removeItem("token");
+    localStorage.removeItem("isLogin");
+    setLogin(false);
+    return () => {
+      
+    };
+  }, [])
+  useEffect(() => {
+    if(JSON.parse(localStorage.getItem("isLogin")) !== false && JSON.parse(localStorage.getItem("name")) !== undefined){
       setLogin(checkLogin);
       setuserName(JSON.parse(localStorage.getItem("name")));
+    }else{
+      setLogin(false);
     }
   },[props.user.action])
 
@@ -81,22 +91,7 @@ const Header =(props)=> {
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
   };
-  const timeOut = () => {
-    if (timeout === 0) {
-      alert("Time out! Please re-book ");
-      props.history.goBack();
-      window.location.reload();
-    }
-  };
-useEffect(() => {
-    let timer = setInterval(() => {
-        const newCount = timeout - 1;
-        setTimeout(newCount >= 0 ? newCount : timeOut());
-      }, 1000);
-    return () => {
-        clearInterval(timer);
-      };
-})
+ 
   const handleClose = () => {
     setAnchorEl(null);
   };

@@ -50,8 +50,19 @@ let seat = (state=initState,action) =>{
         case types.PUT_TICKET_FAILED:
                 return {
                     ...state
-                }
-                    
+                }      
+        case types.PUT_TICKET_FAILED:
+                return {
+                    ...state
+            }
+        case types.SEND_MAIL_SUCESS:
+                return {
+                    ...state
+            }
+        case types.SEND_MAIL_FAIL:
+                return {
+                    ...state
+            }                
         default:
             return state;
     }

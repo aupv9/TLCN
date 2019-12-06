@@ -25,3 +25,25 @@ export const saveTicket=(ticket)=>{
         payload: ticket
     }
 }
+
+/*Action send mail  */
+export const sendMailAPI=(mail,token)=>{
+    return dispatch =>{
+        console.log(mail);
+        console.log(token);
+        axios.post(types.URL_API+`/sendEmail`,mail,{headers:{
+            'Authorization':token
+          }})
+        .then(res =>{
+            dispatch({ 
+                type:types.SEND_MAIL_SUCESS
+            })
+        })
+        .catch(err =>{
+            console.log(err);
+            dispatch({ 
+                type:types.SEND_MAIL_FAIL
+            })
+        })
+    }
+}
