@@ -7,7 +7,7 @@ import ListXe from "../../components/list-xe";
 import SignIn from "../../components/signin";
 import SignUp from "../../components/signup";
 import Payment from "../../components/payment";
-
+import SearchTicket from "../../components/search-ticket";
 import './style.scss';
 
 /*
@@ -37,15 +37,18 @@ class Home extends Component {
 						   path={["/sign-in"]}
 						   render={(props)=> <SignIn {...props} />}
 					/>
-					<Route 
+					<Route exact
 						   path={["/sign-up"]}
 						   render={(props)=> <SignUp {...props} />}
 					/>
-					 <Route 
+					 <Route exact
 						   path={["/payment","/home/payment"]}
 						   render={(props)=> <Payment {...props} />}
 					/>
-					
+					 <Route exact
+						   path={["/ticketinfo","/home/ticketinfo"]}
+						   render={(props)=> <SearchTicket {...props} />}
+					/>
                 <Footer/>
 				
             </>

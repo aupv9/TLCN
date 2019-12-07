@@ -60,7 +60,7 @@ const Header =(props)=> {
     localStorage.removeItem("isLogin");
     setLogin(false);
     return () => {
-      
+      setLogin(false);
     };
   }, [])
   useEffect(() => {
@@ -70,7 +70,7 @@ const Header =(props)=> {
     }else{
       setLogin(false);
     }
-  },[props.user.action])
+  },[checkLogin])
 
   const classes = useStyles();  
   
@@ -119,7 +119,7 @@ const Header =(props)=> {
                             className={classes.contentHeader}>
                         Trang chủ
                     </Link>
-                    <Link to={"/tra-cuu-ve"} 
+                    <Link to={"/ticketinfo"} 
                             className={classes.contentHeader}>
                         Tra cứu vé
                     </Link>

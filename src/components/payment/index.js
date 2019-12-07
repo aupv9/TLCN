@@ -84,7 +84,7 @@ const Payment=(props) => {
       };
 
     useEffect(() => {
-        if( props.seat.action === types.SEND_MAIL_SUCESS){
+        if( props.ticket.action === types.SEND_MAIL_SUCESS){
             alert("Bạn đã đặt vé thành công vui lòng kiểm tra email để lấy thông tin vé !");
             localStorage.removeItem("ticket");
 
@@ -99,7 +99,7 @@ const Payment=(props) => {
             //     draggable: true
             //   });
         }
-        if(props.seat.action === types.SEND_MAIL_FAIL){
+        if(props.ticket.action === types.SEND_MAIL_FAIL){
             toast.success("Bạn đã đặt vé thành công vui lòng kiểm tra email để lấy thông tin vé !", {
                 position: "top-right",
                 autoClose: 10000,
@@ -109,7 +109,7 @@ const Payment=(props) => {
                 draggable: true
               });
         }
-    },[props.seat.action]);
+    },[props.ticket.action]);
     useEffect(() => {
         let timer = setInterval(() => {
             const newCount = timeout - 1;
@@ -153,7 +153,7 @@ const Payment=(props) => {
               });
         }else{
             const ticket={
-                ...props.seat.ticket,
+                ...props.ticket.ticket,
                 hinhthucthanhtoan:valuePay
             }
             const mail={
@@ -312,7 +312,7 @@ const Payment=(props) => {
                     <Typography>Tổng tiền:
                     <NumberFormat thousandSeparator={false}
                                               style={{border:"none"}}
-                                              value={props.seat.priceSeats}
+                                              value={props.ticket.pricetickets}
                                                suffix={".000đ"}
                                               defaultValue={"0đ"}
                                               isAllowed={true}/>
@@ -329,7 +329,7 @@ const Payment=(props) => {
 
 const mapStateToProps=(state)=>({
     user:state.user,
-    seat:state.seat,
+    ticket:state.ticket,
 
 });
 const mapDispatchToProps = dispatch => {

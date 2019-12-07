@@ -20,6 +20,14 @@ export const PUT_TICKET_SUCCESS="PUT_TICKET_SUCCESS";
 export const PUT_TICKET_FAILED="PUT_TICKET_FAILED";
 export const SEND_MAIL_SUCESS="SEND_MAIL_SUCESS";
 export const SEND_MAIL_FAIL="SEND_MAIL_FAIL";
+export const SEARCH_TICKET_SUCCESS="SEARCH_TICKET_SUCCESS";
+export const SEARCH_TICKET_FAIL="SEARCH_TICKET_FAIL";
+export const CANCEL_TICKET_SUCCESS="CANCEL_TICKET_SUCCESS";
+export const CANCEL_TICKET_FAIL="CANCEL_TICKET_FAIL";
+
+
+
+
 
 export const URL_API=`https://api-serivice-vexe.herokuapp.com/api`;
 export const URL_API_LOCAL=`http://localhost:8080/api`;

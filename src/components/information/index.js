@@ -89,11 +89,11 @@ const Informationuser =(props)=> {
       }else{
         let seats="";
         props.seat.seat.forEach(seat =>{
-            seats+=seat.MaGhe+" ";
+          seats+=seat.MaGhe+" ";
         });
-        let priceSeat=0;
+        let prieSeats=0;
         props.seat.seat.forEach(seat =>{
-          priceSeat+=seat.Gia;
+          prieSeats+=seat.Gia
         });
           /*Xử lý nơi đón */
           
@@ -116,18 +116,22 @@ const Informationuser =(props)=> {
           const _id=randomString(6,'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
           const ticket={
             _id:_id,
+            hangxe:props.filterCarReducer.selectCar.nhaxe,
+            ngaydat:new Date().getDay().toString()+"-"
+                  +new Date().getMonth().toString()+"-"+new Date().getFullYear().toString(),
             khachhang:name,
             noidon:noiDon,
             giodon:arrLocationStart[0],
             noitra:noiTra,
             giotra:arrLocationEnd[0],
-            giave:priceSeat,
+            giave:prieSeats,
             phuthu:0,
             soghe:seats,
             tinhtrang:false,
             huy:false,
             sdt:phone,
-            email:email
+            email:email,
+            tuyenduong:props.filterCarReducer.selectCar.chuyendi
           };
          localStorage.setItem("ticket",JSON.stringify(ticket));
          history.push("/payment");
@@ -231,7 +235,9 @@ const Informationuser =(props)=> {
 }
 const mapStateToProps=(state)=>({
     user:state.user,
-    seat:state.seat
+    ticket:state.ticket,
+    seat:state.seat,
+    filterCarReducer:state.filterCarReducer
 });
 const mapDispatchToProps = dispatch => {
     return {
