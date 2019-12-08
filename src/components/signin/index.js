@@ -15,7 +15,8 @@ import {connect} from "react-redux";
 import {signIn,setTokenSession} from '../../redux/action/user';
 import * as types from '../../redux/type';
 import { toast ,ToastContainer} from 'react-toastify';
-
+import Header from '../header';
+import Footer from '../footer';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -49,7 +50,7 @@ const FormError=(isHidden,errorMessage) =>{
   )
 }
 const SignIn =(props)=> {
-  
+
    const classes = useStyles();
    /* Side effect*/
    useEffect(() => {
@@ -60,6 +61,13 @@ const SignIn =(props)=> {
           localStorage.setItem("isLogin",JSON.stringify(true));
           localStorage.setItem("name",JSON.stringify(email));
           localStorage.setItem("token",JSON.stringify(props.user.token));
+          props.user.roles.forEach(item=>{
+           
+            if(item === "ROLE_ADMIN"){ console.log(item);
+                localStorage.setItem("admin",JSON.stringify(true));
+            }
+          })
+          
         /*Chuyển về page home */
         props.history.push("/");
     }
@@ -130,7 +138,7 @@ const SignIn =(props)=> {
           }
         }
     }
-      
+
 //   }
   /* Check email*/
   const handleEmailValidation = event => {
@@ -151,86 +159,91 @@ const SignIn =(props)=> {
       password:password
     }
     props.loginCallAPI(user);
-    
+
    }
-  
+
     return (
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Đăng Nhập
-            </Typography>
-            <div className={classes.form} >
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email"
-                name="email"
-                autoComplete="email"
-                 onChange={handleInputChange}
-                 onBlur={handleEmailValidation}
-              />
-               {FormError(isEmailValid,errorEmailMessage)} 
-
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Mật Khẩu"
-                type="password"
-                id="password"
-                 onChange={handleInputChange}
-                 onBlur={handlePasswordValidation}
-
-              />
-               {FormError(isPasswordValid,errorPasswordMessage)} 
-
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                onClick={login}
-              >
+      <>
+        <Header></Header>
+          <Container component="main"
+                    maxWidth="xs">
+            <CssBaseline />
+            <div className={classes.paper}>
+              <Avatar className={classes.avatar}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
                 Đăng Nhập
-              </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Quên Mật Khẩu?
-                  </Link>
+            </Typography>
+              <div className={classes.form} >
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email"
+                  name="email"
+                  autoComplete="email"
+                  onChange={handleInputChange}
+                  onBlur={handleEmailValidation}
+                />
+                {FormError(isEmailValid,errorEmailMessage)}
+
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Mật Khẩu"
+                  type="password"
+                  id="password"
+                  onChange={handleInputChange}
+                  onBlur={handlePasswordValidation}
+
+                />
+                {FormError(isPasswordValid,errorPasswordMessage)}
+
+                <FormControlLabel
+                  control={<Checkbox value="remember" color="primary" />}
+                  label="Remember me"
+            />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  onClick={login}
+                >
+                  Đăng Nhập
+                </Button>
+                <Grid container>
+                  <Grid item xs>
+                    <Link href="#" variant="body2">
+                      Quên Mật Khẩu?
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Link href="/sign-up" variant="body2">
+                      {"Chưa có tài khoản? Đăng ký"}
+                    </Link>
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <Link href="/sign-up" variant="body2">
-                    {"Chưa có tài khoản? Đăng ký"}
-                  </Link>
-                </Grid>
-              </Grid>
+              </div>
             </div>
-          </div>
-          <ToastContainer position="top-right"
-                          autoClose={1000}
-                          hideProgressBar={true}
-                          newestOnTop={false}
-                          rtl={false}
-                          pauseOnVisibilityChange
-                          draggable
-                          pauseOnHover></ToastContainer>
-        </Container>
+            <ToastContainer position="top-right"
+                            autoClose={1000}
+                            hideProgressBar={true}
+                            newestOnTop={false}
+                            rtl={false}
+                            pauseOnVisibilityChange
+                            draggable
+                            pauseOnHover></ToastContainer>
+          </Container>
+          <Footer/>
+        </>
       );
 }
 

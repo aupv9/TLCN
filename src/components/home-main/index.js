@@ -157,9 +157,8 @@ class Home_Main extends Component {
                                             <div className={"primary-content"}>
                                                <section className="title-section">
                                                     <div className="section-container ">
-                                                        <h1 className="title">Book bus online</h1>
-                                                        <h2 className="subTitle">Search and compare hundreds of travel
-                                                            sites at once</h2>
+                                                        <h1 className="title">Đặt vé xe online</h1>
+                                                        <h2 className="subTitle"></h2>
                                                     </div>
                                                    <div className="form-section">
                                                        <div className="form-container">

@@ -45,7 +45,15 @@ let ticket = (state=initState,action) =>{
         case types.SEARCH_TICKET_FAIL:
             return {
                 ...state
-    }               
+        }  
+        case types.CANCEL_TICKET_SUCCESS:
+            return {
+                ...state
+        } 
+        case types.CANCEL_TICKET_FAIL:
+            return {
+                ...state
+        }                              
         default:
             return state;
     }

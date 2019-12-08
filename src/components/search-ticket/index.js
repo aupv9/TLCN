@@ -11,9 +11,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import {connect} from "react-redux";
-import {searchTicket} from '../../redux/action/ticket';
+import {searchTicket,cancelTicket} from '../../redux/action/ticket';
 import * as types from '../../redux/type';
 import NumberFormat from 'react-number-format';
+import { toast ,ToastContainer} from 'react-toastify';
+import Swal from 'sweetalert2'
 
 
 const useStyles = makeStyles(theme => ({
@@ -34,6 +36,7 @@ const SearchTicket  =(props)=>{
     const [phone,setPhone]=useState("");
     const [ticket,setTicket]=useState({});
     const [result,setResult]=useState(false);
+    const [cancel,setCancel]=useState(false);
     const handleInputChange= event => {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -48,18 +51,59 @@ const SearchTicket  =(props)=>{
     }
     
     useEffect(() => {
+        if(props.ticket.action === types.CANCEL_TICKET_SUCCESS){
+            setCancel(true);
+            toast.success("Vé đã được hủy thành công!", {
+                position: toast.POSITION.TOP_RIGHT
+              });
+        }
+        if(props.ticket.action === types.CANCEL_TICKET_FAIL){
+            setCancel(false);
+            toast.error("Hủy vé thất bại!", {
+                position: toast.POSITION.TOP_RIGHT
+              });
+        }
         if(props.ticket.action === types.SEARCH_TICKET_SUCCESS){
-            console.log(props.ticket.infoticket);
             setTicket(props.ticket.infoticket);
+            setCancel(props.ticket.infoticket.huy);
             setResult(true);
         }
-    })
+        if(props.ticket.action === types.SEARCH_TICKET_FAIL){
+            toast.error("Không có vé bạn cần tìm!", {
+                position: toast.POSITION.TOP_RIGHT
+              });
+            setResult(false);
+        }
+    });
     const onSearchTicket=()=>{
-        props.searchTicket(idVe,phone,JSON.parse(localStorage.getItem("token")));
+
+        const token=JSON.parse(localStorage.getItem("token"));
+        if(!token){
+            toast.error("Cần phải đăng nhập trước !", {
+                position: toast.POSITION.TOP_RIGHT
+              });
+        }else{
+            props.searchTicket(idVe,phone,token);
+        }
     }
 
     const onCancelTicket=()=>{
-
+        const token=JSON.parse(localStorage.getItem("token"));
+        Swal.fire({
+            title: 'Thông Báo?',
+            text: "Bạn muốn hủy vé ?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Đồng ý!'
+          }).then((result) => {
+            if (result.value) {
+              props.cancelTicket({
+                  _id:idVe
+              },token);
+            }
+          })
     }
 
     return (
@@ -169,13 +213,17 @@ const SearchTicket  =(props)=>{
                                                         isAllowed={true}/></TableCell>       
                                
                                 <TableCell>{"Thanh toán tại nhà xe"}</TableCell>       
-                                <TableCell>{ticket.tinhtrang?"Hủy":"Chưa hủy"}
-                                        <Button variant="contained" 
+                                <TableCell>{cancel?"Hủy":"Chưa hủy"}
+                                        {
+                                            cancel?null:(
+                                            <Button variant="contained" 
                                                 color="secondary"
                                                 onClick={onCancelTicket}
                                                 >
-                                            Hủy vé
-                                        </Button>
+                                                Hủy vé
+                                                </Button>
+                                           )
+                                        }
                                 </TableCell>       
 
                             </TableRow>  
@@ -190,6 +238,14 @@ const SearchTicket  =(props)=>{
                 
                 </Grid>
             </Grid>
+            <ToastContainer position="top-right"
+                          autoClose={1000}
+                          hideProgressBar={true}
+                          newestOnTop={false}
+                          rtl={false}
+                          pauseOnVisibilityChange
+                          draggable
+                          pauseOnHover></ToastContainer>
         </Container>
         );
     
@@ -205,6 +261,9 @@ const mapDispatchToProps = dispatch => {
     return {
         searchTicket:(id,phone,token)=>{
             dispatch(searchTicket(id,phone,token));
+        },
+        cancelTicket:(id,token)=>{
+            dispatch(cancelTicket(id,token));
         }
     };
 };

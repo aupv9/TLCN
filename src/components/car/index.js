@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {AppBar, Box, Paper, Table, 
+import {AppBar, Box, Paper, Table,
     TableBody, TableCell, TableHead,
      TableRow,Button,Typography} from "@material-ui/core";
 import {Col, Nav, NavItem, NavLink, Row, TabContent, TabPane} from "reactstrap";
@@ -13,7 +13,7 @@ import { toast ,ToastContainer} from 'react-toastify';
 import Location from '../../components/location';
 import './style.scss';
 import AirlineSeatReclineNormalIcon from '@material-ui/icons/AirlineSeatReclineNormal';
-import Informationuser from '../../components/information'; 
+import Informationuser from '../../components/information';
 import NumberFormat from 'react-number-format';
 import {putNull,selectCar,delCar} from "../../redux/action/car";
 
@@ -40,7 +40,7 @@ const Car = (props) =>{
     const  toggle = tab => {
         if (activeTab !== tab) {
             setActiveTabs(tab);
-        } 
+        }
     }
 
     /*Close detail car*/
@@ -57,11 +57,11 @@ const Car = (props) =>{
         }
         document.getElementById("carDetail-"+id).style.display="block";
     }
-    const resetCarInfo= ()=>{ 
+    const resetCarInfo= ()=>{
         const carInfo=document.getElementsByClassName("infor-car");
         for (const car of carInfo) {
             car.classList.remove("seat-info-detail");
-        } 
+        }
     }
      /*Remove bg seat*/
     const resetSeat=()=>{
@@ -85,7 +85,7 @@ const Car = (props) =>{
 
                 /*Ẩn đi thông tin xe */
                 resetCarInfo();
-                
+
                 /* Select Car*/
                 props.setCar(car);
 
@@ -120,8 +120,8 @@ const Car = (props) =>{
             document.getElementById("seat-detail-"+id).classList.remove("seat-info-detail");
             settriggerShow(!triggerShow);
         }
-        
-       
+
+
     }
     const classes = useStyles();
     return (
@@ -279,8 +279,8 @@ const Car = (props) =>{
                                 <Row>
                                     <Col sm="12">
                                         <h4>
-                                           <AirlineSeatReclineNormalIcon  className={"MuiSvgIcon-colorPrimary"} 
-                                                        fontSize="large"/> 
+                                           <AirlineSeatReclineNormalIcon  className={"MuiSvgIcon-colorPrimary"}
+                                                        fontSize="large"/>
                                         </h4>
                                     </Col>
                                 </Row>
@@ -293,9 +293,9 @@ const Car = (props) =>{
                  className={"infor-car"}
                  style={{display:"none","marginBottom":"10px"}}>
                 <Row>
-                    <Col md="4" 
+                    <Col md="4"
                         style={{paddingLeft:"0px",paddingRight:"0px"}}
-                        > 
+                        >
                         <StageSeat arrSeat={arrSeat}
                                     start={start}
                                     end={end}
@@ -303,37 +303,37 @@ const Car = (props) =>{
                             />
                     </Col>
                     <Col md="4"
-                         style={{paddingLeft:"0px",paddingRight:"0px"}}> 
-                        <Location  lichTrinh={lichtrinh} 
+                         style={{paddingLeft:"0px",paddingRight:"0px"}}>
+                        <Location  lichTrinh={lichtrinh}
                                     start={start}
                                     end={end}></Location>
                     </Col>
                     <Col md="4"
                         style={{paddingLeft:"0px",paddingRight:"0px"}}
-                        > 
+                        >
                         <Informationuser />
                     </Col>
                 </Row>
-                <Row style={{marginTop:"2px",width:"1030px",height:"auto"}}>                            
+                <Row style={{marginTop:"2px",width:"1030px",height:"auto"}}>
                     <Col md="12">
                         <Paper style={{padding:"10px"}}>
                             <Row>
                                 <Col md="6">
                                     <Typography >
                                         Số ghế:{
-                                            props.seat.seat.map((item,index)=>{ 
+                                            props.seat.seat.map((item,index)=>{
                                                 return(
                                                     <>
                                                         <span key={index}>
                                                             {item.MaGhe+" "}
                                                         </span>
                                                     </>
-                                                )
+                                                );
                                             })
                                         }
-                                    </Typography>   
+                                    </Typography>
                                     <Typography>
-                                        Tổng tiền: 
+                                        Tổng tiền:
                                     <NumberFormat thousandSeparator={false}
                                               style={{border:"none"}}
                                               value={props.seat.priceSeats}
@@ -355,11 +355,11 @@ const Car = (props) =>{
                                         }
                                     </Typography>
                                 </Col>
-                               
+
                             </Row>
-                            
-                        </Paper>  
-                    </Col>     
+
+                        </Paper>
+                    </Col>
                 </Row>
             </div>
             <ToastContainer position="top-right"
@@ -384,7 +384,7 @@ const mapStateToProps =(state)=>({
 });
 const mapDispatchToProps = dispatch => {
     return{
-        resetSeats:()=>{ 
+        resetSeats:()=>{
             dispatch(putNull());
         },
         setCar:(car)=>{
@@ -393,7 +393,7 @@ const mapDispatchToProps = dispatch => {
         delCar:()=>{
             dispatch(delCar());
         }
-    }
+    };
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Car);

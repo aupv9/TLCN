@@ -81,6 +81,7 @@ export const cancelTicket=(ve,token)=>{
                 'Authorization':token
         }})
         .then((response)=>{
+            console.log(response);
             dispatch({
                 type:types.CANCEL_TICKET_SUCCESS,
                 payload:response.data

@@ -15,6 +15,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import {delTokenSession} from '../../redux/action/user';
 import {connect} from "react-redux";
 import * as types from '../../redux/type';
+import { NavLink ,useHistory} from "react-router-dom";
 
 
 const useStyles = makeStyles(theme => ({
@@ -38,7 +39,6 @@ const useStyles = makeStyles(theme => ({
       color: "rgba(0,0,0,.75)",
       fontWeight:700,
       fontSize:13,
-
     },
     textBtn:{
       fontWeight:700,
@@ -51,9 +51,10 @@ const useStyles = makeStyles(theme => ({
 
 
 const Header =(props)=> {
-  
+  let history=useHistory();
   const checkLogin=JSON.parse(localStorage.getItem("isLogin"));
   const [isLogin,setLogin]=useState(false);
+  const [isAdmin,setAdmin]=useState(false);
   useEffect(() => {
     localStorage.removeItem("name");
     localStorage.removeItem("token");
@@ -64,6 +65,11 @@ const Header =(props)=> {
     };
   }, [])
   useEffect(() => {
+    const flagAdmin=JSON.parse(localStorage.getItem("admin"));
+    if( flagAdmin === true){
+      console.log(flagAdmin);
+      setAdmin(true);
+    }
     if(JSON.parse(localStorage.getItem("isLogin")) !== false && JSON.parse(localStorage.getItem("name")) !== undefined){
       setLogin(checkLogin);
       setuserName(JSON.parse(localStorage.getItem("name")));
@@ -80,12 +86,13 @@ const Header =(props)=> {
  /*Time */
  const [timeout,setTimeout] = useState(10000);
   const handleLogout=()=>{
-    localStorage.removeItem("name");
+     localStorage.removeItem("name");
     localStorage.removeItem("token");
-    localStorage.removeItem("isLogin");
+     localStorage.removeItem("isLogin");
 
     setLogin(false);
     props.delSession();
+    history.push("/");
 
   }
   const handleMenu = event => {
@@ -106,6 +113,7 @@ const Header =(props)=> {
         return (
             <>   
                 <AppBar position="static"
+                      id="header"
                        className={classes.header}>
                   <Toolbar>
                   {/* Logo header */}
@@ -115,7 +123,7 @@ const Header =(props)=> {
                     </Link>
                     {/* Navbar content */}
                     <Typography className={classes.headerContainer}>
-                      <Link to={"/home"} 
+                      <Link to={"/"} 
                             className={classes.contentHeader}>
                         Trang chủ
                     </Link>
@@ -159,6 +167,14 @@ const Header =(props)=> {
                         open={open}
                         onClose={handleClose}
                       >
+                      {isAdmin?
+                      (<MenuItem 
+                        
+                          
+                        ><NavLink to="/admin">
+              
+                        Trang quản lý
+                       </NavLink></MenuItem>):null}
                         <MenuItem 
                           onClick={handleLogout}
                         >Đăng Xuất</MenuItem>

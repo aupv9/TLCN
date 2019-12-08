@@ -67,7 +67,6 @@ const Informationuser =(props)=> {
     /**method đặt vé */
     const setTicketUp =()=>{
 
-      
       if( props.seat.seat.length <= 0){
 
         toast.error("Phải chọn ghế !", {
