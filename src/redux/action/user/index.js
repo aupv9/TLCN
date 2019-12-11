@@ -92,3 +92,25 @@ export const getUsers=(token) =>{
     }
    
 }
+
+/**add user */
+export const addUser= (user,token)=>{
+    return dispatch =>{
+       
+        axios.post(types.URL_API_LOCAL+`/add-user`,
+        user,{headers:{
+            'Authorization':token
+          }})
+        .then(res=>{
+            dispatch({
+                type:types.ADD_USER_SUCCESS
+            })
+        })
+        .catch(err=>{
+            console.log(err);
+            dispatch({
+                type:types.ADD_USER_FAIL
+            })
+        })
+    }
+}

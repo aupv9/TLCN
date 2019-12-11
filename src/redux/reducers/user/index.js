@@ -55,6 +55,14 @@ let User= (state=initState,action) =>{
             return{
                 ...state
            }
+        case types.ADD_USER_SUCCESS:
+            return{
+                ...state
+           }
+           case types.ADD_USER_FAIL:
+            return{
+                ...state
+           }
         default:
             return state;
     }

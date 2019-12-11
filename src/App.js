@@ -13,20 +13,7 @@ class App extends Component{
       
       return (
           <>
-              {/* <Router>
-                   <Switch>
-
-                       <Route 
-                
-						path={["/"]}
-                          component={({ props }) => (
-
-                         <Home  {...props}  />
-                            )}
-                          />
-
-                   </Switch>
-              </Router> */}
+             
           </>
       );
   }
