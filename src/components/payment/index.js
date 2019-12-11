@@ -72,6 +72,7 @@ const Payment=(props) => {
     const [noidon,setNoidon]=useState("");
     const [giotra,setGiotra]=useState("");
     const [noitra,setNoitra]=useState("");
+    const [giaVe,setGiaVe]=useState(0);
 
     /*Time */
     const [timeout,setTimeout] = useState(300);
@@ -131,6 +132,7 @@ const Payment=(props) => {
             setNoidon(tick.noidon);
             setGiotra(tick.giotra);
             setNoitra(tick.noitra);
+            setGiaVe(tick.giave);
         }
         
         if(!JSON.parse(localStorage.getItem('token')) || !localStorage.getItem('ticket')) {
@@ -312,7 +314,7 @@ const Payment=(props) => {
                     <Typography>Tổng tiền:
                     <NumberFormat thousandSeparator={false}
                                               style={{border:"none"}}
-                                              value={props.ticket.pricetickets}
+                                              value={giaVe}
                                                suffix={".000đ"}
                                               defaultValue={"0đ"}
                                               isAllowed={true}/>

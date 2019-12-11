@@ -183,7 +183,7 @@ const Car = (props) =>{
                                                             </div>
                                                             <div className="show-detail">
                                                                 <div className="dropdown-detail">
-                                                                    sss
+                                                                
                                                                 </div>
                                                                 <div className="button-detail">
                                                                     <button onClick={()=>toggleSeatDetail(index)}><span>Chọn Chỗ</span></button>

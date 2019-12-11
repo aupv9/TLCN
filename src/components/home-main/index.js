@@ -43,7 +43,6 @@ class Home_Main extends Component {
     * */
     onSearch= type => event=>{
         let value= event.target.value;
-        console.log(value);
         switch(type) {
             case 1:
                 this.setState(
@@ -82,7 +81,6 @@ class Home_Main extends Component {
         //     document.getElementById("listRe").style.display="none";
         //     this.setState({key:""});
         // }
-        console.log(this.state.key);
     }
     /*
     * khi nhấp chuột ra khỏi input sẽ ẩn đi list địa điểm

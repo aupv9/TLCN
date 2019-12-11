@@ -59,6 +59,8 @@ const Header =(props)=> {
     localStorage.removeItem("name");
     localStorage.removeItem("token");
     localStorage.removeItem("isLogin");
+    localStorage.removeItem("admin");
+
     setLogin(false);
     return () => {
       setLogin(false);
@@ -84,7 +86,6 @@ const Header =(props)=> {
   const open = Boolean(anchorEl);
   const [userName,setuserName]=useState("");
  /*Time */
- const [timeout,setTimeout] = useState(10000);
   const handleLogout=()=>{
      localStorage.removeItem("name");
     localStorage.removeItem("token");
@@ -92,8 +93,6 @@ const Header =(props)=> {
 
     setLogin(false);
     props.delSession();
-    history.push("/");
-
   }
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);

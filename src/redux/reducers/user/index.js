@@ -46,6 +46,15 @@ let User= (state=initState,action) =>{
                 ...state,
                 locationEnd:action.payload,
            }
+        case types.GET_LIST_USER_SUCCESS:
+            return{
+                ...state,
+                users:action.payload,
+           }
+         case types.GET_LIST_USER_FAIL:
+            return{
+                ...state
+           }
         default:
             return state;
     }

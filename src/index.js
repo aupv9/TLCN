@@ -23,33 +23,38 @@ ReactDOM.render(
 
     <Router >
         <Switch>
-        <Route exact
+        	<Route 
             path="/" 
             component={Home} />
-            <Route 
+                    {/* <Route exact
+						   path={[`/`]}
+						   render={(props)=> < {...props} /> }
+						   />
+					<Route exact
 						   path={[`/list-xe/:start/:end/:date`]}
 						   render={(props)=> <ListXe {...props} /> }
 						   />
-					<Route 
+					<Route exact
 						   path={["/sign-in"]}
 						   render={(props)=> <SignIn {...props} />}
 					/>
-					<Route 
+					<Route exact
 						   path={["/sign-up"]}
 						   render={(props)=> <SignUp {...props} />}
 					/>
-					 <Route 
+					 <Route exact
 						   path={["/payment","/home/payment"]}
 						   render={(props)=> <Payment {...props} />}
 					/>
-					 <Route 
+					 <Route exact
 						   path={["/ticketinfo","/home/ticketinfo"]}
 						   render={(props)=> <SearchTicket {...props} />}
-					/>
-        <Route
-            exact
-            path="/admin" 
-            component={Admin} />
+					/> */}
+					<Route
+					exact
+					path="/admin" 
+					component={Admin} />
+    
 
         
         </Switch>

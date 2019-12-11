@@ -28,6 +28,7 @@ export const  signup = (user)=>{
 /*Sign In */
 export const signIn = (user)=>{
     return dispatch =>{
+        console.log(user);
         axios.post(
             types.URL_API+`/login`,
             user
@@ -71,4 +72,23 @@ export const setEndLocation=(location)=>{
         type:types.SET_END_LOCATION,
         payload:location
     }
+}
+
+/*List Users */
+export const getUsers=(token) =>{
+    return dispatch =>{
+        axios.get(types.URL_API+`/users`,token)
+        .then((response=>{
+            dispatch({
+                type:types.GET_LIST_USER_SUCCESS,
+                payload:response.data
+            });
+        }))
+        .catch((error)=>{
+            dispatch({
+                type:types.GET_LIST_USER_FAIL
+            });
+        })
+    }
+   
 }

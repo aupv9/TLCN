@@ -164,7 +164,7 @@ const SignIn =(props)=> {
 
     return (
       <>
-        <Header></Header>
+        {/* <Header></Header> */}
           <Container component="main"
                     maxWidth="xs">
             <CssBaseline />
@@ -242,7 +242,7 @@ const SignIn =(props)=> {
                             draggable
                             pauseOnHover></ToastContainer>
           </Container>
-          <Footer/>
+          {/* <Footer/> */}
         </>
       );
 }

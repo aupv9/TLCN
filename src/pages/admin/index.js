@@ -17,9 +17,8 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import User from './user';
-import homeRoutes from '../../routes';
-
-
+import routes from '../../routes';
+import Sidebar from "../../components/sidebar";
 
 const useStyles = makeStyles(theme => ({
    
@@ -49,64 +48,30 @@ const Admin =(props)=>  {
     const classes = useStyles();
     let history=useHistory();
 
-    // useEffect(() => {
+     useEffect(() => {
 
-    //     document.getElementById("footer").style.display='none';
-    //     if(!JSON.parse(localStorage.getItem("admin"))){
-    //         history.push('/');
-    //     }
+         document.getElementById("footer").style.display='none';
+         if(!JSON.parse(localStorage.getItem("admin"))){
+            history.push('/');
+        }
 
-    // },[])
+  },[])
 
     return (
-            <div>
-                 <Grid container  spacing={2}>
-                    <Grid item xs={2}>
-                    <List component="nav" 
-                    className={classes.sidebar}>
-                    
-                    <NavLink to="/admin">
-                        <ListItem button>   
-                            <ListItemIcon>
-                                <DashboardIcon />
-                            </ListItemIcon>
-                        <ListItemText primary="DashBoard" />
-                        </ListItem>
-                    </NavLink>
-                    <NavLink to="/admin/user">
-                        <ListItem button>   
-                            <ListItemIcon>
-                                <PersonIcon />
-                            </ListItemIcon>
-                        <ListItemText primary="Người dùng" />
-                        </ListItem>
-                    </NavLink>
-                    <NavLink to="/admin/xe">
-                        <ListItem button>   
-                            <ListItemIcon>
-                                <DirectionsCarIcon />
-                            </ListItemIcon>
-                        <ListItemText primary="Xe" />
-                        </ListItem>
-                    </NavLink>
-                    <NavLink to="/admin/ve">
-                        <ListItem button>   
-                            <ListItemIcon>
-                                <DescriptionIcon />
-                            </ListItemIcon>
-                        <ListItemText primary="Vé" />
-                        </ListItem>
-                    </NavLink>
-                </List>
-                    </Grid>
-                    <Grid item xs={10}>
-                    
+        <div className={classes.wrapper}>
+            <Grid container  spacing={2}>
+                        <Grid item xs={2}>
+                         <Sidebar />
 
-                    </Grid>
-                </Grid>
-               
-                
-            </div>
+                    
+                        </Grid>
+                        <Grid item xs={10}>
+                            1
+                        </Grid>
+            </Grid>
+                    
+           
+        </div>
         );
     
 }
