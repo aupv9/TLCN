@@ -13,8 +13,10 @@ import Home_Main from "../../components/home-main";
 import Admin from "../admin";
 import User from '../admin/user';
 import Xe from '../admin/xe';
-import AddUser from "../admin/add-user";
+import Ve from '../admin/ve';
 
+import AddUser from "../admin/add-user";
+import AddXe from "../admin/xe-add";
 /*
 * Class Home Component Home
 * Used render giao diện trang chính
@@ -69,9 +71,16 @@ class Home extends Component  {
 						exact
 					  path="/admin/xe"
 					  component={Xe} />
+					  <Route
+						exact
+						path="/admin/ve" 
+						component={Ve} />
 					  <Route 
 					  path="/admin/user/add"
 					  component={AddUser} />
+					  <Route 
+					  path="/admin/xe/add"
+					  component={AddXe} />
 				<Footer></Footer>
             </>
 		);

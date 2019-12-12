@@ -117,7 +117,6 @@ const AddUser = (props)=> {
             "roles":roles
         }
         const token = JSON.parse(localStorage.getItem("token"));
-        console.log(token);
         props.addUser(user,token);
 
     }
@@ -253,7 +252,7 @@ const mapStateToProps =(state)=>({
   });
   const mapDispatchToProps = dispatch => {
     return {
-       addUser:(user,token)=> dispatch(addUser(user,token))
+        addUser:(user,token)=> dispatch(addUser(user,token))
     };
   };
 

@@ -262,6 +262,7 @@ class Home_Main extends Component {
 
                                                                            />
                                                                            <button className="button-submit"
+                                                                                     style={{width:"120px"}}
                                                                                     onClick={this.onSearchCars}>Tìm Kiếm</button>
                                                                        </div>
                                                                    </div>

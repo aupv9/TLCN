@@ -271,7 +271,7 @@ const Car = (props) =>{
                                 <Row>
                                     <Col sm="12"
                                         style={{marginLeft:"-10px"}}>
-                                        <h4>Tab 1 Contents</h4>
+                                        <h4></h4>
                                     </Col>
                                 </Row>
                             </TabPane>
@@ -279,8 +279,7 @@ const Car = (props) =>{
                                 <Row>
                                     <Col sm="12">
                                         <h4>
-                                           <AirlineSeatReclineNormalIcon  className={"MuiSvgIcon-colorPrimary"}
-                                                        fontSize="large"/>
+                                           
                                         </h4>
                                     </Col>
                                 </Row>

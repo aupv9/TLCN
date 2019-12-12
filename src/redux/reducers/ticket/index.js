@@ -53,7 +53,16 @@ let ticket = (state=initState,action) =>{
         case types.CANCEL_TICKET_FAIL:
             return {
                 ...state
-        }                              
+        } 
+        case types.GET_TICKETS_SUCCES:
+            return {
+                ...state,
+                tickets:action.payload
+        } 
+        case types.GET_TICKETS_FAIL:
+            return {
+                ...state
+        }                             
         default:
             return state;
     }

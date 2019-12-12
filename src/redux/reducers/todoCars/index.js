@@ -26,7 +26,24 @@ let filterCarReducer= (state=initState,action) =>{
             return {
                 ...state,
                 selectCar: {}
-            }        
+            }  
+        case types.GET_CAR_ALL_SUCCESS:
+            return {
+                ...state,
+                cars:action.payload
+            }
+        case types.GET_CAR_ALL_FAIL:
+            return {
+                ...state,
+            } 
+        case types.CREATE_CAR_SUCCESS:
+                return {
+                    ...state,
+                } 
+        case types.CREATE_CAR_FAIL:
+                return {
+                       ...state,
+            } 
         default:
             return state;
     }

@@ -60,17 +60,13 @@ const Admin =(props)=>  {
     return (
         <div className={classes.wrapper}>
             <Grid container  spacing={2}>
-                        <Grid item xs={2}>
-                         <Sidebar />
-
-                    
-                        </Grid>
-                        <Grid item xs={10}>
-                            1
-                        </Grid>
+                  <Grid item xs={2}>
+                      <Sidebar />
+                  </Grid>
+                  <Grid item xs={10}>
+                            
+                  </Grid>
             </Grid>
-                    
-           
         </div>
         );
     

@@ -8,7 +8,7 @@ export const  signup = (user)=>{
     return dispatch =>{
        
         axios.post(
-            types.URL_API+`/sign-up`,
+            types.URL_API_LOCAL+`/sign-up`,
             user
         )
         .then(res =>{
@@ -30,7 +30,7 @@ export const signIn = (user)=>{
     return dispatch =>{
         console.log(user);
         axios.post(
-            types.URL_API+`/login`,
+            types.URL_API_LOCAL+`/login`,
             user
         )
         .then(res =>{
@@ -77,7 +77,7 @@ export const setEndLocation=(location)=>{
 /*List Users */
 export const getUsers=(token) =>{
     return dispatch =>{
-        axios.get(types.URL_API+`/users`,token)
+        axios.get(types.URL_API_LOCAL+`/users`,token)
         .then((response=>{
             dispatch({
                 type:types.GET_LIST_USER_SUCCESS,

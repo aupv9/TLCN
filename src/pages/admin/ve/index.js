@@ -20,7 +20,7 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {connect} from "react-redux";
-import {getCarAll} from '../../../redux/action/car';
+import {getVe} from '../../../redux/action/ticket';
 import * as types from '../../../redux/type';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -36,20 +36,6 @@ const useStyles = makeStyles(theme => ({
         width:"15%",
         height:"100%"
     },
-
-    root: {
-        flexGrow: 1,
-      },
-      menuButton: {
-        marginRight: theme.spacing(2),
-      },
-      title: {
-        flexGrow: 1,
-      },
-      header:{
-
-            }
-
 
   }));
   const useStyles1 = makeStyles(theme => ({
@@ -121,29 +107,28 @@ const ITEM_PADDING_TOP = 8;
       },
     },
   };
-const Xe = (props)=> {
+const Ve = (props)=> {
     const classes = useStyles();
 
-    const [cars,setCars]=useState([]);
+    const [tickets,setTickets]=useState([]);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const [page, setPage] = React.useState(0);
     const [open, setOpen] = React.useState(false);
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, cars.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, tickets.length - page * rowsPerPage);
     let history=useHistory();
     useEffect(() => {
-        if(props.car.action === types.GET_CAR_ALL_SUCCESS){
-            setCars(props.car.cars);
+        if(props.ticket.action === types.GET_TICKETS_SUCCES){
+            setTickets(props.ticket.tickets);
         }
     })
     useEffect(() => {
-       // const data = axios.get("http://localhost:8080/api/Cars").then(res => console.log(res.data));
        
         const token=JSON.parse(localStorage.getItem("token"));
-         props.getAllCar(token);
+         props.getTickets();
 
     },[])
     const onAdd=()=>{
-        history.push("/admin/xe/add");
+        history.push("/admin/ve/add");
     }
     
   const handleChangePage = (event, newPage) => {
@@ -167,83 +152,53 @@ const Xe = (props)=> {
                     <Sidebar />
                     </Grid>
                     <Grid item xs={10}>
-                    <Typography>Quản lý người dùng</Typography>
+                    <Typography>Quản lý vé</Typography>
                         <Button variant="contained" 
                                 color="primary"
                                 className={classes.btnAdd}
                                 onClick={onAdd}>
-                            Thêm Xe
+                            Thêm vé
                         </Button>
                         <Table className={classes.table} aria-label="simple table">
                             <TableHead>
                             <TableRow hover={true}>
                                 {/* <TableCell></TableCell> */}
-                                <TableCell>Loại Xe</TableCell>
-                                <TableCell >Nhà Xe</TableCell>
-                                <TableCell >Chuyến Đi</TableCell>
-                                
-                                <TableCell >Giờ Đi</TableCell>
-                                <TableCell >Ngày Đi</TableCell>
-                                <TableCell >Lịch Trình</TableCell>
-                                <TableCell >Số Lượng Ghế</TableCell>
+                                <TableCell>Hãng Xe</TableCell>
+                                <TableCell >Tuyến Đường</TableCell>
+                               
+                                <TableCell >Giá Vé</TableCell>
+                                <TableCell >Ngày Đặt</TableCell>
+                                <TableCell >Số Ghế</TableCell>
+                                <TableCell >Số điện thoại</TableCell>
                                 <TableCell >Xóa</TableCell>
                             </TableRow>
                             </TableHead>
                             <TableBody>
-                               {(rowsPerPage > 0 ? cars.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage ):cars
+                               {(rowsPerPage > 0 ? tickets.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage ):tickets
                                )
-                                .map((car,index) =>{
-                                    const lengthGhe=car.danhsachghe !== null ? car.danhsachghe.length:0; 
+                                .map((ticket,index) =>{
+                                    {/* const lengthGhe=ticket.danhsachghe !== null ? tickets.danhsachghe.length:0;  */}
                                     return (
                                     <TableRow key={index}
-                                    hover={true}>
+                                        hover={true}>
                                     
                                     <TableCell >
-                                        {car.loaixe}
+                                        {ticket.hangxe}
                                     </TableCell>
                                  
-                                    <TableCell >{car.nhaxe}</TableCell>
-                                    <TableCell >{car.chuyendi}</TableCell>
+                                    <TableCell >{ticket.tuyenduong}</TableCell>
                                    
-                                    <TableCell >{car.giodi}</TableCell>
-                                    <TableCell >{car.ngaydi}</TableCell>
-                                    <TableCell >
-                                      <Table className={classes.table} aria-label="simple table">
-                                          <TableHead>
-                                            <TableRow hover={true}>
-                                              <TableCell>Thời gian đi</TableCell>
-                                              <TableCell>Điểm đi</TableCell>
-                                              <TableCell >Địa chỉ</TableCell>
-                                              <TableCell >Tỉnh</TableCell>
-
-                                            </TableRow>
-                                          </TableHead>
-                                          <TableBody>
-                                          {
-                                            (car.lichtrinh?car.lichtrinh:[]).map((item, index) =>{
-                                              return (
-                                                <TableRow key={index}>
-                                                  <TableCell >
-                                                    {item.thoigiandi}
-                                                  </TableCell>
-                                                  <TableCell >{item.diemdi}</TableCell>
-                                                  <TableCell >{item.diachi}</TableCell>
-                                                  <TableCell >{item.tinh}</TableCell>
-                                              </TableRow>
-                                              )
-                                            })            
-                                          }
-                                              
-                                          </TableBody>
-                                        </Table>
-                                      
+                                    <TableCell >{ticket.giave}</TableCell>
+                                    <TableCell >{ticket.ngaydat}</TableCell>
+                                    <TableCell>
+                                        {ticket.soghe}
                                     </TableCell>
                                     <TableCell >
-                                          {lengthGhe}
+                                      {ticket.sdt}
                                     </TableCell>
-
-                                    <TableCell >{car.deleted?"Đã Xóa":"Chưa Xóa"}</TableCell>
-
+                                    <TableCell >
+                                          {ticket.deleted?"Đã xóa":"Chưa xóa"}
+                                    </TableCell>
 
 
                                     <TableCell >
@@ -259,7 +214,7 @@ const Xe = (props)=> {
                                         </Button>
                                     </TableCell>
                                   
-                                </TableRow>)
+                                    </TableRow>)
                                 })
                                }
                                {emptyRows > 0 && (
@@ -273,7 +228,7 @@ const Xe = (props)=> {
                               <TablePagination
                                  rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
                                 colSpan={3}
-                                count={cars.length}
+                                count={tickets.length}
                                 rowsPerPage={rowsPerPage}
                                 page={page}
                                 SelectProps={{
@@ -296,11 +251,11 @@ const Xe = (props)=> {
 }
 
 const mapStateToProps =(state)=>({
-    car:state.filterCarReducer
+    ticket:state.ticket
   });
   const mapDispatchToProps = dispatch => {
     return {
-        getAllCar:(token)=> dispatch(getCarAll(token))
+        getTickets:()=> dispatch(getVe())
     };
   };
-export default connect(mapStateToProps,mapDispatchToProps)(Xe);
+export default connect(mapStateToProps,mapDispatchToProps)(Ve);

@@ -6,7 +6,7 @@ import axios from 'axios';
 export const setTicket=(ticket,token)=>{
 
     return dispatch =>{
-        axios.post(types.URL_API+`/ve`,ticket,{headers:{
+        axios.post(types.URL_API_LOCAL+`/ve`,ticket,{headers:{
             'Authorization':token
           }})
         .then(res => {
@@ -29,7 +29,7 @@ export const saveTicket=(ticket)=>{
 /*Action send mail  */
 export const sendMailAPI=(mail,token)=>{
     return dispatch =>{
-        axios.post(types.URL_API+`/sendEmail`,mail,{headers:{
+        axios.post(types.URL_API_LOCAL+`/sendEmail`,mail,{headers:{
             'Authorization':token
           }})
         .then(res =>{
@@ -51,7 +51,7 @@ export const searchTicket=(id,phone,token)=>{
         console.log(id);
         console.log(phone);
         console.log(token);
-        axios.post(types.URL_API+`/search-ve`,{
+        axios.post(types.URL_API_LOCAL+`/search-ve`,{
             _id:id,
 	        sdt:phone
         },{headers:{
@@ -76,7 +76,7 @@ export const searchTicket=(id,phone,token)=>{
 export const cancelTicket=(ve,token)=>{
     return (dispatch)=>{
         axios.post(
-            types.URL_API+`/ve-cancel`,
+            types.URL_API_LOCAL+`/ve-cancel`,
             ve,{headers:{
                 'Authorization':token
         }})
@@ -92,6 +92,19 @@ export const cancelTicket=(ve,token)=>{
                 type:types.CANCEL_TICKET_FAIL,
                 payload:error
             })
+        })
+    }
+}
+
+export const getVe = ()=>{
+    return dispatch =>{
+        axios.get(types.URL_API_LOCAL+`/get-ve`)
+        .then(res =>{
+            dispatch({ type:types.GET_TICKETS_SUCCES,
+            payload:res.data});
+        })
+        .catch(err =>{
+            dispatch({ type:types.GET_TICKETS_FAIL});
         })
     }
 }

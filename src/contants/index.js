@@ -106,3 +106,46 @@ export const LIST_PROVINCE=[
     {MA:64,NAME:"Vĩnh Long"},
     {MA:1,NAME:"Vĩnh Phúc"}, {MA:1,NAME:"Yên Bái"}
 ]
+
+
+export const nhaXe=[
+    {
+        NhaXe:"Hải Duyên",
+        Id:1
+    },
+    {
+        NhaXe:"Minh Trí",
+        Id:2
+    },
+    {
+        NhaXe:"Nguyễn Kim",
+        Id:3
+    },
+    {
+        NhaXe:"Đan Anh",
+        Id:4
+    },
+]
+
+export const chuyenDi=[
+    {
+        TenChuyenDi:"Sài Gòn - Đà Lạt",
+        NhaXe:[
+            3,2,4
+        ]
+    },
+    {
+        TenChuyenDi:"Sài Gòn - Cái Bè",
+        NhaXe:[
+            1
+        ]
+    }
+]
+export const tinhDiQua=[
+    {
+        DiQua:[
+            59,63
+        ],
+        
+    }
+]

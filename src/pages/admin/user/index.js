@@ -12,11 +12,9 @@ import {connect} from "react-redux";
 import {getUsers} from '../../../redux/action/user';
 import {useHistory} from 'react-router-dom';
 import * as types from '../../../redux/type';
-import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
 
 
 

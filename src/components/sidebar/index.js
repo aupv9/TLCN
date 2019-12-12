@@ -16,6 +16,7 @@ import routes from '../../routes.js';
 import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
+import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
 // core components
 
 
@@ -57,7 +58,7 @@ export default function Sidebar(props) {
                         <NavLink to="/admin/xe">
                             <ListItem button>   
                                 <ListItemIcon>
-                                    <LibraryBooks />
+                                    <AirportShuttleIcon />
                                 </ListItemIcon>
                             <ListItemText primary="Xe" />
                             </ListItem>

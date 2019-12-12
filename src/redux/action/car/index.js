@@ -5,8 +5,7 @@ import axios from 'axios';
 /** */
 export const getCar= (start, end, date) =>{
     return dispatch =>{
-
-        axios.get(types.URL_API+`/Cars/start=${start}&end=${end}&date=${date}`)
+        axios.get(types.URL_API_LOCAL+`/Cars/start=${start}&end=${end}&date=${date}`)
                     .then(
                         (response)=>
                         {
@@ -53,5 +52,44 @@ export const selectCar=(car)=>{
 export const delCar=()=>{
     return {
         type:types.DEL_CAR
+    }
+}
+
+
+export const getCarAll=(token)=>{
+    return dispatch =>{
+       console.log("run");
+       axios.get("http://localhost:8080/api/Cars").then(res => {
+           console.log(res.data);
+           dispatch(
+            {
+                type:types.GET_CAR_ALL_SUCCESS,
+                payload:res.data
+            }
+        );
+    })
+        .catch((error) =>{  
+            dispatch(
+                {
+                    type:types.GET_CAR_ALL_FAIL,
+                }
+            );
+        });
+    }
+}
+
+export const addXe = (xe,token) =>{
+    return dispatch =>{
+        axios.post(types.URL_API_LOCAL+`/Car`,xe,{headers:{
+            'Authorization':token
+          }})
+          .then(res =>{
+              dispatch({
+                  type:types.CREATE_CAR_SUCCESS
+              });
+          })
+          .catch(err =>{
+              dispatch({ type:types.CREATE_CAR_FAIL});
+          })
     }
 }
